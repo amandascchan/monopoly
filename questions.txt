@@ -40,7 +40,7 @@ Keep a field called "numberRollUpRimCups" that keeps track of how many cups ther
 
 Question: Suppose we wanted to model SLC and Needles Hall more closely to Chance and Community Chest cards. Is there a suitable design pattern you could use? How would you use it?
 
-We could implement a doubly - linked list(or array) with pointers to community chest or chance cards. We will generate the cards when the game starts based on the probability table given. We will have a pointer to the top card. If a player lands on a square that requires a community chest, or chance card, they will take the top card, take the action, and that card will notify the card next to it to become the top card.
+We could implement a doubly - linked list(or array) with pointers to community chest or chance cards. We will generate the cards when the game starts based on the probability table given. We will have a pointer to the top card. If a player lands on a square that requires a community chest, or chance card, they will take the top card, take the action, and that card will notify the card next to it to become the top card. This would be an example of the observer pattern, wherein the top card changes state to not be the top card, and the card underneath it changes state to be the top card.
 
 In the array implementation, all subsequent cards will move forward one index in the array, and the old top card becomes the top card.
 In the doubly-linked list implementation, the top card observes the bottom card, and the card underneath it. Once the top card has been used, it notifies the card below it to become the top card, then it becomes the bottom card. This implementation mimics the observer pattern design pattern.
