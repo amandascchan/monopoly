@@ -1,5 +1,4 @@
 
-poly
 cs246 project
 
 # monopoly
