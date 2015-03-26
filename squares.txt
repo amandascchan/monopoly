@@ -1,0 +1,48 @@
+name type description
+COLLECT_OSAP NO collect $200
+AL YES 40
+SLC NO CARD
+ML YES 60
+TUITION NO Pay $300 or 10% of your total worth
+MKV
+ECH
+NEEDLES_HALL
+PAS
+HH
+DC_Tim_Line
+DC
+empty
+RCH
+COOP_FEE
+empty
+PAC
+MC
+empty
+DWE
+NEEDLES_HALL
+empty
+CPH
+REV
+empty
+UWP
+C2
+empty
+LHI
+SLC
+empty
+SLC
+ESC
+empty
+BMH
+EIT
+empty
+OPT
+GO_TO_TIMS
+B2
+CIF
+B1
+V1
+EV3
+NEEDLES_HALL
+EV1
+Goose_Nesting
