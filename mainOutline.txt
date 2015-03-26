@@ -1,30 +1,33 @@
-﻿program is called from command line with optional arguments -load file and -testing.
-	if -load file the game is played from the state specified in file..
-	if testing the values of each die roll can be specified by the player.
-The number of players is read in.
-Player names and chars(board pieces) are read from cin.
-Container of player objects is created and stored in a field of the board.
-Random generator picks who goes first.
-Player container is itterated through.
-CurrentActivePlayer field is set.
- Commands are read from cin.
-	roll - theBoard->movePlayer is called. Method first checks if the player is in the timsline. Method changes the players location pointer and calls the action method on the location pointer	with it's self as an argument
-. The method then calls textdisplay->notify(the appropriate 	coordinates and char). The board is then printed.
 
-	trade <name> <give> <receive> - active player offers to trade <give> with <name> in return for <recieve>.
-  theboard->trade(currentplayer) called.
+Main Function Basic Outline
+
+Program is called from command line with optional arguments (-load file or -test).
+	I. -load: file the game is played from the state specified in file.
+	II.-test: the values of each die roll can be specified by the player.
+
+Read number of players, player names, and chars(board pieces) from cin.
+
+Array of player objects is created and stored in a field of the board. (This is detailed in flow chart)
+
+The commands are as follows:
+
+	roll - theBoard->movePlayer is called. Method first checks if the player is in the Timsline. Method changes the players location pointer and calls the action method on the location pointer	with it's self as an argument
+. The method then calls textDisplay->notify(the appropriate coordinates and char). The board is then printed.
+
+	trade <name> <give> <receive> - active player offers to trade <give> with <name> in return for <receive>.
+  theboard->trade(currentPlayer) called.
 	
 	improve <property> buy/sell – player->improve() improve method reads in property name and 	checks if player owns. Checks if player can afford improvement if yes calls
-	property->improve(buy/sell) this method bill/compensates the owner the opropriate 	ammount. Board->print() is then called from main.
+	property->improve(buy/sell) this method bill/compensates the owner the appropriate amount. Board->print() is then called from main.
 	
 	mortgage <property> - player->mortgage() called, reads in name of property, checks if it owns 	property. If player owns property property->mortgage() is called this method makes the 	property stop charging tuition and compensates the owner.
 
 	unmortgage <property> - player->unmortgage() called, checks if it owns property bills the 	owner the lent money plus ten percent. Makes the property start charging tuition again.
 
-	bankrupt – player->bankrupt() is called. Checks if player owes more money than has. If yes all 		assets are given to play who is owed. Players must immediatly pay 10% of the principle when 	inheriting a mortgaged property. They may then choose to unmortgage be paying the principle if 	not they will have to pay the usual principle plus 10% when unmortgaging later.
+	bankrupt - player->bankrupt() is called. Checks if player owes more money than has. If yes all 		assets are given to play who is owed. Players must immediately pay 10% of the principle when 	inheriting a mortgaged property. They may then choose to unmortgage be paying the principle if 	not they will have to pay the usual principle plus 10% when unmortgaging later.
 
-	Assets – calls player->displayAssets(). Does not print if player is deciding how to pay tution
+	Assets - calls player->displayAssets(). Does not print if player is deciding how to pay tuition
 
-	save – saves the state of the game
+	save - saves the state of the game
 
-	next – if player is not in tims line and has rolled this turn continues.
+	next - if player is not in tims line and has rolled this turn continues.
