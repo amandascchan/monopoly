@@ -2,12 +2,11 @@
 #define __TEXTDISPLAY_H__
 #include <iostream>
 #include <sstream>
-#include "board.h"
-#include "player.h"
-
+#include <string>
+extern const std::string names[];
+extern const bool prop[];
 class TextDisplay {
   char **theDisplay;          //the n x n display 
-  const int gridSize;         //size of the grid (n)
 
   /*
    * The following field helps track how the game as progressed
@@ -15,9 +14,10 @@ class TextDisplay {
    * Whenever a Cell changes color, the corresponding color count should
    * be updated.
    */
-
+  void drawBox(int row, int column, std::string name, bool property);
+  void init();
  public:
-  TextDisplay(int n); //one arg constructor where the parameter is the gridSize
+  TextDisplay(); //one arg constructor where the parameter is the gridSize
 
   /*
    * The TextDisplay is an observer of each Cell. Cells call notify to 
