@@ -67,6 +67,9 @@ Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
+  for(int i = 0; i < players.size(); i++) {
+      delete players[i];
+  }
   delete [] theBoard;
   delete td;
 }
