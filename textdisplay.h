@@ -13,7 +13,7 @@ class TextDisplay {
   void init();
  public:
   TextDisplay(); //one arg constructor where the parameter is the gridSize
-  void addPlayer(char player);
+  void addPlayer(char player,int row, int column);
 
   void notify(int r, int c, char ch);  
 

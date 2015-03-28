@@ -1,7 +1,5 @@
 #include <iostream>
-#include "board.h"
 #include "textdisplay.h"
-#include "square.h"
 #include <string>
 #include "academic.h"
 #include <map>
@@ -38,9 +36,10 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
 void Board::addPlayer(string name) {
     Player *p = new Player(name);
     p->setDisplay(td);
-    p->setCoords(5*10,8*10);
+    if(players.size()>=4) p->setCoords(5*10+players.size()/4+3, 8*10+(players.size()+1)%4+2);
+    else p->setCoords(5*10+players.size()/4+3, 8*10+players.size()%4+2);
     players.push_back(p);
-    td->addPlayer(playerOptions[name]);
+    td->addPlayer(playerOptions[name], p->row, p->column);
 }
 void Board::makeProperty(int i){
     string n = names[i];

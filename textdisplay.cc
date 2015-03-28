@@ -18,10 +18,10 @@ TextDisplay::TextDisplay(): theDisplay(NULL)  {
   }
   init();
 }
-void TextDisplay::addPlayer(char player) {
+void TextDisplay::addPlayer(char player, int row, int column) {
     players.push_back(player);
     //remember to set as player row/column eh
-    theDisplay[10*5+players.size()/5+3][8*10+players.size()%5 +1] =player;
+    theDisplay[row][column] =player;
 }
 TextDisplay::~TextDisplay() {
   for(int i = 0; i < 56; i++) {
