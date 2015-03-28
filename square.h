@@ -2,15 +2,15 @@
 #define __SQUARE_H__
 #include <iostream>
 #include "textdisplay.h"
-
-const int maxNeighbours = 4;
-
+#include <string>
 class Square {
-  int state;        //current state of the cell
-  int prevState;    //previous state of the cell
-//  int numNeighbours;   //number of neighbors
-  //Square *neighbours[maxNeighbours];   //pointers to neighbors
+  std::string name;
   int r, c;                   //co-ordinates of the cell
+  std::string block;
+  int cost;
+  int imCost;
+  int im[6];
+
   TextDisplay * td;        //pointer to the text display
 
   // Add private members, if necessary (access to Xwindow, location in the window etc)
@@ -22,37 +22,20 @@ class Square {
 public:
   Square();                                   // Default constructor
 
- // char getState();                          //getter for private state
- // void setState(const int& change);         //setter for private state
   void setCoords(const int r, const int c);				//setter for private co-ordinates of cell
 
-  //possible setter for partb when we have XWindow
-  //void setCoords(int r, int c, int x, int y, int width, int height, Xwindow *w);
-
   void setDisplay(TextDisplay * t);         //setter for TextDisplay
+  void setName(std::string name);
 
- // void addNeighbour(Square *neighbour);       //add a neighbouring cell
-  
-  /*
-   * The following methods are provided as a hint towards implementing the notification 
-   * You should try to use the methods with the given signatures.
-   *
-   * If you feel the need to change the *signature* of the method (not the name) you may
-   * do so but MUST provide a comprehensive explanation in your code why you felt the change
-   * was necessary
-   */
-	
-	
-  /*
-   * Intended to be called only by the grid class for changing the state of the 0 0 cell
-   */
-   //void notify( const int & change);	
+  void setIm(int i, int cost);
+  int getIm(int i);
+  void setCost(int cost);
+  int getCost();
+  void setImCost(int cost);
+  int getImCost();
+  std::string getName();
+  void setBlock(std::string name);
+  std::string getBlock();
 
-	/*
-	 * Intended to be called by Squares to notify their neighbors
-	 * current: this cells current(new) state 
-	 * previous: this cells past state
-	 */
-  // void notify(const int & current, const int & previous); 
 };
 #endif

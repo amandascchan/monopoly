@@ -3,20 +3,36 @@
 #include "textdisplay.h"
 #include "square.h"
 #include <string>
-
+#include "academic.h"
+#include <map>
 using namespace std;
 
-Board::Board():td(NULL), theBoard(NULL),numPlayers(0), squares(NULL), mode("") {
+Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   td = new TextDisplay();
   //remember to set num players later
-  theBoard = new Square*[11*11];
-
-  for(int i = 0; i < 11*11; i++) {
-    theBoard[i] = new Square;
-    theBoard[i]->setCoords(this->row(i), this->column(i));
-    theBoard[i]->setDisplay(td);
+  theBoard = new Square*[40];
+  for(int i = 0; i < 40; i++) {
+      if(prop[i]) {
+          theBoard[i] = new Square;
+          makeProperty(i);
+      }
+      else theBoard[i] = new Square;
+      theBoard[i]->setName(names[i]); 
+      theBoard[i]->setCoords(this->column(i)*5, this->row(i)*8);
+      theBoard[i]->setDisplay(td);
   }
-  //set up left and right later
+
+}
+void Board::makeProperty(int i){
+    string n = names[i];
+    if(aInfo.count(n)) {
+        theBoard[i]->setCost(aInfo[n].pCost);
+        if(aInfo[n].type == "A") {
+            theBoard[i]->setImCost(aInfo[n].imCost);
+            theBoard[i]->setBlock(aInfo[n].block);
+            for(int j = 0; j < 6; j++) theBoard[i]->setIm(j, aInfo[n].imp[j]);
+        }
+    }
 }
 
 int Board::row(int i) {
@@ -30,23 +46,15 @@ int Board::column(int i) {
 }
 
 Board::~Board() {
-  for(int i = 0; i< 11*11;i++) {
+  for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
   delete [] theBoard;
   delete td;
 }
-
-/*void Board::init(int r, int c, int state) {
-  if(r >= gridSize || c >= gridSize || r < 0 || c < 0) return;
-  else {
-    theBoard[r*gridSize+c]->setState(state);
-  }
+Square * Board::getSquare(int i) {
+    return theBoard[i];
 }
-
-void Board::change(const int & state) {
-  theBoard[0]->notify(state);
-}*/
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);
   return out;

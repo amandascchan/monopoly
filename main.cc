@@ -1,9 +1,13 @@
 #include "textdisplay.h"
-
+#include "square.h"
+#include "board.h" 
 using namespace std;
 
 int main() {
-    TextDisplay display = TextDisplay();
-    cout << display;
-
+    Board board= Board();
+    for(int i = 0; i < 40; i++) {
+        cout << board.getSquare(i)->getName() << endl;
+        cout << board.getSquare(i)->getCost() <<endl;
+    }
+    cout << board;
 }

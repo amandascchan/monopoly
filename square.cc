@@ -1,22 +1,21 @@
 #include "textdisplay.h"
 #include "square.h"
-
+#include <string>
 
 using namespace std;
 
-Square::Square(): state(0), prevState(0), numNeighbours(0), r(0), c(0), td(NULL) {
-  numNeighbours = 0;
+Square::Square(): cost(0), imCost(0), r(0), c(0), td(NULL) {
+    for(int i = 0; i < 6; i ++) {
+        im[i] = 0;
+    }
 }
-char Square::getState() {
-  return state - '0';}
-
-void Square::setState(const int& change) {
-  if(state) {
-    prevState = state;
-  }
-  state = change;
-  char notC = change + '0';
-  td->notify(r, c, notC);
+void Square::setBlock(string name) {this->block = name;}
+string Square::getBlock() {return block;}
+void Square::setName(string name) {
+    this->name = name;
+}
+string Square::getName() {
+    return name;
 }
 void Square::setCoords(const int r, const int c) {
   this->r = r;
@@ -25,21 +24,15 @@ void Square::setCoords(const int r, const int c) {
 void Square::setDisplay(TextDisplay * t) {
   td = t;
 }
-/*void Square::addNeighbour(Square *neighbour) {
-  neighbours[numNeighbours] = neighbour;
-  numNeighbours++;
+
+int Square::getIm(int i) {
+    return im[i];
 }
-void Square::notify( const int & change) {
-  int copyState = state;
-  notify(change,copyState);
+void Square::setIm(int i, int cost) {
+    im[i] = cost;
 }
-void Square::notify(const int & current, const int & previous){
-  if(state == previous && current != state) {
-    state = current;
-    td->notify(r,c,state + '0');
-    for(int i = 0; i < numNeighbours; i++) {
-      neighbours[i]->notify(current, previous);
-    }
-  }
-  else return;
-}*/
+
+void Square::setCost(int cost) {this->cost = cost;}
+int Square::getCost() {return this->cost;}
+void Square::setImCost(int cost) {imCost = cost;}
+int Square::getImCost() {return this->imCost;}

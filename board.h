@@ -4,24 +4,22 @@
 #include "textdisplay.h"
 #include <vector>
 #include <string> 
+#include "square.h"
 
 class Board {
-  Board **theBoard; // The actual n x n grid. 
-//  Square **squares;
-//  Player *currentActivePlayer;
   int numPlayers;                    // Number of players
-//  Vector <Player> **players;
   TextDisplay *td;                  // The text display.
- // Vector <std::String> saveArray;
-  
+  Square **theBoard; 
 
   // Add private members, if necessary.
   int row(int i);
   int column(int i);
+  void makeProperty(int i);
 
 
  public:
   std::string mode;
+  Square *getSquare(int i);
 
   Board();
   ~Board();  
