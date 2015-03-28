@@ -1,6 +1,7 @@
 #include "textdisplay.h"
 #include "square.h"
 #include "board.h" 
+#include "player.h"
 using namespace std;
 
 int main() {
@@ -9,5 +10,6 @@ int main() {
         cout << board.getSquare(i)->getName() << endl;
         cout << board.getSquare(i)->getCost() <<endl;
     }
+
     cout << board;
 }

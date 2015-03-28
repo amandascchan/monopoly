@@ -14,6 +14,7 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
   td = new TextDisplay();
   //remember to set num players later
   theBoard = new Square*[40];
+  
   for(int i = 0; i < 40; i++) {
       if(prop[i]) {
           theBoard[i] = new Square;
@@ -24,6 +25,14 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
       theBoard[i]->setCoords(this->column(i)*5, this->row(i)*8);
       theBoard[i]->setDisplay(td);
   }
+  addPlayer("Goose");
+  addPlayer("GRT Bus");
+  addPlayer("Tim Hortons Doughnut");
+  addPlayer("Professor");
+  addPlayer("Student");
+  addPlayer("Money");
+  addPlayer("Laptop");
+  addPlayer("Pink tie");
 }
 
 void Board::addPlayer(string name) {
@@ -31,7 +40,7 @@ void Board::addPlayer(string name) {
     p->setDisplay(td);
     p->setCoords(5*10,8*10);
     players.push_back(p);
-
+    td->addPlayer(playerOptions[name]);
 }
 void Board::makeProperty(int i){
     string n = names[i];
@@ -59,9 +68,6 @@ Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
- /* for(int i = 0; i < numPlayer; i++) {
-      delete players[i];
-  }*/
   delete [] theBoard;
   delete td;
 }

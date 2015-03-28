@@ -4,10 +4,10 @@
 #include <string>
 #include <string.h>
 #include <stdlib.h>
+#include "player.h"
+#include "playerdata.h"
 using namespace std;
 
-const string names[] = {"Goose Nesting", "EV1", "NEEDLES HALL", "EV2", "EV3", "V1","PHYS","B1", "CIF", "B2", "GO TO TIMS", "OPT", "EIT", "BMH", "ESC", "SLC", "SLC", "LHI", "C2", "UWP", "REV", "CPH", "NEEDLES HALL", "DWE", "MC", "PAC", "COOP FEE", "RCH", "DC", "DC Tims Line", "HH","PAS", "NEEDLES HALL", "ECH", "MKV", "TUITION", "ML", "SLC", "AL", "COLLECT OSAP"};
-const bool prop[] = {false, true, false, true, true, false, true, true, false, true, false, true,true, true, true, false, false, true, true, false, false, true, false, true, true, false,false, true, true, false, true, true, false, true, false, false, true, false, true, false};
 TextDisplay::TextDisplay(): theDisplay(NULL)  {
   theDisplay = new char *[56];
   for(int i = 0; i < 56; i++) {
@@ -18,7 +18,11 @@ TextDisplay::TextDisplay(): theDisplay(NULL)  {
   }
   init();
 }
-
+void TextDisplay::addPlayer(char player) {
+    players.push_back(player);
+    //remember to set as player row/column eh
+    theDisplay[10*5+players.size()/5+3][8*10+players.size()%5 +1] =player;
+}
 TextDisplay::~TextDisplay() {
   for(int i = 0; i < 56; i++) {
     delete [] theDisplay[i];
@@ -72,13 +76,7 @@ void TextDisplay::drawBox(int row, int column, string name, bool property) {
     }
 
 }
-void TextDisplay::notify(int r, int c, char ch){
- /* int prev = *(theDisplay[r*gridSize+c]) - '0';
-  colourCount[prev]--;
-  *(theDisplay[r*gridSize+c]) = ch;
-  colourCount[ch-'0']++; */
-}
-
+void TextDisplay::notify(int r, int c, char ch){}
 
 ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   for(int i = 0; i < 56; i++) {

@@ -16,6 +16,8 @@ struct Academic
 };
 
 extern std::map<std::string, Academic> aInfo;
+extern std::string const names[];
+extern bool const prop[];
 
 
 #endif

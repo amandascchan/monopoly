@@ -6,6 +6,7 @@
 #include "square.h"
 #include <map>
 #include "playerdata.h"
+#include "player.h"
 
 using namespace std;
 
@@ -22,4 +23,5 @@ void Player::setCoords(int row, int column) {
     this->row = row;
     this->column = column;
 }
+string Player::getName() {return name;}
 Player::~Player() {}

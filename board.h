@@ -1,12 +1,12 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 #include <iostream>
-#include "textdisplay.h"
 #include <vector>
 #include <string> 
 #include "square.h"
 #include "player.h"
-
+#include "textdisplay.h"
+class Player;
 class Board {
   int numPlayers;                    // Number of players
   TextDisplay *td;                  // The text display.

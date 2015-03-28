@@ -21,6 +21,7 @@ class Player {
   int row, column;
   
  public:
+  std::string getName();
   Player(std::string name);
   ~Player();  
   void movePlayer(int r, int c); 

@@ -32,8 +32,6 @@ Academic V1 = {"V1", "", 200, 0, {0,25,50,100,150,0}, "R"};
 Academic REV = {"REV", "", 200, 0, {0,25,50,100,150,0}, "R"};
 Academic PAC = {"PAC", "", 150, 0, {0,0,0,0,0,0}, "G"};
 Academic CIF = {"CIF", "", 150, 0, {0,0,0,0,0,0}, "G"};
-/*Academic info[] = {AL, ML, ECH, PAS, HH, RCH, DWE, CPH, LHI, BMH, OPT, EV1, EV2, EV4, PHYS, B1, B2, EIT, ESC, C2, MC, DC};
-*/
 
 pair<string, Academic> aInfo_data[] =  
 {
@@ -66,3 +64,6 @@ pair<string, Academic> aInfo_data[] =
     make_pair("V1", V1)
 };
 map<string, Academic> aInfo(aInfo_data, aInfo_data + sizeof aInfo_data / sizeof aInfo_data[0]);
+
+const string names[] = {"Goose Nesting", "EV1", "NEEDLES HALL", "EV2", "EV3", "V1","PHYS","B1", "CIF", "B2", "GO TO TIMS", "OPT", "EIT", "BMH", "ESC", "SLC", "SLC", "LHI", "C2", "UWP", "REV", "CPH", "NEEDLES HALL", "DWE", "MC", "PAC", "COOP FEE", "RCH", "DC", "DC Tims Line", "HH","PAS", "NEEDLES HALL", "ECH", "MKV", "TUITION", "ML", "SLC", "AL", "COLLECT OSAP"};
+const bool prop[] = {false, true, false, true, true, false, true, true, false, true, false, true,true, true, true, false, false, true, true, false, false, true, false, true, true, false,false, true, true, false, true, true, false, true, false, false, true, false, true, false};
