@@ -21,7 +21,7 @@ TextDisplay::TextDisplay(): theDisplay(NULL)  {
 
 TextDisplay::~TextDisplay() {
   for(int i = 0; i < 56; i++) {
-    delete theDisplay[i];
+    delete [] theDisplay[i];
   }
   delete [] theDisplay;
 }

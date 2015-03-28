@@ -7,20 +7,25 @@
 #include "board.h"
 #include "square.h"
 
+class Board;
 
 class Player {
-  string name;
+    friend class Board;
+    std::string name;
   int cups;
   Square *location;
   char avatar;
-  Board *board;
-  int Savings;
+  Board *theBoard;
+  int savings;
   TextDisplay *td;
+  int row, column;
   
  public:
-
-  Board();
-  ~Board();  
+  Player(std::string name);
+  ~Player();  
+  void movePlayer(int r, int c); 
+  void setCoords(int row, int column);
+  void setDisplay(TextDisplay *t);
 
 };
 

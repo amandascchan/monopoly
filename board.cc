@@ -5,9 +5,12 @@
 #include <string>
 #include "academic.h"
 #include <map>
+#include "player.h"
+#include "playerdata.h"
 using namespace std;
 
-Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
+
+Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
   td = new TextDisplay();
   //remember to set num players later
   theBoard = new Square*[40];
@@ -21,6 +24,13 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
       theBoard[i]->setCoords(this->column(i)*5, this->row(i)*8);
       theBoard[i]->setDisplay(td);
   }
+}
+
+void Board::addPlayer(string name) {
+    Player *p = new Player(name);
+    p->setDisplay(td);
+    p->setCoords(5*10,8*10);
+    players.push_back(p);
 
 }
 void Board::makeProperty(int i){
@@ -34,7 +44,7 @@ void Board::makeProperty(int i){
         }
     }
 }
-
+    
 int Board::row(int i) {
   int xCoord = i/11;
   return xCoord;
@@ -49,6 +59,9 @@ Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
+ /* for(int i = 0; i < numPlayer; i++) {
+      delete players[i];
+  }*/
   delete [] theBoard;
   delete td;
 }
