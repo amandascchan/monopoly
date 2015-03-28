@@ -5,6 +5,8 @@
 
 class SLCCard: public Card{
 	int move;
+public:
+	SLCCard(int);
 	action(Player *);
 };
 

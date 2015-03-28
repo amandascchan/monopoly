@@ -11,3 +11,5 @@ SLCCard::action(Player *player){
 		player->board->movePlayer("Collect OSAP");
 	}
 }
+
+SLCCard::SLCCard(int move): move(move){}

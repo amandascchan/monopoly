@@ -3,7 +3,6 @@
 #include "player.h"
 
 class Card{
-	int numCards;
 	virtual action(Player *)=0;
 };
 

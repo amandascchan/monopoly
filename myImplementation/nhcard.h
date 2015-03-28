@@ -5,6 +5,8 @@
 
 class NHCard: public Card{
 	int transAmt;
+public:
+	NHCard(int);
 	action(Player *);
 };
 

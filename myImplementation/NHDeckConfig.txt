@@ -1,4 +1,4 @@
-Total Cards 18
+18
 NHCard 18
 -200 1
 -100 2

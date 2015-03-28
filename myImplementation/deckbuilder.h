@@ -4,10 +4,10 @@
 #include "slccard.h"
 #include "nhcard.h"
 #include <string.h>
-#include <std::vector> v;.h>
+#include <vector.h>
 
 class deckBuilder{
-	Card **
+	vector<Card *> buildDeck(String config);
 };
 
 #endif
