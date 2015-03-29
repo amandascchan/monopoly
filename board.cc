@@ -107,7 +107,6 @@ void Board::Roll(){
    cout << "You are at: " << activePlayer->location->getName() << endl;
    cout << "Description of location: " << activePlayer->location->getDesc() << endl;
    if(aInfo.count(activePlayer->location->getName())) Buy();
-   // next();
 }
 void Board::Buy() {
     //ALL OF THIS WILL BE REPLACED BY TRAVIS CODE. THIS IS FOR DEMO PURPOSES ONLY.

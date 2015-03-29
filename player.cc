@@ -24,8 +24,14 @@ bool Player::isBankrupt() {return bankrupt;}
 Player::~Player() {}
 void Player::displayAssets() {
     cout << "Your savings: " << savings << endl;
+    cout << "Your Properties: " << endl;
     for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
         cout << "Name: " << (*it)->getName() << endl;
         cout << "Cost: " << (*it)->getCost() << endl;
+        cout << "Improvement Cost: " << (*it)->getImCost() << endl;
+        cout << "Property possible improvements" << endl;
+        for(int i = 0; i < 6; i++) {
+            cout << i << " " << (*it)->getIm(i) << endl;        
+        }
     }
 }
