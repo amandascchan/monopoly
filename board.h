@@ -27,6 +27,8 @@ class Board {
   void Buy();
   void printPlayers();
   void Roll();
+  void Roll(int num);
+  bool startGame();
 
   Board();
   ~Board();  

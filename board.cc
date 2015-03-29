@@ -101,6 +101,14 @@ int Board::column(int i) {
   int yCoord = i%11;
   return yCoord;
 }
+bool Board::startGame() {
+    if(players.size() == 0) {
+        cerr << "We need at least one player to start the game!" << endl;
+        return false;
+    }
+    printPlayers();
+    return true;
+}
 void Board::Roll(){
     int x = rand()%11+2;
     cout << "Number rolled: " << x << endl;
@@ -108,6 +116,10 @@ void Board::Roll(){
    cout << "You are at: " << activePlayer->location->getName() << endl;
    cout << "Description of location: " << activePlayer->location->getDesc() << endl;
    if(aInfo.count(activePlayer->location->getName())) Buy();
+}
+void Board::Roll(int num) {
+    movePlayer(num);
+    if(aInfo.count(activePlayer->location->getName())) Buy();
 }
 void Board::Buy() {
     //ALL OF THIS WILL BE REPLACED BY TRAVIS CODE. THIS IS FOR DEMO PURPOSES ONLY.
