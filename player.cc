@@ -1,15 +1,16 @@
-#include <iostream>
+#include "all.h.gch"
+#include "board.h"
+#include "square.h"
 #include <string> 
 #include "playerdata.h"
 #include "player.h"
-
 using namespace std;
 
-Player::Player(string name): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
+Player::Player(string name, TextDisplay *t, Board *b, Square *l): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
     avatar = playerOptions[name].avatar;
-}
-void Player::setDisplay(TextDisplay *t) {
     td = t;
+    theBoard = b;
+    location = l;
 }
 void Player::setCoords(int row, int column) {
     this->row = row;

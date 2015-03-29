@@ -1,11 +1,9 @@
+#pragma once
 #ifndef __TEXTDISPLAY_H__
 #define __TEXTDISPLAY_H__
-#include <iostream>
-#include <sstream>
 #include <string>
 #include <vector>
 #include "academic.h"
-
 
 class TextDisplay {
   char **theDisplay;          //the n x n display 

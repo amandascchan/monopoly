@@ -1,13 +1,17 @@
-#include <iostream>
-#include <ctime>
+#include "all.h.gch"
+#include "square.h"
+#include "player.h"
+#include "textdisplay.h"
+#include "academic.h"
+#include "playerdata.h"
+#include "npdata.h"
+#include <string>
 #include <algorithm>
 #include <stdlib.h>
-#include <stdio.h>
 #include "board.h"
 using namespace std;
 
-
-Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
+Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   td = new TextDisplay();
   //remember to set num players later
   fillLoop();
@@ -38,11 +42,8 @@ void Board::addPlayer(string name) {
         cerr << "This player isn't valid" << endl;
         return;
     }
-    Player *p = new Player(name);
-    p->setDisplay(td);
+    Player *p = new Player(name, td, this, theBoard[0]);
     p->setCoords(players.size()/4+3, players.size()%4+2);
-    p->location = theBoard[0];
-    p->theBoard = this;
     if(players.size()>=4) p->setCoords(players.size()/4+3, (players.size()+1)%4+2);
     players.push_back(p);
     td->addPlayer(playerOptions[name].avatar, p->row, p->column);
@@ -140,7 +141,6 @@ Square* Board::getSquare(string name) {
         if(name == theBoard[i]->getName()) return theBoard[i];
     }
     throw name;
-
 }
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);

@@ -1,6 +1,5 @@
 #ifndef __ACADEMIC_H__
 #define __ACADEMIC_H__
-#include <string>
 #include <map>
 using namespace std;
 

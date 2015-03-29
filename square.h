@@ -1,9 +1,6 @@
 #ifndef __SQUARE_H__
 #define __SQUARE_H__
-#include <iostream>
-#include "textdisplay.h"
-#include "player.h"
-#include <string>
+class TextDisplay;
 class Player;
 class Square {
   std::string name;

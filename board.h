@@ -1,18 +1,10 @@
+#pragma once
 #ifndef __BOARD_H__
 #define __BOARD_H__
-#include <iostream>
-#include <vector>
-#include <string> 
-#include "square.h"
-#include "player.h"
-#include "textdisplay.h"
-#include  <map>
-#include "academic.h"
-#include "playerdata.h"
-#include "npdata.h"
 
 class Square;
 class Player;
+class TextDisplay;
 class Board {
   int numPlayers;                    // Number of players
   TextDisplay *td;                  // The text display.

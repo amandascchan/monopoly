@@ -1,12 +1,7 @@
+#pragma once
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
-#include <iostream>
-#include "textdisplay.h"
-#include <vector>
-#include <string> 
-#include "board.h"
-#include "square.h"
-#include <map>
+#include "all.h.gch"
 class Board;
 class Square;
 
@@ -28,11 +23,10 @@ class Player {
   
  public:
   std::string getName();
-  Player(std::string name);
+  Player(std::string name, TextDisplay *t, Board *b, Square *l);
   ~Player();  
   void movePlayer(int r, int c); 
   void setCoords(int row, int column);
-  void setDisplay(TextDisplay *t);
   Board* getBoard();
   void Bankrupt();
   int getSavings();
