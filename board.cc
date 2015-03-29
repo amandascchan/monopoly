@@ -110,6 +110,7 @@ void Board::Roll(){
    // next();
 }
 void Board::Buy() {
+    //ALL OF THIS WILL BE REPLACED BY TRAVIS CODE. THIS IS FOR DEMO PURPOSES ONLY.
     cout << "Would you like to buy this property (yes/no)" << endl;
     string answer;
     cin >> answer;

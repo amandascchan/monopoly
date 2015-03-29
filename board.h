@@ -10,6 +10,7 @@
 #include "academic.h"
 #include "playerdata.h"
 #include "npdata.h"
+
 class Square;
 class Player;
 class Board {
@@ -18,7 +19,6 @@ class Board {
   Square **theBoard; 
   std::vector<Player*> players;
   Player *activePlayer;
-  // Add private members, if necessary.
   int row(int i);
   int column(int i);
   void makeProperty(int i);
