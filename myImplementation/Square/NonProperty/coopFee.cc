@@ -7,3 +7,6 @@ void CoopFee::action(){
 	currentPlayer->debt += 150;
 	currentPlayer->payDebt();
 }
+
+CoopFee::CoopFee(Board *theBoard, Square *prevSquare, Square *nextSquare):
+		theBoard(theBoard), prevSquare(prevSquare), nextSquare(nextSquare), name("Co-op Fee"){}

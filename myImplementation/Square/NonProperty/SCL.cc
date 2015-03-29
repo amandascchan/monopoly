@@ -10,6 +10,8 @@ void SLC::action(){
 	deck[rand() % deck.size()]->action();
 }
 
+
+
 SLC::SLC(Board *theBoard, Square *prevSquare, Square *nextSquare):
 		theBoard(theBoard), prevSquare(prevSquare), nextSquare(nextSquare), name("SLC"){
 	deckBuilder myBuilder;

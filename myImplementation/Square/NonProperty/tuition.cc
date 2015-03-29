@@ -16,3 +16,7 @@ void Tuition::action(){
 	}
 	currentPlayer->payDebt();
 }
+
+Tuition::Tuition(Board *theBoard, Square *prevSquare, Square *nextSquare):
+					theBoard(theBoard), prevSquare(prevSquare),
+					nextSquare(nextSquare), name("Tuition"){}

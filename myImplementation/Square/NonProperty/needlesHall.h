@@ -5,6 +5,7 @@ class NHCard;
 
 class NeedlesHall: public NonProperty{
 	std::vector<Card *> deck;
+public:
 	void action();
 	NeedlesHall(Board *theBoard, Square *prevSquare, Square *nextSquare);
 	~NeedlesHall();
