@@ -21,5 +21,4 @@ int main(void) {
 
     cout << "get square method" << endl;
     cout << board.getSquare("ML")->getName() << endl;
-    cout << board.getSquare("fdsfsds")->getName()<< endl;
 }

@@ -1,20 +1,12 @@
 #include <iostream>
-#include "textdisplay.h"
-#include <vector>
 #include <string> 
-#include "board.h"
-#include "square.h"
-#include <map>
 #include "playerdata.h"
 #include "player.h"
 
 using namespace std;
 
-Player::Player(string name): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0) {
+Player::Player(string name): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
     avatar = playerOptions[name].avatar;
-}
-void Player::movePlayer(int r, int c) {
- //   td->movePlayer(r,c, avatar);
 }
 void Player::setDisplay(TextDisplay *t) {
     td = t;
@@ -24,4 +16,9 @@ void Player::setCoords(int row, int column) {
     this->column = column;
 }
 string Player::getName() {return name;}
+int Player::getSavings() {return savings;}
+void Player::Bankrupt() {bankrupt = true;}
+Board* Player::getBoard() { return theBoard;}
+void Player::endTurn() {theBoard->next();}
+bool Player::isBankrupt() {return bankrupt;}
 Player::~Player() {}

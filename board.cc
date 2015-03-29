@@ -1,16 +1,9 @@
 #include <iostream>
 #include <ctime>
-#include "textdisplay.h"
 #include <algorithm>
-#include <string>
-#include "academic.h"
-#include "npdata.h"
-#include <map>
-#include "player.h"
-#include "playerdata.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
+#include "board.h"
 using namespace std;
 
 
@@ -52,6 +45,7 @@ void Board::addPlayer(string name) {
     p->setDisplay(td);
     p->setCoords(players.size()/4+3, players.size()%4+2);
     p->location = theBoard[0];
+    p->theBoard = this;
     if(players.size()>=4) p->setCoords(players.size()/4+3, (players.size()+1)%4+2);
     players.push_back(p);
     td->addPlayer(playerOptions[name].avatar, p->row, p->column);

@@ -6,6 +6,10 @@
 #include "square.h"
 #include "player.h"
 #include "textdisplay.h"
+#include  <map>
+#include "academic.h"
+#include "playerdata.h"
+#include "npdata.h"
 
 class Player;
 class Board {

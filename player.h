@@ -6,20 +6,24 @@
 #include <string> 
 #include "board.h"
 #include "square.h"
-
+#include <map>
 class Board;
 
 class Player {
     friend class Board;
-    std::string name;
-  int cups;
+  std::string name;
   Square *location;
-  char avatar;
+  std::vector<Square*> properties;
   Board *theBoard;
-  int savings;
   TextDisplay *td;
+  int cups;
+  char avatar;
+  int savings;
   int row, column;
   int lIndex;
+  std::map<std::string, int>owings;
+  int turnsInTimLine;
+  bool bankrupt;
   
  public:
   std::string getName();
@@ -28,6 +32,11 @@ class Player {
   void movePlayer(int r, int c); 
   void setCoords(int row, int column);
   void setDisplay(TextDisplay *t);
+  Board* getBoard();
+  void Bankrupt();
+  int getSavings();
+  void endTurn();
+  bool isBankrupt();
 
 };
 
