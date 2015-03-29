@@ -2,7 +2,7 @@
 #include "board.h"
 #include "square.h"
 #include <string> 
-#include "playerdata.h"
+#include "data/playerdata.h"
 #include "player.h"
 using namespace std;
 

@@ -3,10 +3,9 @@
 #include "square.h"
 #include "board.h" 
 #include "player.h"
-#include "academic.h"
 using namespace std;
 
-int main(void) {
+int main() {
     Board board= Board();
     cout << "enter player names: make sure they match the ones on the spec, type q to finish entering players" << endl;    
     while(true) {

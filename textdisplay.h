@@ -3,7 +3,7 @@
 #define __TEXTDISPLAY_H__
 #include <string>
 #include <vector>
-#include "academic.h"
+#include "data/academic.h"
 
 class TextDisplay {
   char **theDisplay;          //the n x n display 

@@ -2,9 +2,9 @@
 #include "square.h"
 #include "player.h"
 #include "textdisplay.h"
-#include "academic.h"
-#include "playerdata.h"
-#include "npdata.h"
+#include "data/academic.h"
+#include "data/playerdata.h"
+#include "data/npdata.h"
 #include <string>
 #include <algorithm>
 #include <stdlib.h>
