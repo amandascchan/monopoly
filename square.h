@@ -2,13 +2,17 @@
 #define __SQUARE_H__
 #include <iostream>
 #include "textdisplay.h"
+#include "player.h"
 #include <string>
+class Player;
 class Square {
   std::string name;
   std::string block;
   int cost;
   int imCost;
   int im[6];
+  Player *owner;
+  std::string desc;
 
   TextDisplay * td;        //pointer to the text display
 
@@ -36,6 +40,9 @@ public:
   std::string getName();
   void setBlock(std::string name);
   std::string getBlock();
+  void setDesc(std::string desc);
+  std::string getDesc();
+  void setOwner(Player *);
 
 };
 #endif

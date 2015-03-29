@@ -8,6 +8,7 @@
 #include "square.h"
 #include <map>
 class Board;
+class Square;
 
 class Player {
     friend class Board;
@@ -37,6 +38,7 @@ class Player {
   int getSavings();
   void endTurn();
   bool isBankrupt();
+  void displayAssets();
 
 };
 

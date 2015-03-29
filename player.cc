@@ -22,3 +22,10 @@ Board* Player::getBoard() { return theBoard;}
 void Player::endTurn() {theBoard->next();}
 bool Player::isBankrupt() {return bankrupt;}
 Player::~Player() {}
+void Player::displayAssets() {
+    cout << "Your savings: " << savings << endl;
+    for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
+        cout << "Name: " << (*it)->getName() << endl;
+        cout << "Cost: " << (*it)->getCost() << endl;
+    }
+}

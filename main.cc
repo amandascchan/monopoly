@@ -9,16 +9,35 @@ using namespace std;
 
 int main(void) {
     Board board= Board();
-    for(int i = 0; i < 40; i++) {
-        cout << board.getSquare(i)->getCost() <<endl;
+    cout << "enter player names: make sure they match the ones on the spec, type q to finish entering players" << endl;    
+    while(true) {
+        string command;
+        cin >> command;
+        if(command == "q") break;
+        board.addPlayer(command);
     }
     board.printPlayers();
-    for(int i = 0; i < 40;i++) {
-        board.Roll();
+    cout << board << endl;
+    for(int i = 0; i < 40; i++) {
+        cout << "square name: " << board.getSquare(i)->getName() << endl;
+        cout << "square cost: " << board.getSquare(i)->getCost() << endl;
     }
-    board.movePlayer("DC Tims Line");
     cout << board;
-
-    cout << "get square method" << endl;
-    cout << board.getSquare("ML")->getName() << endl;
+    cout << "you can roll, or type next for next player, or type q" << endl;
+    while(true) {
+        string command;
+        cin >> command;
+        if(command == "q") break;
+        else if(command == "roll") 
+        {
+            board.Roll();
+        }
+        else if(command == "next") 
+        {
+            board.next();
+            cout << board;
+        }
+        else if(command == "q") break;
+       
+    }
 }

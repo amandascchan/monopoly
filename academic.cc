@@ -38,6 +38,7 @@ pair<string, Academic> aInfo_data[] =
     make_pair("AL",AL),
     make_pair("ML", ML),
     make_pair("ECH", ECH),
+    make_pair("PAS", PAS),
     make_pair("HH", HH),
     make_pair("RCH",RCH),
     make_pair("DWE",DWE),

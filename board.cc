@@ -20,20 +20,13 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
           makeProperty(i);
       }
       else {
+          theBoard[i]->setCost(npInfo[cNames[i]].pCost);
+          theBoard[i]->setDesc(npInfo[cNames[i]].desc);
       }
       theBoard[i]->setDisplay(td);
       theBoard[i]->setCoords(spots[i][0], spots[i][1]);
   }
 
-  addPlayer("Goose");
-  addPlayer("GRT Bus");
-  addPlayer("Tim Hortons Doughnut");
-  addPlayer("Professor");
-  addPlayer("Student");
-  addPlayer("Money");
-  addPlayer("Laptop");
-  addPlayer("Pink tie");
-  activePlayer = players[0];
 }
 void Board::printPlayers() {
     for(int i = 0; i < players.size(); i++) {
@@ -41,6 +34,10 @@ void Board::printPlayers() {
     }
 }
 void Board::addPlayer(string name) {
+    if(playerOptions.count(name)==0) {
+        cerr << "This player isn't valid" << endl;
+        return;
+    }
     Player *p = new Player(name);
     p->setDisplay(td);
     p->setCoords(players.size()/4+3, players.size()%4+2);
@@ -51,6 +48,7 @@ void Board::addPlayer(string name) {
     td->addPlayer(playerOptions[name].avatar, p->row, p->column);
     playerOptions[name].row = p->row;
     playerOptions[name].column = p->column;
+    if(players.size() == 1) activePlayer = players[0];
 }
 void Board::makeProperty(int i){
     string n = cNames[i];
@@ -60,6 +58,7 @@ void Board::makeProperty(int i){
         theBoard[i]->setBlock(aInfo[n].block);
         for(int j = 0; j < 6; j++) theBoard[i]->setIm(j, aInfo[n].imp[j]);
     }
+    theBoard[i]->setDesc("This is a property");
 }
 Player* Board::getNextPlayer(int n) {
     int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
@@ -69,6 +68,7 @@ Player* Board::getNextPlayer(int n) {
 }
 void Board::next() {
    activePlayer = getNextPlayer(1);
+   cout << "The next player is now: " << activePlayer->name << endl;
 }
 void Board::movePlayer(int numMoves) {
     int n = (activePlayer->lIndex+numMoves)%40;
@@ -104,9 +104,23 @@ void Board::Roll(){
     int x = rand()%11+2;
     cout << "Number rolled: " << x << endl;
     movePlayer(x);
-    next();
+   cout << "You are at: " << activePlayer->location->getName() << endl;
+   cout << "Description of location: " << activePlayer->location->getDesc() << endl;
+   if(aInfo.count(activePlayer->location->getName())) Buy();
+   // next();
 }
-
+void Board::Buy() {
+    cout << "Would you like to buy this property (yes/no)" << endl;
+    string answer;
+    cin >> answer;
+    if(answer == "yes") {
+        activePlayer->savings = activePlayer->savings - activePlayer->location->getCost();
+        activePlayer->location->setOwner(activePlayer);
+        activePlayer->properties.push_back(activePlayer->location);
+        if(activePlayer->savings <= 0) cout << "LOL you're in debt" << endl;
+        activePlayer->displayAssets();
+    }
+}
 Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];

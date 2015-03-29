@@ -10,7 +10,7 @@
 #include "academic.h"
 #include "playerdata.h"
 #include "npdata.h"
-
+class Square;
 class Player;
 class Board {
   int numPlayers;                    // Number of players
@@ -22,7 +22,6 @@ class Board {
   int row(int i);
   int column(int i);
   void makeProperty(int i);
-  void addPlayer(std::string name);
  public:
   std::string mode;
   Square *getSquare(int i);
@@ -32,7 +31,8 @@ class Board {
   void next();
   Player* getAPlayer();
   Square* getSquare(std::string name);
-
+  void addPlayer(std::string name);
+  void Buy();
   void printPlayers();
   void Roll();
 

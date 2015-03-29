@@ -7,7 +7,7 @@ using namespace std;
 struct npData
 {
     std::string name;
-    std::string description;
+    std::string desc;
     int pCost;
     int row, column;
 
