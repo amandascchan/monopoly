@@ -1,15 +1,16 @@
 #include "slccard.h"
+#include "player.h"
 
-SLCCard::action(Player *player){
+void SLCCard::action( ){
 	if ((move<=3)&&(-3<=move)){
-		player->board->movePlayer(move);
+		theBoard->movePlayer(move);
 	}
 	else if (move > 3){
-		player->board->movePlayer("DC Tims Line");
+		theBoard->movePlayer("Go To Tims");
 	}
 	else if (move < -3){
-		player->board->movePlayer("Collect OSAP");
+		theBoard->movePlayer("Collect OSAP");
 	}
 }
 
-SLCCard::SLCCard(int move): move(move){}
+SLCCard::SLCCard(Board *theBoard, int move): theBoard(theBoard), move(move){}

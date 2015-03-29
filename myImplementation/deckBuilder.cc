@@ -1,23 +1,23 @@
-#include "player.h"
 #include "slccard.h"
 #include "nhcard.h"
-#include <string.h>
-#include <vector.h>
+#include <string>
+#include <vector>
 #include "deckBuilder.h"
-#include <sstream.h>
+#include <sstream>
+#include <iostream>
 
-vector<Card *> deckBuilder::buildDeck(String config){
-	std::StringStream configStream(config);
+std::vector<SLCCard *> deckBuilder::buildDeck(std::string config){
+	std::stringstream configStream(config);
 	int totalCards;
 	configStream >> totalCards;
-	String cardType;
-	vector<Card *> retVec; 
+	std::string cardType;
+	std::vector<SLCCard *> retVec; 
 	while (configStream >> cardType){
 			int calibNum;
 			int numCards;
-			while (configStream >> moves){
+			while (configStream >> calibNum){
 				configStream >> numCards;
-				Card *myCardP;
+				SLCCard *myCardP;
 				if (cardType == "SLCCard"){
 					myCardP = new SLCCard(calibNum);
 				}
@@ -28,6 +28,7 @@ vector<Card *> deckBuilder::buildDeck(String config){
 					retVec.push_back(myCardP);
 				}
 			}
+		configStream.clear();
 	}	
 	return retVec;
 }

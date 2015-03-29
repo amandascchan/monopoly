@@ -1,13 +1,13 @@
 #ifndef __DECKBUILDER_H__
 #define __DECKBUILDER_H__
-#include "player.h"
 #include "slccard.h"
 #include "nhcard.h"
-#include <string.h>
-#include <vector.h>
+#include <string>
+#include <vector>
 
 class deckBuilder{
-	vector<Card *> buildDeck(String config);
+public:
+	std::vector<Card *> buildDeck(std::string config);
 };
 
 #endif

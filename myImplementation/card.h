@@ -1,9 +1,12 @@
 #ifndef __CARD_H__
 #define __CARD_H__
-#include "player.h"
+
+class Board;
 
 class Card{
-	virtual action(Player *)=0;
+	Board *theBoard;
+public:
+	virtual void action()=0;
 };
 
 #endif

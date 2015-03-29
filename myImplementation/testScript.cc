@@ -1,26 +1,53 @@
-#include "player.h"
-#include "card.h"
-#include "slccard.h"
-#include "nhcard.h"
-#include <string.h>
-#include <vector.h>
-#include "deckBuilder.h"
-#include <sstream.h>
+#include <string>
+#include <vector>
+#include <iostream>
 
 int main(){
-	deckBuilder myDB;
-	String myConfig = "24
-SLCCard 24
--4 1
--3 3
--2 4
--1 4
-1 3
-2 4
-3 4
-4 1"
-	vector<Card *> mydeck = myDB.buildDeck(myConfig);
-
-
-
+	std::string highestBidder;
+	int highestBid=-1;
+	int numBidders = 3;
+	std::string name;
+	std::vector<std::string> bidders;
+	bool atleastOneBid = false;
+	for (int i = 1; i <= numBidders; ++i){
+		std::cout << "bidder name " << i << std::endl;
+		std::cin >> name;
+		bidders.push_back(name);
+	}
+	std::vector<std::string>::iterator i = bidders.begin();
+	while (numBidders > 1){
+		int bid;
+		std::string command;
+		std::string currentBidder = *i;
+		std::cout << currentBidder << "'s turn to bid/withdraw" << std::endl;
+		if (std::cin >> bid){
+			atleastOneBid = true;
+			if (bid > highestBid){
+				highestBidder = currentBidder;
+				highestBid = bid;
+				std::cout << highestBid << std::endl;
+			}
+			++i;
+			if (i == bidders.end()){
+				i = bidders.begin();
+			}
+		}
+		else{
+			std::cin.clear();
+			std::cin >> command;
+			if (command == "withdraw"){
+				bidders.erase(i);
+				--numBidders;
+			}
+			if (i == bidders.end()){
+				i = bidders.begin();
+			}
+		}
+	}
+	if (atleastOneBid){
+		std::cout << "Sold to " << highestBidder << "!" << std::endl;
+	}
+	else{
+		std::cout << "Not Sold!!!" << std::endl;
+	}
 }

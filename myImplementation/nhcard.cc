@@ -1,7 +1,9 @@
 #include "nhcard.h"
+#include "player.h"
 
-NHCard::action(Player *player){
-	player->savings += transAmt;
+void NHCard::action(){
+	theBoard->getNextPlayer(0)->savings += transAmt;
 }
 
-NHCard::NHCard(int transAmt): transAmt(transAmt){}
+
+NHCard::NHCard(Board *theBoard, int transAmt): theBoard(theBoard), transAmt(transAmt){}
