@@ -12,12 +12,20 @@ struct Academic
     int imCost;
     int imp[6];
     std::string type;
+    int row, column;
 
 };
-
+struct SquareInfo
+{
+    std::string name;
+    std::string type;
+};
+void fillLoop();
 extern std::map<std::string, Academic> aInfo;
 extern std::string const names[];
 extern bool const prop[];
+extern std::string const cNames[];
+extern int spots[][2];
 
 
 #endif

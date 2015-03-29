@@ -1,6 +1,8 @@
 #include <iostream>
 #include <sstream>
 #include "textdisplay.h"
+#include "academic.h"
+#include "npdata.h"
 #include <string>
 #include <string.h>
 #include <stdlib.h>
@@ -20,9 +22,21 @@ TextDisplay::TextDisplay(): theDisplay(NULL)  {
 }
 void TextDisplay::addPlayer(char player, int row, int column) {
     players.push_back(player);
-    //remember to set as player row/column eh
-    theDisplay[row][column] =player;
+    theDisplay[5*10+row][8*10+column] =player;
 }
+void TextDisplay::movePlayer(int oldI, int newI, string pName) {
+    int oR, oC, nR,nC;
+    oR = spots[oldI][0];
+    oC = spots[oldI][1];
+    nR = spots[newI][0];
+    nC = spots[newI][1];
+    int pR, pC;
+    pR = playerOptions[pName].row;
+    pC = playerOptions[pName].column;
+    theDisplay[oR+pR][oC+pC] = ' ';
+    theDisplay[nR+pR][nC+pC] = playerOptions[pName].avatar;
+}
+
 TextDisplay::~TextDisplay() {
   for(int i = 0; i < 56; i++) {
     delete [] theDisplay[i];
@@ -74,7 +88,6 @@ void TextDisplay::drawBox(int row, int column, string name, bool property) {
         theDisplay[row+i][column] = '|';
         theDisplay[row+i][column+8] = '|';
     }
-
 }
 void TextDisplay::notify(int r, int c, char ch){}
 

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Square::Square(): cost(0), imCost(0), r(0), c(0), td(NULL) {
+Square::Square(): cost(0), imCost(0), row(0), column(0), td(NULL) {
     for(int i = 0; i < 6; i ++) {
         im[i] = 0;
     }
@@ -18,8 +18,8 @@ string Square::getName() {
     return name;
 }
 void Square::setCoords(const int r, const int c) {
-  this->r = r;
-  this->c = c;
+  this->row = r;
+  this->column = c;
 }
 void Square::setDisplay(TextDisplay * t) {
   td = t;

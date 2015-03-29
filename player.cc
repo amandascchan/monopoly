@@ -10,8 +10,8 @@
 
 using namespace std;
 
-Player::Player(string name): name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0) {
-    avatar = playerOptions[name];
+Player::Player(string name): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0) {
+    avatar = playerOptions[name].avatar;
 }
 void Player::movePlayer(int r, int c) {
  //   td->movePlayer(r,c, avatar);

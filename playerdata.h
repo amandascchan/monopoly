@@ -3,7 +3,11 @@
 #include <string>
 #include <map>
 
-
-extern std::map<std::string, char> playerOptions;
+struct PlayerData {
+    std::string name;
+    char avatar;
+    int row, column;
+};
+extern std::map<std::string, PlayerData> playerOptions;
 #endif
 

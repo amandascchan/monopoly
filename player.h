@@ -19,6 +19,7 @@ class Player {
   int savings;
   TextDisplay *td;
   int row, column;
+  int lIndex;
   
  public:
   std::string getName();

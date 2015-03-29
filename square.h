@@ -5,7 +5,6 @@
 #include <string>
 class Square {
   std::string name;
-  int r, c;                   //co-ordinates of the cell
   std::string block;
   int cost;
   int imCost;
@@ -21,6 +20,7 @@ class Square {
 
 public:
   Square();                                   // Default constructor
+  int row, column;
 
   void setCoords(const int r, const int c);				//setter for private co-ordinates of cell
 
