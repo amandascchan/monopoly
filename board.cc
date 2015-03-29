@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "textdisplay.h"
 #include <algorithm>
 #include <string>
@@ -7,6 +8,9 @@
 #include <map>
 #include "player.h"
 #include "playerdata.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
 using namespace std;
 
 
@@ -14,6 +18,7 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(), mode("") {
   td = new TextDisplay();
   //remember to set num players later
   fillLoop();
+  srand(time(0));
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
       theBoard[i] = new Square;
@@ -68,12 +73,18 @@ Player* Board::getNextPlayer(int n) {
     return nP;
 
 }
+void Board::next() {
+   activePlayer = getNextPlayer(1);
+}
 void Board::movePlayer(int numMoves) {
     int n = (activePlayer->lIndex+numMoves)%40;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
 }    
+Player* Board::getAPlayer() {
+    return activePlayer;
+}
 void Board::movePlayer(string name) {
     int nI = 0;
     for(int i = 0; i < 40; i++) {
@@ -95,6 +106,12 @@ int Board::column(int i) {
   int yCoord = i%11;
   return yCoord;
 }
+void Board::Roll(){
+    int x = rand()%11+2;
+    cout << "Number rolled: " << x << endl;
+    movePlayer(x);
+    next();
+}
 
 Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
@@ -106,8 +123,16 @@ Board::~Board() {
   delete [] theBoard;
   delete td;
 }
-Square * Board::getSquare(int i) {
-    return theBoard[i];
+Square* Board::getSquare(int i) {
+    if(theBoard[i]) return theBoard[i];
+    throw i;
+}
+Square* Board::getSquare(string name) {
+    for(int i = 0; i < 40; i++) {
+        if(name == theBoard[i]->getName()) return theBoard[i];
+    }
+    throw name;
+
 }
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);

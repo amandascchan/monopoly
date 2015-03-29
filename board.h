@@ -25,8 +25,12 @@ class Board {
   void movePlayer(int numMoves);
   void movePlayer(std::string location);
   Player* getNextPlayer(int n);
+  void next();
+  Player* getAPlayer();
+  Square* getSquare(std::string name);
 
- void printPlayers();
+  void printPlayers();
+  void Roll();
 
   Board();
   ~Board();  
