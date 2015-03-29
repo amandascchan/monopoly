@@ -23,7 +23,7 @@ int main(void) {
         cout << "square cost: " << board.getSquare(i)->getCost() << endl;
     }
     cout << board;
-    cout << "you can roll, or type next for next player, or type q" << endl;
+    cout << "you can roll, or type next for next player, or type q to quit" << endl;
     while(true) {
         string command;
         cin >> command;
