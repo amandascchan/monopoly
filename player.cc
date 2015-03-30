@@ -24,11 +24,15 @@ void Player::endTurn() {theBoard->next();}
 bool Player::isBankrupt() {return bankrupt;}
 Player::~Player() {}
 void Player::displayAssets() {
+    cout << "Your avatar: " << avatar << endl;
     cout << "Your savings: " << savings << endl;
     cout << "Your Properties: " << endl;
+    cout << "Your location: " << location->getName() << endl;
+    cout << "Number of Tim's Cups you have: " << cups << endl;
     for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
         cout << "Name: " << (*it)->getName() << endl;
         cout << "Cost: " << (*it)->getCost() << endl;
+        cout << "Tuition for other players: " << (*it)->getRent() << endl;
         cout << "Improvement Cost: " << (*it)->getImCost() << endl;
         cout << "Property possible improvements" << endl;
         for(int i = 0; i < 6; i++) {

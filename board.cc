@@ -38,18 +38,29 @@ void Board::printPlayers() {
     }
 }
 void Board::addPlayer(string name) {
-    if(playerOptions.count(name)==0) {
-        cerr << "This player isn't valid" << endl;
-        return;
+    addPlayer(name, 'c', 0, 0, 0); 
+}
+void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
+    if(playerOptions.count(name) == 0) {
+            cerr << "This player isn't valid" << endl;
+            return;
     }
-    Player *p = new Player(name, td, this, theBoard[0]);
-    p->setCoords(players.size()/4+3, players.size()%4+2);
-    if(players.size()>=4) p->setCoords(players.size()/4+3, (players.size()+1)%4+2);
+    Player *p = new Player(name, td, this, theBoard[pos] );
+    (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
+    p->savings = money;
+    p->cups = nT;
+    p->lIndex = pos;
     players.push_back(p);
-    td->addPlayer(playerOptions[name].avatar, p->row, p->column);
+    td->addPlayer(playerOptions[name].avatar, p->location->row+p->row, p->location->column+p->column);
     playerOptions[name].row = p->row;
     playerOptions[name].column = p->column;
     if(players.size() == 1) activePlayer = players[0];
+}
+void Board::addProperty(string name, string owner, int imp) {
+    getSquare(name)->setOwner(getPlayer(owner));
+    getPlayer(owner)->properties.push_back(getSquare(name));
+    getSquare(name)->impDatShit(imp);
+
 }
 void Board::makeProperty(int i){
     string n = cNames[i];
@@ -153,6 +164,11 @@ Square* Board::getSquare(string name) {
         if(name == theBoard[i]->getName()) return theBoard[i];
     }
     throw name;
+}
+Player* Board::getPlayer(string n) {
+    for(vector<Player *>::iterator it=players.begin(); it!=players.end();it++) {
+        if((*it)->name == n) return *it;
+    }
 }
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);

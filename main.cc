@@ -12,10 +12,24 @@ int main(int argc, char *argv[]) {
     Board board= Board();
     cout << "enter player names: make sure they match the ones on the spec, type q to finish entering players" << endl;    
     while(true) {
-        string command;
-        getline(cin,command);
+        string command, line;
+        getline(cin,line);
+        stringstream ss(line);
+        ss >> command;
         if(command == "q") break;
-        board.addPlayer(command);
+        else if(command == "Goose") {
+            char m;
+            int mm;
+            int TC;
+            int pos;
+            ss >> m >> mm >> TC >> pos;
+            //Travis: this is an example for loading a game, adding players
+            board.addPlayer("Goose", m, mm, TC, pos);
+            board.getAPlayer()->displayAssets();
+            cout << board;
+
+        }
+        else board.addPlayer(command);
     }
     //Hey Travis, this startGame function lets you know if there is at least one player 
     //to start the game with
@@ -56,5 +70,13 @@ int main(int argc, char *argv[]) {
             cout << board;
         }
         else if(command == "q") break;
+        else if(command == "AL") {
+            string o1;
+            int n;
+            ss >> o1 >> n;
+            //example for loading a game adding properties
+            board.addProperty("AL", "Goose", 3);
+            board.getAPlayer()->displayAssets();
+        }
     }
 }

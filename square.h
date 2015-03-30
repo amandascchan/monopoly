@@ -8,6 +8,7 @@ class Square {
   int cost;
   int imCost;
   int im[6];
+  int rent;
   Player *owner;
   std::string desc;
 
@@ -40,6 +41,8 @@ public:
   void setDesc(std::string desc);
   std::string getDesc();
   void setOwner(Player *);
+  void impDatShit(int numImp);
+  int getRent();
 
 };
 #endif

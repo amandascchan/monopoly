@@ -22,7 +22,7 @@ TextDisplay::TextDisplay(): theDisplay(NULL)  {
 }
 void TextDisplay::addPlayer(char player, int row, int column) {
     players.push_back(player);
-    theDisplay[5*10+row][8*10+column] =player;
+    theDisplay[row][column] =player;
 }
 void TextDisplay::movePlayer(int oldI, int newI, string pName) {
     int oR, oC, nR,nC;

@@ -20,14 +20,17 @@ class Board {
   void movePlayer(int numMoves);
   void movePlayer(std::string location);
   Player* getNextPlayer(int n);
-  void next();
   Player* getAPlayer();
+  Player* getPlayer(std::string n);
   Square* getSquare(std::string name);
+  void next();
   void addPlayer(std::string name);
+  void addPlayer(std::string name, char a, int money, int nT, int pos);
   void Buy();
   void printPlayers();
   void Roll();
   void Roll(int num);
+  void addProperty(std::string name, std::string owner, int imp);
   bool startGame();
 
   Board();
