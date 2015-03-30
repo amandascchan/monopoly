@@ -6,11 +6,12 @@
 #include "player.h"
 using namespace std;
 
-Player::Player(string name, TextDisplay *t, Board *b, Square *l): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
+Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
     avatar = playerOptions[name].avatar;
     td = t;
     theBoard = b;
     location = l;
+    lIndex = lDex;
 }
 void Player::setCoords(int row, int column) {
     this->row = row;

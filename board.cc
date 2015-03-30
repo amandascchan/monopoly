@@ -45,11 +45,10 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
             cerr << "This player isn't valid" << endl;
             return;
     }
-    Player *p = new Player(name, td, this, theBoard[pos] );
+    Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
     p->cups = nT;
-    p->lIndex = pos;
     players.push_back(p);
     td->addPlayer(playerOptions[name].avatar, p->location->row+p->row, p->location->column+p->column);
     playerOptions[name].row = p->row;

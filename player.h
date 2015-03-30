@@ -23,7 +23,7 @@ class Player {
   
  public:
   std::string getName();
-  Player(std::string name, TextDisplay *t, Board *b, Square *l);
+  Player(std::string name, TextDisplay *t, Board *b, Square *l, int lDex);
   ~Player();  
   void movePlayer(int r, int c); 
   void setCoords(int row, int column);

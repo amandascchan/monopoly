@@ -78,7 +78,7 @@ int main(int argc, char *argv[]) {
             ss >> o1 >> n;
             //example for loading a game adding properties
             board.addProperty("AL", "Goose", 3);
-            board.getAPlayer()->displayAssets();
+            board.getPlayer("Goose")->displayAssets();
         }
     }
 }
