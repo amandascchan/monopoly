@@ -18,12 +18,14 @@ int main(int argc, char *argv[]) {
         ss >> command;
         if(command == "q") break;
         else if(command == "Goose") {
+            //Travis!! Please read these comments!!
+            //This is an example for loading a game, adding players,
+            //when the player name is Goose
             char m;
             int mm;
             int TC;
             int pos;
             ss >> m >> mm >> TC >> pos;
-            //Travis: this is an example for loading a game, adding players
             board.addPlayer("Goose", m, mm, TC, pos);
             board.getAPlayer()->displayAssets();
             cout << board;
