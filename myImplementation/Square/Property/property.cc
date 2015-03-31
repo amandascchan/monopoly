@@ -1,4 +1,7 @@
 #include "property.h"
+#include <string>
+#include <vector>
+#include <iostream>
 
 void Property::auction(){
 	Player *highestBidder;
@@ -14,7 +17,7 @@ void Property::auction(){
 		int bid;
 		string command;
 		Player *currentBidder = *i;
-		std::cout << currentBidder->name << "'s turn to bid/withdraw" << std::endl;
+		std::cout << currentBidder->getName() << "'s turn to bid/withdraw" << std::endl;
 		if (std::cin >> bid){
 			atleastOneBid = true;
 			if (bid > highestBid){
@@ -39,33 +42,39 @@ void Property::auction(){
 		}
 	}
 	if (numBidders == 1){
-		std::cout << "Sold to " << *i->name << "for " << highestBid << " dollars!" << std::endl;
-		owner = *i;
-		highestBidder->savings -= highestBid;
+		std::cout << "Sold to " << highestBidder->getName() << "for " << highestBid << " dollars!" << std::endl;
+		owner = highestBidder;
+		highestBidder->transaction(-highestBid, NULL);
 	}
 }
 
 void Property::buy(){
-	if (theBoard->getNextPlayer(0)->savings >= price){
-		owner = theBoard->getNextPlayer(0);
-		theBoard->getNextPlayer(0)->savings -= price;
+	Player *buyer = theBoard->getNextPlayer(0);
+	if (buyer->canAfford(price)){
+		owner = buyer;
+		buyer->transaction(-price, NULL);
 	}
 	else{
 		std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
 	}
 }
 
+void Property::mortgage(){
+    isMortgaged = true;
+    owner->transaction(price/2);
+}
+
 void Property::unMortgage(){
 	if (isMortgaged){
-		if (theBoard->getNextPlayer(0)->savings >= price*1.1){
+		if (owner->canAfford(price*1.1/2)){
 			isMortgaged = false;
-			theBoard->getNextPlayer(0)->savings -= price*1.1;
+			owner->transaction(price*1.1/2);
 		}
-		else{
+		else {
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
 		}
 	}
-	else{
+	else {
 		std::cout << "No mortgage to remove." << std::endl;
 	}
 }

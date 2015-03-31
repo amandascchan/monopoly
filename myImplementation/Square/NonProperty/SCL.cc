@@ -12,8 +12,8 @@ void SLC::action(){
 
 
 
-SLC::SLC(Board *theBoard, Square *prevSquare, Square *nextSquare):
-		theBoard(theBoard), prevSquare(prevSquare), nextSquare(nextSquare), name("SLC"){
+SLC::SLC(Board *theBoard, TextDisplay *td):
+		Square(theBoard, td), name("SLC"){
 	deckBuilder myBuilder;
 	std::string config = "24 SLCCard -4 1 -3 3 -2 4 -1 4 1 3 2 4 3 4 4 1";
 	deck = deckBuilder->buildDeck(config);

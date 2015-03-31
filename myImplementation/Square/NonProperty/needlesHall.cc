@@ -10,8 +10,8 @@ void NeedlesHall::action(){
 
 
 
-NeedlesHall::NeedlesHall(Board *theBoard, Square *prevSquare, Square *nextSquare):
-	theBoard(theBoard), prevSquare(prevSquare), nextSquare(nextSquare), name("Needles Hall"){
+NeedlesHall::NeedlesHall(Board *theBoard, TextDisplay *td):
+	Square(theBoard, td), name("Needles Hall"){
 	deckBuilder myBuilder;
 	std::string config = "18 NHCard -200 1 -100 2 -50 3 25 6 50 3 100 2 200 1"
 	deck = deckBuilder->buildDeck(config);

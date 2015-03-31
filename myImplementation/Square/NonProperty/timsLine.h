@@ -3,7 +3,7 @@
 
 class TimsLine: public NonProperty{
 public:
-	TimsLine(Board *theBoard, Square *prevSquare, Square *nextSquare);
+	TimsLine(Board *, TextDisplay *);
 	void action();
 };
 

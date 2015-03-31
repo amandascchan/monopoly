@@ -1,26 +1,25 @@
+#include "board.h"
 #include "textdisplay.h"
-#include "square.h"
+#include "academic.h"
 #include <string>
 #include <iostream>
 
-using namespace std;
 
-Academic::Academic(Board *theBoard, TextDisplay *td): theBoard(theBoard), td(td){
+Academic::Academic(Board *theBoard, TextDisplay *td): Square(theBoard, td){
     for(int i = 0; i < 6; i ++) {
         tiution[i] = 0;
     }
 }
 
-Academic::action(){
+void Academic::action(){
   if (!isMortgaged){
     int fee = tuition[numImp];
     if ((owner->ownsBlock(block))&&(numImp == 0)){fee *= 2;}
-    theBoard->getNextPlayer(0)->transaction(-fee);
-    owner->transaction(fee);
+    theBoard->getNextPlayer(0)->transaction(-fee, owner);
   }
 }
 
-Academic::improve(std::string buyOrSell){
+void Academic::improve(std::string buyOrSell){
   if (buyOrSell == "buy"){
     if (owner->ownsBlock(block)){
       if (owner->canAfford(impCost)){
@@ -47,10 +46,10 @@ Academic::improve(std::string buyOrSell){
   }
 }
 
-Academic::mortgage(){
+void Academic::mortgage(){
   if (numImp == 0){
     isMortgaged = true;
-    theBoard->getNextPlayer(0)->transaction(price/2);
+    owner->transaction(price/2);
   }
   else {
     std::cout << "Can not mortgage property that has improvements." << endl;

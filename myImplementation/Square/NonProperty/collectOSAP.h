@@ -3,7 +3,7 @@
 
 class CollectOSAP: public NonProperty{
 public:
-	CollectOSAP(Board *theBoard, Square *prevSquare, Square *nextSquare);
+	CollectOSAP(Board *theBoard, TextDisplay *);
 	void action();
 };
 

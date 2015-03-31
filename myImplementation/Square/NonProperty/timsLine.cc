@@ -1,6 +1,5 @@
 #include "timsLine.h"
 void TimsLine::action(){}
 
-TimsLine::TimsLine(Board *theBoard, Square *prevSquare, Square *nextSquare):
-					theBoard(theBoard), prevSquare(prevSquare),
-					nextSquare(nextSquare), name("DC Tims Line"){}
+TimsLine::TimsLine(Board *theBoard, TextDisplay *td):
+					Square(theBoard, td), name("DC Tims Line"){}

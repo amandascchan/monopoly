@@ -3,7 +3,7 @@
 
 class GooseNest: public NonProperty{
 public:
-	GooseNest(Board *theBoard, Square *prevSquare, Square *nextSquare);
+	GooseNest(Board *theBoard, TextDisplay *);
 	void action();
 };
 

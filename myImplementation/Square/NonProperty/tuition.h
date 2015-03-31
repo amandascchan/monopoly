@@ -3,7 +3,7 @@
 
 class Tuition: public NonProperty{
 public:
-	Tuition::Tuition();
+	Tuition::Tuition(Board *, TextDisplay *);
 	void action();
 };
 

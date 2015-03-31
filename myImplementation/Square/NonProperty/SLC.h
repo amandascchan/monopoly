@@ -7,7 +7,7 @@ class SLC: public NonProperty{
 	std::vector<Card *> deck;
 public:
 	void action();
-	SLC(Board *theBoard, Square *prevSquare, Square *nextSquare);
+	SLC(Board *, TextDisplay *);
 	~SLC();
 };
 

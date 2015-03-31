@@ -6,6 +6,5 @@ void GoToTimsLine::action(){
 	theBoard->getNextPlayer(0)->giveJailTime();
 }
 
-GoToTimsLine::GoToTimsLine(Board *theBoard, Square *prevSquare, Square *nextSquare):
-		theBoard(theBoard), prevSquare(prevSquare),
-		nextSquare(nextSquare), name("Go to Tims Line"){}
+GoToTimsLine::GoToTimsLine(Board *theBoard, TextDisplay *td):
+		Square(theBoard, td), name("Go to Tims Line"){}
