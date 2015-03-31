@@ -80,5 +80,13 @@ int main(int argc, char *argv[]) {
             board.addProperty("AL", "Goose", 3);
             board.getPlayer("Goose")->displayAssets();
         }
+        else if(command == "owns") {
+          string block;
+          ss >> block;
+          cout << board.getAPlayer()->ownsBlock(block) << endl;
+        }
+        else if(command == "numRez") {
+          cout << board.getAPlayer()->numRez() << endl;
+        }
     }
 }

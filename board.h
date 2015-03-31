@@ -14,6 +14,7 @@ class Board {
   int row(int i);
   int column(int i);
   void makeProperty(int i);
+  void printError(std::string name);
  public:
   std::string mode;
   Square *getSquare(int i);
@@ -31,8 +32,12 @@ class Board {
   void Roll();
   void Roll(int num);
   void addProperty(std::string name, std::string owner, int imp);
+  //void improve(std::string name, std::string buyOrSell);
+  //void mortgage(std::string name);
+  //void unmortgage(std::string name);
   bool startGame();
-
+  bool winner();
+  
   Board();
   ~Board();  
   friend std::ostream &operator<<(std::ostream &out, const Board &g);

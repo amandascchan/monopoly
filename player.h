@@ -29,10 +29,12 @@ class Player {
   void setCoords(int row, int column);
   Board* getBoard();
   void Bankrupt();
-  int getSavings();
   void endTurn();
-  bool isBankrupt();
   void displayAssets();
+  bool isBankrupt();
+  bool ownsBlock(std::string name);
+  int getSavings();
+  int numRez();
 
 };
 

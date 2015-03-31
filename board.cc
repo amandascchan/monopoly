@@ -64,9 +64,9 @@ void Board::addProperty(string name, string owner, int imp) {
 void Board::makeProperty(int i){
     string n = cNames[i];
     theBoard[i]->setCost(aInfo[n].pCost);
+    theBoard[i]->setBlock(aInfo[n].block);
     if(aInfo[n].type == "A") {
         theBoard[i]->setImCost(aInfo[n].imCost);
-        theBoard[i]->setBlock(aInfo[n].block);
         for(int j = 0; j < 6; j++) theBoard[i]->setIm(j, aInfo[n].imp[j]);
     }
     theBoard[i]->setDesc("This is a property");
@@ -144,6 +144,43 @@ void Board::Buy() {
         activePlayer->displayAssets();
     }
 }
+bool Board::winner() {
+  if(players.size() == 1) return true;
+  return false;
+}
+/*void Board::mortage(string name) {
+  if(aInfo.count(name)) {
+    Property *p = dynamiccaast<Property *>(getSquare(name));
+    p->mortgage();
+    return;
+  }
+  printError(name);
+}
+void Board::unmortgage(string name) {
+  if(aInfo.count(name)) {
+    Property *p = dynamiccast<Property *>(getSquare(name));
+    p->unmortgage();
+    return;
+  }
+  printError(name);
+}
+void Board::improve(string name, string buyOrSell) {
+  if(aInfo.count(name)) {
+    if(aInfo[name].type == "A") {
+      Academic *p = dynamiccast<Academic *>(getSquare(name));
+      p->improve(buyOrSell);
+      return;
+    }
+    cout << name << " cannot be improved" << endl;
+  }
+  printError(name);
+}*/
+
+void Board::printError(string name) {
+  cout << name << " does not exist" << endl;
+  return;
+}
+
 Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
