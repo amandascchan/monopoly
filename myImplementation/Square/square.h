@@ -8,7 +8,7 @@ class Square {
 	Board *theBoard;
 	Square *nextSquare;
 	Square *prevSquare;
-	int r, c;              //co-ordinates of the cell
+	int row, column;              //co-ordinates of the cell
 	TextDisplay * td;        //pointer to the text display
   	// Add private members, if necessary (access to Xwindow, location in the window etc)
   	//int x, y, width, height;
