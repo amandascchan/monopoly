@@ -49,11 +49,9 @@ int main(int argc, char *argv[]){
         commandStream >> command;
 		if (command == "roll"){
 			int r1, r2;
-			if (testing&&(ss >> d1 >> d2)){
-				int r1, r2;
-				cin >> r1 >> r2
+			if (testing&&(commandStream >> r1 >> r2)){
 				board.roll(r1, r2);
-			}
+			} else board.roll();
 		}
 		else if (command == "next"){
 			board.next();
@@ -85,11 +83,11 @@ int main(int argc, char *argv[]){
 		else if (command == "assets"){
 			theBoard.getNextPlayer(0)->printAssets();
 		}
-		else if (command == "save"){
+	/*	else if (command == "save"){
 			string saveFile;
 			commandStream >> saveFile;
 			theBoard.save(saveFile);
-		}
+		}*/
 	}
 	cout << theBoard.getNextPlayer(0)->getName() << " Wins!" << endl;
 }
