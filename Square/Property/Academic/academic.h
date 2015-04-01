@@ -7,7 +7,6 @@ class TextDisplay;
 class Player;
 
 class Academic: public Property {
-  std::string block;
   int impCost;
   int numImp;
   int tuition[6];
@@ -17,5 +16,6 @@ public:
   void action();
   void improve(std::string);
   void mortgate();
+  void setPosition(int, int);
 };
 #endif

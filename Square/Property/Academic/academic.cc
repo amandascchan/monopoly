@@ -6,10 +6,16 @@
 #include <iostream>
 
 
-Academic::Academic(Board *theBoard, TextDisplay *td): Square(theBoard, td){
+Academic::Academic(Board *theBoard, TextDisplay *td): Square(theBoard, td),
+				isMortgaged(false), owner(NULL), numImp(0){
     for(int i = 0; i < 6; i ++) {
         tiution[i] = 0;
     }
+}
+
+void Academic::setPosition(int r, int c){
+	row = r;
+	column = c;
 }
 
 void Academic::action(){

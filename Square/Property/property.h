@@ -8,6 +8,7 @@ class Property: public Square{
 	bool isMortgaged;
 	Player *owner;
 	int price;
+	string block;
 	void auction();
 	void buy();
 	void unMortgage();

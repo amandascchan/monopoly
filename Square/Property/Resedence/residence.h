@@ -7,7 +7,6 @@ class TextDisplay;
 class Player;
 
 class Residence: public Property {
-  std::string block;
   std::string desc;
 public:
   Residence(Board *, TextDisplay *);

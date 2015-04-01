@@ -7,7 +7,8 @@
 
 
 Residence::Residence(Board *theBoard, TextDisplay *td): Square(theBoard, td),
-											price(200), block("Residence"){}
+											price(200), block("Residence"),
+											owner(NULL), isMortgaged(false){}
 
 void Residence::action(){
 	int numOwned = owner->numRez();

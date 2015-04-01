@@ -7,7 +7,8 @@
 
 
 Gym::Gym(Board *theBoard, TextDisplay *td): Square(theBoard, td),
-											price(150), block("Gym"){}
+											price(150), block("Gym"),
+											owner(NULL), isMortgaged(NULL){}
 
 void Gym::action(){
 	int r1 = rand() % 6 + 1;

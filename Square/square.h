@@ -7,6 +7,7 @@ class Board;
 class TextDisplay;
 
 class Square {
+	friend class Board;
 	std::string name;
 	Board *theBoard;
 	int row, column;              //co-ordinates of the cell
