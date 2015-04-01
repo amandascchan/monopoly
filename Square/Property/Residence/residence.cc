@@ -1,7 +1,8 @@
-#include "board.h"
-#include "textdisplay.h"
-#include "player.h"
-#include "square.h"
+#include "../../../Board/board.h"
+#include "../../../Player/player.h"
+#include "../../../TextDisplay/textdisplay.h"
+#include "../../square.h"
+#include "../property.h"
 #include <string>
 #include <iostream>
 

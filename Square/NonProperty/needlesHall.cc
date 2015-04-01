@@ -2,10 +2,11 @@
 #include <cstdlib>
 #include <ctime>
 #include "needlesHall.h"
-#include "card.h"
-#include "textdisplay.h"
-#include "board.h"
-#include "deckbuilder.h"
+#include "../../Card/card.h"
+#include "../../Player/player.h"
+#include "../../TextDisplay/textdisplay.h"
+#include "../../Board/board.h"
+#include "../../DeckBuilder/deckbuilder.h"
 
 
 void NeedlesHall::action(){

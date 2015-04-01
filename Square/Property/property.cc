@@ -2,9 +2,9 @@
 #include <string>
 #include <vector>
 #include <iostream>
-#include "board.h"
-#include "player.h"
-#include "textdisplay.h"
+#include "../../Board/board.h"
+#include "../../Player/player.h"
+#include "../../TextDisplay/textdisplay.h"
 
 void Property::auction(){
 	Player *highestBidder;

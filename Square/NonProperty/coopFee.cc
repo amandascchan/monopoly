@@ -1,11 +1,11 @@
 #include "coopFee.h"
-#include "NPInclude.h.gch"
+#include "../../Player/player.h"
+#include "../../TextDisplay/textdisplay.h"
+#include "../../Board/board.h"
 #include <iostream>	
 
 void CoopFee::action(){
-	Player *currentPlayer = theboard->getNextPLayer(0);
-	currentPlayer->debt += 150;
-	currentPlayer->payDebt();
+	theboard->getNextPlayer(0)->transation(150, NULL);
 }
 
 CoopFee::CoopFee(Board *theBoard, TextDisplay *td):

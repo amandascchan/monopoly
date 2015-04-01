@@ -1,7 +1,7 @@
 #ifndef __GYM_H__
 #define __GYM_H__
 #include <string>
-#include "property.h"
+#include "../property.h"
 
 class TextDisplay;
 class Player;

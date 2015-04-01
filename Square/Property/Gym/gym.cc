@@ -1,6 +1,6 @@
-#include "board.h"
-#include "textdisplay.h"
-#include "player.h"
+#include "../../../Board/board.h"
+#include "../../../Player/player.h"
+#include "../../../TextDisplay/textdisplay.h"
 #include "gym.h"
 #include <string>
 #include <iostream>

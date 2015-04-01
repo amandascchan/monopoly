@@ -1,10 +1,12 @@
 #include "collectOSAP.h"
-#include "NPInclude.h.gch"
+#include "../../Player/player.h"
+#include "../../TextDisplay/textdisplay.h"
+#include "../../Board/board.h"
 #include <iostream>	
 
 void CollectOSAP::action(){
-	Player *currentPlayer = theboard->getNextPLayer(0);
-	currentPlayer->savings += 200;
+	Player *currentPlayer = theboard->getNextPlayer(0);
+	currentPlayer->transaction(200, NULL);
 }
 
 CollectOSAP::CollectOSAP(Board *theBoard, TextDisplay *td):

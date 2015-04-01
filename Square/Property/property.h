@@ -1,6 +1,6 @@
 #ifndef __PROPERTY_H__
 #define __PROPERTY_H__
-#include "square.h"
+#include "../square.h"
 
 class Player;
 

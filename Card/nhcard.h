@@ -1,5 +1,6 @@
 #ifndef __NHCARD_H__
 #define __NHCARD_H__
+
 #include "card.h"
 
 

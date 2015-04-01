@@ -1,5 +1,6 @@
 #ifndef __SLCCARD_H__
 #define __SLCCARD_H__
+
 #include "card.h"
 
 class SLCCard: public Card{
