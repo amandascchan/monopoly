@@ -1,5 +1,5 @@
 #include "collectOSAP.h"
-#include "board.h"	
+#include "NPInclude.h.gch"
 #include <iostream>	
 
 void CollectOSAP::action(){

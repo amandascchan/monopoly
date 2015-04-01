@@ -1,4 +1,5 @@
 #include "board.h"
+#include "player.h"
 #include "textdisplay.h"
 #include "academic.h"
 #include <string>

@@ -1,8 +1,11 @@
 #ifndef __SQUARE_H__
 #define __SQUARE_H__
 #include <iostream>
-#include "textdisplay.h"
 #include <string>
+
+class Board;
+class TextDisplay;
+
 class Square {
 	std::string name;
 	Board *theBoard;

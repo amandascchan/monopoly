@@ -1,5 +1,7 @@
 #include "tuition.h"
-#include "board.h"	
+#include "textdisplay.h"
+#include "board.h"
+#include "deckbuilder.h"
 #include <iostream>	
 
 void Tuition::action(){

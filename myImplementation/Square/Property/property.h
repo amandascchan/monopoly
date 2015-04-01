@@ -1,6 +1,7 @@
 #ifndef __PROPERTY_H__
 #define __PROPERTY_H__
 #include "square.h"
+
 class Player;
 
 class Property: public Square{

@@ -3,6 +3,10 @@
 #include <ctime>
 #include "SLC.h"
 #include "card.h"
+#include "textdisplay.h"
+#include "board.h"
+#include "deckbuilder.h"
+#include "needlesHall.h"
 
 
 

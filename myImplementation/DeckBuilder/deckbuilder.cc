@@ -1,3 +1,4 @@
+#include "card.h"
 #include "slccard.h"
 #include "nhcard.h"
 #include <string>

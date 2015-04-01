@@ -5,6 +5,7 @@
 
 class TextDisplay;
 class Player;
+class Board;
 
 class Gym: public Property {
   std::string block;

@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 					r1 = rand %6 + 1;
 					r2 = rand %6 + 1;
 				}
-				theBoard->Roll(r1, r2);
+				theBoard->Roll(r1 + r2);
 			}
 			else {
 				cout << "You have already rolled this turn." << endl;

@@ -1,5 +1,6 @@
 #include "board.h"
 #include "textdisplay.h"
+#include "player.h"
 #include "gym.h"
 #include <string>
 #include <iostream>

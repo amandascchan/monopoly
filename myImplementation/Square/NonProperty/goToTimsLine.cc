@@ -1,5 +1,5 @@
 #include "player.h"
-#include "board.h"
+#include "NPInclude.h.gch"
 
 void GoToTimsLine::action(){
 	theBoard->movePlayer("DC Tims Line");

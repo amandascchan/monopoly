@@ -1,5 +1,5 @@
 #include "coopFee.h"
-#include "board.h"	
+#include "NPInclude.h.gch"
 #include <iostream>	
 
 void CoopFee::action(){

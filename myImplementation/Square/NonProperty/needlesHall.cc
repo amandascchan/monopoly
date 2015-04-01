@@ -1,7 +1,11 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
-
+#include "needlesHall.h"
+#include "card.h"
+#include "textdisplay.h"
+#include "board.h"
+#include "deckbuilder.h"
 
 
 void NeedlesHall::action(){
