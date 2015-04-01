@@ -49,9 +49,9 @@ void Property::auction(){
 		}
 	}
 	if (numBidders == 1){
-		std::cout << "Sold to " << highestBidder->getName() << "for " << highestBid << " dollars!" << std::endl;
-		owner = highestBidder;
-		highestBidder->transaction(-highestBid, NULL);
+		std::cout << "Sold to " << (*i)->getName() << " for " << highestBid << " dollars!" << std::endl;
+		owner = *i;
+		(*i)->transaction(-highestBid, NULL);
 	}
 }
 
