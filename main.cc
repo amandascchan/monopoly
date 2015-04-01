@@ -1,7 +1,7 @@
-#include "textdisplay.h"
-#include "square.h"
-#include "board.h" 
-#include "player.h"
+#include "TextDisplay/textdisplay.h"
+#include "Square/square.h"
+#include "Board/board.h" 
+#include "Player/player.h"
 #include <cstring>
 #include <ctime>
 #include <cstdlib>

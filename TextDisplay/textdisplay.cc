@@ -1,13 +1,13 @@
 #include <iostream>
 #include <sstream>
 #include "textdisplay.h"
-#include "data/academic.h"
-#include "data/npdata.h"
+#include "../data/academic.h"
+#include "../data/npdata.h"
 #include <string>
 #include <string.h>
 #include <stdlib.h>
-#include "player.h"
-#include "data/playerdata.h"
+#include "../Playre/player.h"
+#include "../data/playerdata.h"
 using namespace std;
 
 TextDisplay::TextDisplay(): theDisplay(NULL)  {
