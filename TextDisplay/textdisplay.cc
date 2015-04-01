@@ -43,7 +43,6 @@ TextDisplay::~TextDisplay() {
   }
   delete [] theDisplay;
 }
-
 void TextDisplay::init() {
     for(int i = 0; i < 11; i++) {
         drawBox(0, i*8, names[i], prop[i]);
@@ -89,8 +88,11 @@ void TextDisplay::drawBox(int row, int column, string name, bool property) {
         theDisplay[row+i][column+8] = '|';
     }
 }
-void TextDisplay::notify(int r, int c, char ch){}
-
+void TextDisplay::addImprov(int row, int column, int numImprovements) {
+    for(int i = 6; i > (6-numImprovements); i--) {
+    theDisplay[row+1][column + i] = 'I';
+    }
+}
 ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   for(int i = 0; i < 56; i++) {
     for(int j = 0; j < 90; j++) {
