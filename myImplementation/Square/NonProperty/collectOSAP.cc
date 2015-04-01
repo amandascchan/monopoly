@@ -1,5 +1,5 @@
 #include "collectOSAP.h"
-#include "board.h"	
+#include "NPInclude.h.gch"
 #include <iostream>	
 
 void CollectOSAP::action(){
@@ -7,6 +7,5 @@ void CollectOSAP::action(){
 	currentPlayer->savings += 200;
 }
 
-CollectOSAP::CollectOSAP(Board *theBoard, Square *prevSquare, Square *nextSquare):
-		theBoard(theBoard), prevSquare(prevSquare),
-		nextSquare(nextSquare), name("Collect OSAP"){}
+CollectOSAP::CollectOSAP(Board *theBoard, TextDisplay *td):
+		Square (theBoard, td), name("Collect OSAP"){}

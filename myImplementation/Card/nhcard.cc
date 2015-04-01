@@ -1,8 +1,9 @@
 #include "nhcard.h"
 #include "player.h"
+#include "board.h"
 
 void NHCard::action(){
-	theBoard->getNextPlayer(0)->savings += transAmt;
+	theBoard->getNextPlayer(0)->transaction(transAmt, NULL);
 }
 
 

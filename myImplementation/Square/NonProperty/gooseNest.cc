@@ -1,6 +1,6 @@
 #include "gooseNest.h"	
+#include "NPInclude.h.gch"
 
-GooseNest::GooseNest(Board *theBoard, Square *prevSquare, Square *nextSquare):
-		theBoard(theBoard), prevSquare(prevSquare),
-		nextSquare(nextSquare), name("Goose Nest"){}
+GooseNest::GooseNest(Board *theBoard, TextDisplay *td):
+		Square(theBoard, td), name("Goose Nest"){}
 void GooseNest::action(){}

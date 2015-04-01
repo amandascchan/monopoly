@@ -1,5 +1,5 @@
 #include "coopFee.h"
-#include "board.h"	
+#include "NPInclude.h.gch"
 #include <iostream>	
 
 void CoopFee::action(){
@@ -8,5 +8,5 @@ void CoopFee::action(){
 	currentPlayer->payDebt();
 }
 
-CoopFee::CoopFee(Board *theBoard, Square *prevSquare, Square *nextSquare):
-		theBoard(theBoard), prevSquare(prevSquare), nextSquare(nextSquare), name("Co-op Fee"){}
+CoopFee::CoopFee(Board *theBoard, TextDisplay *td):
+		Square(theBoard, td), name("Co-op Fee"){}

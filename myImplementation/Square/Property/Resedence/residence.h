@@ -1,17 +1,16 @@
-#ifndef __GYM_H__
-#define __GYM_H__
+#ifndef __RESIDENCE_H__
+#define __RESIDENCE_H__
 #include <string>
 #include "property.h"
 
 class TextDisplay;
 class Player;
-class Board;
 
-class Gym: public Property {
+class Residence: public Property {
   std::string block;
   std::string desc;
 public:
-  Gym(Board *, TextDisplay *);
+  Residence(Board *, TextDisplay *);
   void action();
 };
 #endif

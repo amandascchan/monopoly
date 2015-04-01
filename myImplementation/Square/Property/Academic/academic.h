@@ -1,8 +1,11 @@
-#ifndef __SQUARE_H__
-#define __SQUARE_H__
+#ifndef __ACADEMIC_H__
+#define __ACADEMIC_H__
 #include <string>
+#include "property.h"
+
 class TextDisplay;
 class Player;
+
 class Academic: public Property {
   std::string block;
   int impCost;
@@ -11,8 +14,8 @@ class Academic: public Property {
   std::string desc;
 public:
   Academic(Board *, TextDisplay *);
-  action();
-  improve(std::string);
-  mortgate();
+  void action();
+  void improve(std::string);
+  void mortgate();
 };
 #endif

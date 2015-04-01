@@ -38,9 +38,12 @@ int main(int argc, char *argv[]){
 	board.startGame()
 	cout << board;
 	bool beginTurn = true;
+	Player *currentPlayer;
+	bool hasRolled = false;
 	while(!theBoard.winner()){
 		if (beginTurn){
-			cout << board.getNextPlayer(0)->getName() << "'s turn" << endl;
+			currentPlayer = theBoard.getNextPlayer(0);
+			cout << currentPlayer->getName() << "'s turn" << endl;
 			beginTurn = false;
 		}
         string line, command;
@@ -48,14 +51,29 @@ int main(int argc, char *argv[]){
         stringstream commandStream(line);
         commandStream >> command;
 		if (command == "roll"){
-			int r1, r2;
-			if (testing&&(commandStream >> r1 >> r2)){
-				board.roll(r1, r2);
-			} else board.roll();
+			if (!hasRolled){
+				int r1, r2;
+				if (testing&&(commandStream >> r1)){
+					if (!(commandStream >> r2))r2 = rand %6 + 1;
+				}
+				else {
+					r1 = rand %6 + 1;
+					r2 = rand %6 + 1;
+				}
+				theBoard->Roll(r1 + r2);
+			}
+			else {
+				cout << "You have already rolled this turn." << endl;
+			}
 		}
 		else if (command == "next"){
-			board.next();
-			beginTurn = true;
+			if (currentPlayer->canAfford(0)){
+				board.next();
+				beginTurn = true;
+			}
+			else {
+				cout << "You can not end your turn until you have paid your debt." << endl;
+			}
 		}
 		else if (command == "trade"){
 			string counterParty, give, recieve;
