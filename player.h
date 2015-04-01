@@ -17,9 +17,10 @@ class Player {
   int savings;
   int row, column;
   int lIndex;
-  std::map<std::string, int>owings;
   int turnsInTimLine;
   bool bankrupt;
+  Player *creditor;
+  int debt;
   
  public:
   std::string getName();
@@ -31,10 +32,12 @@ class Player {
   void Bankrupt();
   void endTurn();
   void displayAssets();
+  void transaction(int amount, Player *p);
   bool isBankrupt();
   bool ownsBlock(std::string name);
   int getSavings();
   int numRez();
+  bool canAfford(int number);
 
 };
 

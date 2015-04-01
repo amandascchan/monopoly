@@ -37,6 +37,9 @@ void Board::printPlayers() {
         cout << players[i]->name << endl;
     }
 }
+void Board::removePlayer() {
+
+}
 void Board::addPlayer(string name) {
     addPlayer(name, 'c', 0, 0, 0); 
 }

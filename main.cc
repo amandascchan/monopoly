@@ -88,5 +88,11 @@ int main(int argc, char *argv[]) {
         else if(command == "numRez") {
           cout << board.getAPlayer()->numRez() << endl;
         }
+        else if(command == "transaction") {
+          int amt;
+          ss >> amt;
+          board.getAPlayer()->transaction(amt, NULL);
+          board.getAPlayer()->displayAssets();
+        }
     }
 }

@@ -8,12 +8,13 @@
 #include <algorithm>
 using namespace std;
 
-Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
+Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): creditor(NULL),lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(0), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
     avatar = playerOptions[name].avatar;
     td = t;
     theBoard = b;
     location = l;
     lIndex = lDex;
+    debt = 0;
 }
 void Player::setCoords(int row, int column) {
     this->row = row;
@@ -42,6 +43,23 @@ int Player::numRez() {
     if((*it)->getBlock() == "Residence") count++;
   }
   return count;
+}
+bool Player::canAfford(int number) {
+  return (savings - number >= 0);
+}
+void Player::transaction(int amount, Player *p) {
+  int result  = savings + amount;
+  if(p != this) {
+    if(result < 0) {
+      (p)? creditor = p : NULL;
+      savings = 0;
+      debt = result;
+    }
+    else {
+      savings = result;
+      creditor->savings += amount;
+    }
+  }
 }
 void Player::displayAssets() {
     cout << "Your avatar: " << avatar << endl;
