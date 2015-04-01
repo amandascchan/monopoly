@@ -2,7 +2,7 @@
 #include "square.h"
 #include "player.h"
 #include "textdisplay.h"
-#include "data/squaredata.h"
+#include "data/academic.h"
 #include "data/playerdata.h"
 #include "data/npdata.h"
 #include <string>
@@ -18,25 +18,6 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   srand(time(0));
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
-    Square *n = new Square;
-    if(aInfo.count(cNames[i])) {
-      if(aInfo[cNames[i]].type == "A") {
-        n = new Academic(this, td);
-        for(int i = 0; i < 6; i++) 
-        
-     }
-      else if(aInfo[cNames[i]].type == "R") {
-      }
-      else if(aInfo[cNames[i]].type == "G") {
-      }
-      else {
-      }
-
-
-
-
-
-    }
       theBoard[i] = new Square;
       theBoard[i]->setName(cNames[i]);
       if(aInfo.count(cNames[i])) {
@@ -90,9 +71,6 @@ void Board::makeProperty(int i){
     if(aInfo[n].type == "A") {
         theBoard[i]->setImCost(aInfo[n].imCost);
         for(int j = 0; j < 6; j++) theBoard[i]->setIm(j, aInfo[n].imp[j]);
-    }
-    else if(aInfo[n].type == "R") {
-      
     }
     theBoard[i]->setDesc("This is a property");
 }

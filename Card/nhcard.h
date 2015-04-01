@@ -2,7 +2,6 @@
 #define __NHCARD_H__
 #include "card.h"
 
-class Board;
 
 class NHCard: public Card{
 	int transAmt;

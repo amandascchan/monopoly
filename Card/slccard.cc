@@ -1,6 +1,5 @@
 #include "slccard.h"
 #include "player.h"
-#include "board.h"
 
 void SLCCard::action( ){
 	if ((move<=3)&&(-3<=move)){

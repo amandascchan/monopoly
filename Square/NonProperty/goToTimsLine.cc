@@ -3,7 +3,7 @@
 
 void GoToTimsLine::action(){
 	theBoard->movePlayer("DC Tims Line");
-	theBoard->getNextPlayer(0)->giveJailTime();
+	//theBoard->getNextPlayer(0)->giveJailTime();
 }
 
 GoToTimsLine::GoToTimsLine(Board *theBoard, TextDisplay *td):
