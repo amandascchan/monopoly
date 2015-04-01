@@ -13,7 +13,6 @@ class Board {
   Player *activePlayer;
   int row(int i);
   int column(int i);
-  void makeProperty(int i);
   void printError(std::string name);
  public:
   std::string mode;

@@ -19,33 +19,53 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
       theBoard[i] = new Square;
+      Square *n;
       if(aInfo.count(cNames[i])) {
           if(aInfo[cNames[i]].type == "A") {
-              Square *n = new Academic(this, td);
-              n->name = aInfo[cNames[i]].name;
+              n = new Academic(this, td);
               n->block = aInfo[cNames[i]].block;
               n->impCost = aInfo[cNames[i]].imCost;
-              n->price = aInfo[cNames[i]].pCost;
               for(int j = 0; j <6; j++) {
                   n->tuition[j] = aInfo[cNames[j]].imp[j];
               }
           }
           else if(aInfo[cNames[i]].type == "R") {
-              Square *n = new Residence(this, td);
+              n = new Residence(this, td);
           }
           else if(aInfo[cNames[i]].type == "G") {
-              Gym *n = new Gym(this, td);
+              n = new Gym(this, td);
           }
-          else {
-              
-
-          }
+          n->price = aInfo[cNames[i]].pCost;
       }
       else {
-          theBoard[i]->setCost(npInfo[cNames[i]].pCost);
-          theBoard[i]->setDesc(npInfo[cNames[i]].desc);
+          if(cNames[i] == "SLC") {
+              n = new SLC(this, td);
+          }
+          else if(cNames[i] == "NEEDLES HALL") {
+              n = new NeedlesHall(this, td);
+          }
+          else if(cNames[i] == "GO TO TIMS") {
+              n = new GoToTimsLine(this, td);
+          }
+          else if(cNames[i] == "DC Tims Line") {
+              n = new TimsLine(this,td);
+          }
+          else if(cNames[i] == "TUITION") {
+              n = new Tuition(this,td);
+          }
+          else if(cNames[i] == "Goose Nesting") {
+              n = new GooseNest(this, td);
+          }
+          else if(cNames[i] == "COOP FEE") {
+              n = new CoopFee(this, td);
+          }
+          else if(cNames[i] == "COLLECT OSAP") {
+              n = new CollectOSAP(this, td);
+          }
+          //n->desc = npInfo[cNames[i]].desc;
       }
-      theBoard[i]->setCoords(spots[i][0], spots[i][1]);
+      n->name = cNames[i];
+      n->setPosition(spots[i][0], spots[i][1]);
   }
 
 }
@@ -77,16 +97,6 @@ void Board::addProperty(string name, string owner, int imp) {
     getPlayer(owner)->properties.push_back(getSquare(name));
     getSquare(name)->impDatShit(imp);
 
-}
-void Board::makeProperty(int i){
-    string n = cNames[i];
-    theBoard[i]->setCost(aInfo[n].pCost);
-    theBoard[i]->setBlock(aInfo[n].block);
-    if(aInfo[n].type == "A") {
-        theBoard[i]->setImCost(aInfo[n].imCost);
-        for(int j = 0; j < 6; j++) theBoard[i]->setIm(j, aInfo[n].imp[j]);
-    }
-    theBoard[i]->setDesc("This is a property");
 }
 Player* Board::getNextPlayer(int n) {
     int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
