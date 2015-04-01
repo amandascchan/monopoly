@@ -3,11 +3,11 @@
 #include "../Square/NonProperty/collectOSAP.h"
 #include "../Square/NonProperty/coopFee.h"
 #include "../Square/NonProperty/needlesHall.h"
-#include "../Square/NonProperty/goToTimes.h"
+#include "../Square/NonProperty/goToTimsLine.h"
 #include "../Square/NonProperty/tuition.h"
 #include "../Square/NonProperty/nonproperty.h"
 #include "../Square/NonProperty/gooseNest.h"
-#include "../Square/NonProperty/slc.h"
+#include "../Square/NonProperty/SLC.h"
 #include "../Square/NonProperty/timsLine.h"
 #include "../Square/NonProperty/nonproperty.h"
 #include "../Square/Property/property.h"
@@ -32,24 +32,24 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   srand(time(0));
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
-      theBoard[i] = new Square;
-      Square *n;
+	Square *n;
       if(aInfo.count(cNames[i])) {
           if(aInfo[cNames[i]].type == "A") {
-              n = new Academic(this, td);
-              n->block = aInfo[cNames[i]].block;
-              n->impCost = aInfo[cNames[i]].imCost;
+             Academic *m = new Academic(this, td);
+              m->block = aInfo[cNames[i]].block;
+              m->impCost = aInfo[cNames[i]].imCost;
               for(int j = 0; j <6; j++) {
-                  n->tuition[j] = aInfo[cNames[j]].imp[j];
+                  m->tuition[j] = aInfo[cNames[j]].imp[j];
               }
+		m->price = aInfo[cNames[i]].pCost;
+		n = dynamic_cast<Square *>(m);
           }
           else if(aInfo[cNames[i]].type == "R") {
-              n = new Residence(this, td);
+		n = new Residence(this,td);
           }
           else if(aInfo[cNames[i]].type == "G") {
               n = new Gym(this, td);
           }
-          n->price = aInfo[cNames[i]].pCost;
       }
       else {
           if(cNames[i] == "SLC") {
@@ -80,6 +80,7 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
       }
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
+	theBoard[i] = n;
   }
 
 }
@@ -89,7 +90,7 @@ void Board::printPlayers() {
     }
 }
 void Board::addPlayer(string name) {
-    addPlayer(name, 'c', 0, 0, 0); 
+    addPlayer(name, 'c', 1500, 0, 0); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
     if(playerOptions.count(name) == 0) {
@@ -107,9 +108,9 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
     if(players.size() == 1) activePlayer = players[0];
 }
 void Board::addProperty(string name, string owner, int imp) {
-    getSquare(name)->setOwner(getPlayer(owner));
+ /*   getSquare(name)->setOwner(getPlayer(owner));
     getPlayer(owner)->properties.push_back(getSquare(name));
-    getSquare(name)->impDatShit(imp);
+    getSquare(name)->impDatShit(imp);*/
 
 }
 Player* Board::getNextPlayer(int n) {
@@ -127,6 +128,8 @@ void Board::movePlayer(int numMoves) {
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
+    activePlayer->displayAssets();
+    activePlayer->location->action();
 }    
 Player* Board::getAPlayer() {
     return activePlayer;
@@ -160,30 +163,9 @@ bool Board::startGame() {
     printPlayers();
     return true;
 }
-void Board::Roll(){
-    int x = rand()%11+2;
-    cout << "Number rolled: " << x << endl;
-    movePlayer(x);
-   cout << "You are at: " << activePlayer->location->getName() << endl;
-   cout << "Description of location: " << activePlayer->location->getDesc() << endl;
-   if(aInfo.count(activePlayer->location->getName())) Buy();
-}
 void Board::Roll(int num) {
+   cout << "Number rolled: " << num << endl;
     movePlayer(num);
-    if(aInfo.count(activePlayer->location->getName())) Buy();
-}
-void Board::Buy() {
-    //ALL OF THIS WILL BE REPLACED BY TRAVIS CODE. THIS IS FOR DEMO PURPOSES ONLY.
-    cout << "Would you like to buy this property (yes/no)" << endl;
-    string answer;
-    cin >> answer;
-    if(answer == "yes") {
-        activePlayer->savings = activePlayer->savings - activePlayer->location->getCost();
-        activePlayer->location->setOwner(activePlayer);
-        activePlayer->properties.push_back(activePlayer->location);
-        if(activePlayer->savings <= 0) cout << "LOL you're in debt" << endl;
-        activePlayer->displayAssets();
-    }
 }
 bool Board::winner() {
   if(players.size() == 1) return true;
@@ -250,4 +232,7 @@ Player* Board::getPlayer(string n) {
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);
   return out;
+}
+void Board::transfer(Player *p, int amount) {
+  p->savings += amount;
 }

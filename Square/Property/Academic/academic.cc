@@ -6,18 +6,24 @@
 #include <iostream>
 
 
-Academic::Academic(Board *theBoard, TextDisplay *td): Square(theBoard, td),
-				isMortgaged(false), owner(NULL), numImp(0){
+Academic::Academic(Board *theBoard, TextDisplay *td): Property(theBoard, td), numImp(0){
+    isMortgaged =false;
+    owner =NULL;
     for(int i = 0; i < 6; i ++) {
-        tiution[i] = 0;
+        tuition[i] = 0;
     }
 }
 
 void Academic::action(){
-  if (!isMortgaged){
+  if (owner == NULL){
+    buy();
+  }
+  else {
+    if (!isMortgaged){
     int fee = tuition[numImp];
     if ((owner->ownsBlock(block))&&(numImp == 0)){fee *= 2;}
     theBoard->getNextPlayer(0)->transaction(-fee, owner);
+    }
   }
 }
 
@@ -25,7 +31,7 @@ void Academic::improve(std::string buyOrSell){
   if (buyOrSell == "buy"){
     if (owner->ownsBlock(block)){
       if (owner->canAfford(impCost)){
-        owner->transaction(-impCost);
+        owner->transaction(-impCost, NULL);
         ++numImp;
       }
       else {
@@ -38,7 +44,7 @@ void Academic::improve(std::string buyOrSell){
   }
   else if (buyOrSell == "sell"){
     if (numImp > 0){
-      owner->transaction(impCost/2);
+      owner->transaction(impCost/2, NULL);
       --numImp;
     }
     else {
@@ -51,7 +57,7 @@ void Academic::improve(std::string buyOrSell){
 void Academic::mortgage(){
   if (numImp == 0){
     isMortgaged = true;
-    owner->transaction(price/2);
+    owner->transaction(price/2, NULL);
   }
   else {
     std::cout << "Can not mortgage property that has improvements." << endl;

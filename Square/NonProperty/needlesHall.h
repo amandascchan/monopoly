@@ -2,9 +2,10 @@
 #define __NEEDLESHALL_H__
 
 #include "nonproperty.h"
+#include <vector>
 
 class Player;
-class NHCard;
+class Card;
 class Board;
 class TextDisplay;
 

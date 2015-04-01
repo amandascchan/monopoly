@@ -5,9 +5,11 @@
 #include <iostream>	
 
 void CollectOSAP::action(){
-	Player *currentPlayer = theboard->getNextPlayer(0);
+	Player *currentPlayer = theBoard->getNextPlayer(0);
 	currentPlayer->transaction(200, NULL);
 }
 
 CollectOSAP::CollectOSAP(Board *theBoard, TextDisplay *td):
-		Square (theBoard, td), name("Collect OSAP"){}
+		NonProperty(theBoard, td){
+			name = "Collect OSAP";
+		}

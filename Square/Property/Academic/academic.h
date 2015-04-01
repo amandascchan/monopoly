@@ -5,8 +5,11 @@
 
 class TextDisplay;
 class Player;
+class Board;
+
 
 class Academic: public Property {
+	friend class Board;
   int impCost;
   int numImp;
   int tuition[6];
@@ -15,6 +18,6 @@ public:
   Academic(Board *, TextDisplay *);
   void action();
   void improve(std::string);
-  void mortgate();
+  void mortgage();
 };
 #endif

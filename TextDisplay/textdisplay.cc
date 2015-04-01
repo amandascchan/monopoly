@@ -1,12 +1,12 @@
 #include <iostream>
 #include <sstream>
 #include "textdisplay.h"
-#include "../data/academic.h"
+#include "../data/squaredata.h"
 #include "../data/npdata.h"
 #include <string>
 #include <string.h>
 #include <stdlib.h>
-#include "../Playre/player.h"
+#include "../Player/player.h"
 #include "../data/playerdata.h"
 using namespace std;
 

@@ -16,10 +16,11 @@ void NeedlesHall::action(){
 
 
 NeedlesHall::NeedlesHall(Board *theBoard, TextDisplay *td):
-	Square(theBoard, td), name("Needles Hall"){
-	deckBuilder myBuilder;
-	std::string config = "18 NHCard -200 1 -100 2 -50 3 25 6 50 3 100 2 200 1"
-	deck = deckBuilder->buildDeck(config);
+	NonProperty(theBoard, td){
+	name = "Needles Hall";
+	deckBuilder myBuilder(theBoard);
+	std::string config = "18 NHCard -200 1 -100 2 -50 3 25 6 50 3 100 2 200 1";
+	deck = myBuilder.buildDeck(config);
 }
 
 NeedlesHall::~NeedlesHall(){

@@ -4,9 +4,12 @@
 #include <vector>
 
 class Card;
+class Board;
 
 class deckBuilder{
+	Board *theBoard;
 public:
+	deckBuilder(Board *);
 	std::vector<Card *> buildDeck(std::string config);
 };
 

@@ -3,6 +3,7 @@
 
 #include "card.h"
 
+class Board;
 
 class NHCard: public Card{
 	int transAmt;

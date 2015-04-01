@@ -6,4 +6,6 @@
 void TimsLine::action(){}
 
 TimsLine::TimsLine(Board *theBoard, TextDisplay *td):
-					Square(theBoard, td), name("DC Tims Line"){}
+					NonProperty(theBoard, td){
+						name = "DC Tims Line";
+					}

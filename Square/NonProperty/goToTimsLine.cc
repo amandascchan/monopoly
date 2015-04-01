@@ -9,4 +9,6 @@ void GoToTimsLine::action(){
 }
 
 GoToTimsLine::GoToTimsLine(Board *theBoard, TextDisplay *td):
-		Square(theBoard, td), name("Go to Tims Line"){}
+		NonProperty(theBoard, td){
+			name = "Go to Tims Line";
+		}

@@ -8,6 +8,7 @@ class Player;
 class Board;
 
 class Gym: public Property {
+	friend class Board;
   std::string desc;
 public:
   Gym(Board *, TextDisplay *);

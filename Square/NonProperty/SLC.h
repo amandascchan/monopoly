@@ -2,7 +2,7 @@
 #define __SLC_H__
 
 #include "nonproperty.h"
-
+#include <vector>
 class Card;
 class Board;
 class TextDisplay;

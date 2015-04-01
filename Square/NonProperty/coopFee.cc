@@ -5,8 +5,10 @@
 #include <iostream>	
 
 void CoopFee::action(){
-	theboard->getNextPlayer(0)->transation(150, NULL);
+	theBoard->getNextPlayer(0)->transaction(150, NULL);
 }
 
 CoopFee::CoopFee(Board *theBoard, TextDisplay *td):
-		Square(theBoard, td), name("Co-op Fee"){}
+		NonProperty(theBoard, td){
+			name = "Co-op Fee";
+		}

@@ -8,7 +8,7 @@ class TextDisplay;
 
 class CoopFee: public NonProperty{
 public:
-	CoopFee::CoopFee(Board *theBoard, TextDisplay *);
+	CoopFee(Board *theBoard, TextDisplay *);
 	void action();
 };
 

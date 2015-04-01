@@ -7,7 +7,6 @@
 #include "../../TextDisplay/textdisplay.h"
 #include "../../Board/board.h"
 #include "../../DeckBuilder/deckbuilder.h"
-#include "needlesHall.h"
 
 
 
@@ -18,14 +17,15 @@ void SLC::action(){
 
 
 SLC::SLC(Board *theBoard, TextDisplay *td):
-		Square(theBoard, td), name("SLC"){
-	deckBuilder myBuilder;
+		NonProperty(theBoard, td){
+	name = "SLC";
+	deckBuilder myBuilder(theBoard);
 	std::string config = "24 SLCCard -4 1 -3 3 -2 4 -1 4 1 3 2 4 3 4 4 1";
-	deck = deckBuilder->buildDeck(config);
+	this->deck = myBuilder.buildDeck(config);
 }
 
 SLC::~SLC(){
-	for (std::vector<Card *>::iterator i = deck.begin(); i != deck.end(); ++i){
+	for (std::vector<Card *>::iterator i = this->deck.begin(); i != deck.end(); ++i){
 		delete *i;
 	}
 }

@@ -9,7 +9,7 @@ class TextDisplay;
 
 class Tuition: public NonProperty{
 public:
-	Tuition::Tuition(Board *, TextDisplay *);
+	Tuition(Board *, TextDisplay *);
 	void action();
 };
 

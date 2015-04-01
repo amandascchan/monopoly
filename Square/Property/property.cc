@@ -6,10 +6,14 @@
 #include "../../Player/player.h"
 #include "../../TextDisplay/textdisplay.h"
 
+Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
+					owner(NULL), isMortgaged(false){}
+
 void Property::auction(){
+	std::cout << "Auction time!" << std::endl;
 	Player *highestBidder;
 	int highestBid=0;
-	int numBidders = theBoard->numPlayers-1;
+	int numBidders = theBoard->getNumPlayers()-1;
 	std::vector<Player *> bidders;
 	bool atleastOneBid = false;
 	for (int i = 1; i <= numBidders; ++i){
@@ -51,27 +55,38 @@ void Property::auction(){
 	}
 }
 
+std::string Property::getBlock(){
+	return block;
+}
+
 void Property::buy(){
-	Player *buyer = theBoard->getNextPlayer(0);
-	if (buyer->canAfford(price)){
-		owner = buyer;
-		buyer->transaction(-price, NULL);
-	}
-	else{
-		std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
-	}
+	cout << "Would you like to buy this property (yes/no)" << endl;
+    string answer;
+    cin >> answer;
+    if (answer == "yes"){
+		Player *buyer = theBoard->getNextPlayer(0);
+		if (buyer->canAfford(price)){
+			owner = buyer;
+			owner->addProperty(this);
+			buyer->transaction(-price, NULL);
+		}
+		else{
+			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
+		}
+    }
+    else if (answer == "no") auction();
 }
 
 void Property::mortgage(){
     isMortgaged = true;
-    owner->transaction(price/2);
+    owner->transaction(price/2, NULL);
 }
 
 void Property::unMortgage(){
 	if (isMortgaged){
 		if (owner->canAfford(price*1.1/2)){
 			isMortgaged = false;
-			owner->transaction(price*1.1/2);
+			owner->transaction(price*1.1/2, NULL);
 		}
 		else {
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;

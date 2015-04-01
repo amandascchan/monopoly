@@ -1,6 +1,6 @@
+#include "Board/board.h" 
 #include "TextDisplay/textdisplay.h"
 #include "Square/square.h"
-#include "Board/board.h" 
 #include "Player/player.h"
 #include <cstring>
 #include <ctime>
@@ -12,19 +12,19 @@ using namespace std;
 int main(int argc, char *argv[]){
 	bool testing = false;
 	string loadFile = "";
-	srand(time());
+	srand(time(0));
 	for (int i = 1; i < argc; ++i){
 		if (argv[i] == "-testing"){
 			testing = true;
 		}
-		if ((argv[i] == "-load")&&(i + 1 < argv)){
+		if ((argv[i] == "-load")&&(i + 1 < argc)){
 			loadFile = argv[i + 1];
 		}
 	}
 
 	Board theBoard;
 	if (loadFile != ""){
-		theBoard.loadBoard(loadFile);
+		//theBoard.loadBoard(loadFile);
 	}
 	else {
 		cout << "enter player names: make sure they match the ones on the spec, type q to finish entering players" << endl;
@@ -32,11 +32,11 @@ int main(int argc, char *argv[]){
 		while(true) {
         	cin >> command;
         	if(command == "q") break;
-        	else board.addPlayer(command);
+        	else theBoard.addPlayer(command);
     	}
 	}
-	board.startGame()
-	cout << board;
+	theBoard.startGame();
+	cout << theBoard;
 	bool beginTurn = true;
 	Player *currentPlayer;
 	bool hasRolled = false;
@@ -54,13 +54,14 @@ int main(int argc, char *argv[]){
 			if (!hasRolled){
 				int r1, r2;
 				if (testing&&(commandStream >> r1)){
-					if (!(commandStream >> r2))r2 = rand %6 + 1;
+					if (!(commandStream >> r2))r2 = rand() % 6 + 1;
 				}
 				else {
-					r1 = rand %6 + 1;
-					r2 = rand %6 + 1;
+					r1 = rand() % 6 + 1;
+					r2 = rand() % 6 + 1;
 				}
-				theBoard->Roll(r1 + r2);
+				theBoard.Roll(r1 + r2);
+				hasRolled = true;
 			}
 			else {
 				cout << "You have already rolled this turn." << endl;
@@ -68,14 +69,15 @@ int main(int argc, char *argv[]){
 		}
 		else if (command == "next"){
 			if (currentPlayer->canAfford(0)){
-				board.next();
+				theBoard.next();
 				beginTurn = true;
+				hasRolled = false;
 			}
 			else {
 				cout << "You can not end your turn until you have paid your debt." << endl;
 			}
 		}
-		else if (command == "trade"){
+		/*else if (command == "trade"){
 			string counterParty, give, recieve;
 			commandStream >> counterParty >> give >> recieve;
 			theBoard.trade(counterParty, give, recieve);
@@ -94,12 +96,12 @@ int main(int argc, char *argv[]){
 			string propertyName;
 			commandStream >> propertyName;
 			theBoard.mortgage(propertyName);
-		}
+		}*/
 		else if (command == "bankrupt"){
-			theBoard.getNextPlayer(0)->bankrupt();
+			theBoard.getNextPlayer(0)->Bankrupt();
 		}
 		else if (command == "assets"){
-			theBoard.getNextPlayer(0)->printAssets();
+			theBoard.getNextPlayer(0)->displayAssets();
 		}
 	/*	else if (command == "save"){
 			string saveFile;

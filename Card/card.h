@@ -4,8 +4,10 @@
 class Board;
 
 class Card{
+protected:
 	Board *theBoard;
 public:
+	Card(Board *theBoard): theBoard(theBoard){}
 	virtual void action()=0;
 };
 

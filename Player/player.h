@@ -1,15 +1,16 @@
 #pragma once
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
-#include "all.h.gch"
+#include "../all.h.gch"
 class Board;
+class Property;
 class Square;
-
+class TextDisplay;
 class Player {
     friend class Board;
   std::string name;
   Square *location;
-  std::vector<Square*> properties;
+  std::vector<Property*> properties;
   Board *theBoard;
   TextDisplay *td;
   int cups;
@@ -38,6 +39,7 @@ class Player {
   int getSavings();
   int numRez();
   bool canAfford(int number);
+  void addProperty(Property *p);
 
 };
 
