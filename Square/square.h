@@ -19,6 +19,7 @@ class Square {
 	//void notifyDisplay();					    //notify the TextDisplay of the change
 public:
 	Square(Board *, TextDisplay *);
+	void setPosition(int, int);
 	virtual void action()=0;
 	virtual ~Square();
 };

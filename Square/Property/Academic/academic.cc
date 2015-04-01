@@ -13,11 +13,6 @@ Academic::Academic(Board *theBoard, TextDisplay *td): Square(theBoard, td),
     }
 }
 
-void Academic::setPosition(int r, int c){
-	row = r;
-	column = c;
-}
-
 void Academic::action(){
   if (!isMortgaged){
     int fee = tuition[numImp];

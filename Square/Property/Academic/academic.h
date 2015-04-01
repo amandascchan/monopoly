@@ -16,6 +16,5 @@ public:
   void action();
   void improve(std::string);
   void mortgate();
-  void setPosition(int, int);
 };
 #endif
