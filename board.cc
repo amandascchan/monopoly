@@ -2,7 +2,7 @@
 #include "square.h"
 #include "player.h"
 #include "textdisplay.h"
-#include "data/academic.h"
+#include "data/squaredata.h"
 #include "data/playerdata.h"
 #include "data/npdata.h"
 #include <string>
@@ -19,15 +19,32 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
       theBoard[i] = new Square;
-      theBoard[i]->setName(cNames[i]);
       if(aInfo.count(cNames[i])) {
-          makeProperty(i);
+          if(aInfo[cNames[i]].type == "A") {
+              Square *n = new Academic(this, td);
+              n->name = aInfo[cNames[i]].name;
+              n->block = aInfo[cNames[i]].block;
+              n->impCost = aInfo[cNames[i]].imCost;
+              n->price = aInfo[cNames[i]].pCost;
+              for(int j = 0; j <6; j++) {
+                  n->tuition[j] = aInfo[cNames[j]].imp[j];
+              }
+          }
+          else if(aInfo[cNames[i]].type == "R") {
+              Square *n = new Residence(this, td);
+          }
+          else if(aInfo[cNames[i]].type == "G") {
+              Gym *n = new Gym(this, td);
+          }
+          else {
+              
+
+          }
       }
       else {
           theBoard[i]->setCost(npInfo[cNames[i]].pCost);
           theBoard[i]->setDesc(npInfo[cNames[i]].desc);
       }
-      theBoard[i]->setDisplay(td);
       theBoard[i]->setCoords(spots[i][0], spots[i][1]);
   }
 

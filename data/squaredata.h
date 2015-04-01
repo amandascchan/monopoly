@@ -1,9 +1,9 @@
-#ifndef __ACADEMIC_H__
-#define __ACADEMIC_H__
+#ifndef __SQUAREDATA_H__
+#define __SQUAREDATA_H__
 #include <map>
 using namespace std;
 
-struct Academic
+struct SquareData
 {
     std::string name;
     std::string block;
@@ -20,7 +20,7 @@ struct SquareInfo
     std::string type;
 };
 void fillLoop();
-extern std::map<std::string, Academic> aInfo;
+extern std::map<std::string, SquareData> aInfo;
 extern std::string const names[];
 extern bool const prop[];
 extern std::string const cNames[];
