@@ -15,7 +15,6 @@ class Board {
   int column(int i);
   void makeProperty(int i);
   void printError(std::string name);
-  void removePlayer();
  public:
   std::string mode;
   Square *getSquare(int i);
