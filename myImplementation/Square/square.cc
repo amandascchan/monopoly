@@ -1,4 +1,3 @@
-
 #include "square.h"
 #include "textdisplay.h"
 #include "board.h"

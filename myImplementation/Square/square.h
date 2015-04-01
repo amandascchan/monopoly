@@ -5,7 +5,7 @@
 
 class Board;
 class TextDisplay;
-class Player;
+
 class Square {
 	std::string name;
 	Board *theBoard;
