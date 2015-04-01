@@ -14,8 +14,8 @@ class TextDisplay {
   TextDisplay(); //one arg constructor where the parameter is the gridSize
   void addPlayer(char player,int row, int column);
   void movePlayer(int oldI, int newI, string pName);
+  void addImprov(int row, int column, int numImprovements);
 
-  void notify(int r, int c, char ch);  
 
 	
   ~TextDisplay(); //dtor
