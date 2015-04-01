@@ -1,9 +1,13 @@
-#include "all.h.gch"
-#include "board.h"
-#include "square.h"
+#include "../all.h.gch"
+#include "../Board/board.h"
+#include "../Square/square.h"
+#include "../Square/Property/property.h"
+#include "../Square/Property/Residence/residence.h"
+#include "../Square/Property/Gym/gym.h"
+#include "../Square/Property/Academic/academic.h"
 #include <string> 
-#include "data/academic.h"
-#include "data/playerdata.h"
+#include "../data/squaredata.h"
+#include "../data/playerdata.h"
 #include "player.h"
 #include <algorithm>
 using namespace std;
