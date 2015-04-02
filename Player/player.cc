@@ -53,17 +53,20 @@ bool Player::canAfford(int number) {
 }
 void Player::transaction(int amount, Player *p) {
   int result  = savings + amount;
-  if(p != this) {
+  if(p && p != this) {
     if(result < 0) {
       creditor = p;
       savings = 0;
       debt = result;
     }
     else {
+      theBoard->transfer(p, -1*amount);
       savings = result;
-      if(p) theBoard->transfer(creditor, amount);
     }
   }
+  else if(p == NULL) {
+      savings = result;
+    }
 }
 void Player::addProperty(Property *p) {
   properties.push_back(p);
@@ -73,7 +76,9 @@ void Player::displayAssets() {
 	cout << "Your savings: " << savings << endl;
 	cout << "Your location: " << location->getName() << endl;
 	cout << "Number of Tim's Cups you have: " << cups << endl;
-	cout << "Your Properties: " << endl;
+  if (properties.size != 0){
+  	cout << "Your Properties: " << endl;
+  }
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {
 		cout << "Name: " << (*it)->getName() << endl;
 		cout << "Block: " << (*it)->getBlock() << endl;
@@ -89,7 +94,7 @@ void Player::displayAssets() {
 		Academic *acadP = dynamic_cast<Academic *>(*it);
 		if (acadP != NULL){
 			cout << "Improvement Cost: " << acadP->getImCost() << endl;
-			cout << "Property possible improvements" << endl;
+			cout << "Possible improvements" << endl;
 			for(int k = 0; k < 6; k++) {
 				cout << k << " " << acadP->getIm(k) << endl;        
 			}

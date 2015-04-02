@@ -34,14 +34,14 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   for(int i = 0; i < 40; i++) {
 	Square *n;
       if(npInfo.count(cNames[i]) == 0) {
-cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
+//cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
           if(aInfo[cNames[i]].type == "A") {
              Academic *m = new Academic(this, td);
               m->block = aInfo[cNames[i]].block;
               m->impCost = aInfo[cNames[i]].imCost;
               for(int j = 0; j <6; j++) {
                   m->tuition[j] = aInfo[cNames[i]].imp[j];
-                  cout << m->tuition[j] << endl;
+                  //cout << m->tuition[j] << endl;
               }
 		m->price = aInfo[cNames[i]].pCost;
 		n = dynamic_cast<Square *>(m);
@@ -185,10 +185,11 @@ bool Board::winner() {
 void Board::mortgage(string name) {
   if(aInfo.count(name)) {
     Property *p = dynamic_cast<Property *>(getSquare(name));
-    if (name == p->owner->name){
+    if (name == p->name){
       p->mortgage();
     }
     else {
+      cout << name << " " << p->owner->name << endl;
       cout << "You can not mortgage that which you do not own." << endl;
     }
     return;
@@ -199,7 +200,7 @@ void Board::mortgage(string name) {
 void Board::unmortgage(string name) {
   if(aInfo.count(name)) {
     Property *p = dynamic_cast<Property *>(getSquare(name));
-    if (name == p->owner->name){
+    if (name == p->name){
       p->unMortgage();
     }
     else {
@@ -224,7 +225,7 @@ void Board::improve(string name, string buyOrSell) {
 }
 
 void Board::printError(string name) {
-  cout << name << " does not exist" << endl;
+  cout << name << " does not exist or is not a Property" << endl;
   return;
 }
 

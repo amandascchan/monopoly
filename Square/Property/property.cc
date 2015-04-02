@@ -67,7 +67,9 @@ std::string Property::getBlock(){
 void Property::buy(){
 	cout << "Would you like to buy this property named" << name  << "for $" << price << "(yes/no)" << endl;
     string answer;
-    cin >> answer;
+    while (cin >> answer){
+    	if ((answer == "yes")||(answer == "no"))break;
+    }
     if (answer == "yes"){
 		Player *buyer = theBoard->getNextPlayer(0);
 		if (buyer->canAfford(price)){
@@ -89,9 +91,10 @@ void Property::mortgage(){
 
 void Property::unMortgage(){
 	if (isMortgaged){
-		if (owner->canAfford(price*1.1/2)){
+		int fee = (price*1.1)/2;
+		if (owner->canAfford(fee)){
 			isMortgaged = false;
-			owner->transaction(price*1.1/2, NULL);
+			owner->transaction(-fee, NULL);
 		}
 		else {
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;

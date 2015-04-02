@@ -96,7 +96,7 @@ int main(int argc, char *argv[]){
 		else if (command == "unmortgage"){
 			string propertyName;
 			commandStream >> propertyName;
-			theBoard.mortgage(propertyName);
+			theBoard.unmortgage(propertyName);
 		}
 		else if (command == "bankrupt"){
 			theBoard.getNextPlayer(0)->Bankrupt();

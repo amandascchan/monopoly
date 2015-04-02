@@ -32,6 +32,7 @@ void Academic::action(){
   }
   else {
     if (!isMortgaged){
+      std::cout << "about to charge player" << std::endl;
       theBoard->getNextPlayer(0)->transaction(-getRent(), owner);
     }
   }
@@ -39,7 +40,10 @@ void Academic::action(){
 
 void Academic::improve(std::string buyOrSell){
   if (buyOrSell == "buy"){
-    if (owner->ownsBlock(block)){
+    if (numImp >= 5){
+      std::cout << "You can not improve "<< name <<" further." << endl;
+    }
+    else if (owner->ownsBlock(block)){
       if (owner->canAfford(impCost)){
         owner->transaction(-impCost, NULL);
         ++numImp;
@@ -61,7 +65,6 @@ void Academic::improve(std::string buyOrSell){
     else {
       std::cout << "You do not have any improvements to sell." << std::endl;
     }
-    
   }
 }
 

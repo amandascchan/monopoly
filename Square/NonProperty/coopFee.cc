@@ -5,7 +5,7 @@
 #include <iostream>	
 
 void CoopFee::action(){
-	theBoard->getNextPlayer(0)->transaction(150, NULL);
+	theBoard->getNextPlayer(0)->transaction(-150, NULL);
 }
 
 CoopFee::CoopFee(Board *theBoard, TextDisplay *td):
