@@ -15,6 +15,7 @@ class TextDisplay {
   void addPlayer(char player,int row, int column);
   void movePlayer(int oldI, int newI, string pName);
   void addImprov(int row, int column, int numImprovements);
+  void removeImprov(int row, int column, int numImprovements);
 
 
 	

@@ -61,7 +61,7 @@ void Academic::improve(std::string buyOrSell){
     if (numImp > 0){
       owner->transaction(impCost/2, NULL);
       --numImp;
-   //   td->removeImprov(row, column, numImp);
+      td->removeImprov(row, column, numImp);
     }
     else {
       std::cout << "You do not have any improvements to sell." << std::endl;

@@ -93,6 +93,9 @@ void TextDisplay::addImprov(int row, int column, int numImprovements) {
     theDisplay[row+1][column + i] = 'I';
     }
 }
+void TextDisplay::removeImprov(int row, int column, int numImprovements) {
+    theDisplay[row+1][column + 1 + (5-numImprovements)] = '_';
+}
 ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   for(int i = 0; i < 56; i++) {
     for(int j = 0; j < 90; j++) {
