@@ -39,6 +39,9 @@ class Board {
   bool startGame();
   bool winner();
   int getNumPlayers() { return players.size(); }
+  void bankrupt();
+  void trade(std::string, std::string, std::string);
+  void transfer(Player *, std::string, std::string);
   
   Board();
   ~Board();  

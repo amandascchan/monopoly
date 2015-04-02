@@ -25,6 +25,7 @@ public:
 	std::string getBlock();
 	int getCost();
 	virtual int getRent()=0;
+	bool getIsMortgaged();
 };
 
 #endif
