@@ -85,27 +85,23 @@ void Player::displayAssets() {
 	cout << "Your savings: " << savings << endl;
 	cout << "Your location: " << location->getName() << endl;
 	cout << "Number of Tim's Cups you have: " << cups << endl;
-  if (properties.size() != 0){
-  	cout << "Your Properties: " << endl;
-  }
+    if (properties.size() != 0) cout << "Your Properties: " << endl;
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {
 		cout << "Name: " << (*it)->getName() << endl;
 		cout << "Block: " << (*it)->getBlock() << endl;
 		cout << "Cost: " << (*it)->getCost() << endl;
-    cout << "Tuition for other players: ";
-    Gym *gymP = dynamic_cast<Gym *>(*it);
-    if (gymP != NULL){
-      cout << gymP->getRent() << " times the sum of the roll of two dice" << endl;
-    }
-    else {
-      cout << (*it)->getRent() << endl;
-    }
-		Academic *acadP = dynamic_cast<Academic *>(*it);
-		if (acadP != NULL){
-			cout << "Improvement Cost: " << acadP->getImCost() << endl;
+        cout << "Tuition for other players: ";
+        if (dynamic_cast<Gym *>(*it) != NULL){
+        cout << dynamic_cast<Gym *>(*it)->getRent() << " times the sum of the roll of two dice" << endl;
+        }
+        else {
+            cout << (*it)->getRent() << endl;
+        }
+		if (dynamic_cast<Academic *>(*it) != NULL){
+			cout << "Improvement Cost: " << dynamic_cast<Academic *>(*it)->getImCost() << endl;
 			cout << "Possible improvements" << endl;
 			for(int k = 0; k < 6; k++) {
-				cout << k << " " << acadP->getIm(k) << endl;        
+				cout << k << " " << dynamic_cast<Academic *>(*it)->getIm(k) << endl;        
 			}
 		}
 	}

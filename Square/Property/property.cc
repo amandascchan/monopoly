@@ -71,7 +71,7 @@ std::string Property::getBlock(){
 }
 
 void Property::buy(){
-	cout << "Would you like to buy this property named" << name  << "for $" << price << "(yes/no)" << endl;
+	cout << "Would you like to buy this property named " << name  << " for $" << price << "? (yes/no)" << endl;
     string answer;
     while (cin >> answer){
     	if ((answer == "yes")||(answer == "no"))break;

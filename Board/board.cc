@@ -32,31 +32,24 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   srand(time(0));
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
-	Square *n;
+      Square *n;
       if(npInfo.count(cNames[i]) == 0) {
-//cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
           if(aInfo[cNames[i]].type == "A") {
-             Academic *m = new Academic(this, td);
-              m->block = aInfo[cNames[i]].block;
-              m->impCost = aInfo[cNames[i]].imCost;
-              for(int j = 0; j <6; j++) {
-                  m->tuition[j] = aInfo[cNames[i]].imp[j];
-                  //cout << m->tuition[j] << endl;
-              }
-		m->price = aInfo[cNames[i]].pCost;
-		n = dynamic_cast<Square *>(m);
+              n = new Academic(this, td);
+              dynamic_cast<Academic *>(n)->block = aInfo[cNames[i]].block;
+              dynamic_cast<Academic *>(n)->impCost = aInfo[cNames[i]].imCost;
+              for(int j = 0; j <6; j++) dynamic_cast<Academic *>(n)->tuition[j] = aInfo[cNames[i]].imp[j];
+		     dynamic_cast<Academic *>(n)->price = aInfo[cNames[i]].pCost;
           }
           else if(aInfo[cNames[i]].type == "R") {
-		n = new Residence(this,td);
+              n = new Residence(this,td);
           }
           else if(aInfo[cNames[i]].type == "G") {
               n = new Gym(this, td);
           }
       }
       else {
-//cout << "ewrewjir" << i << endl;
           if(cNames[i] == "SLC") {
-	//   cout << "SLC CODE " << i << cNames[i] << endl;
               n = new SLC(this, td);
           }
           else if(cNames[i] == "NEEDLES HALL") {
@@ -84,10 +77,8 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
       }
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
-	theBoard[i] = n;
-//	cout << theBoard[i]->name << i << endl;
+      theBoard[i] = n;
   }
-
 }
 void Board::printPlayers() {
     for(int i = 0; i < players.size(); i++) {
