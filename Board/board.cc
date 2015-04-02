@@ -139,9 +139,16 @@ void Board::bankrupt() {
       }
     }
  }
+  Player *p = getNextPlayer(-1);
+  int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
+  td->removePlayer(activePlayer->name, activePlayer->location->row, activePlayer->location->column);
+  players.erase(players.begin()+pos);
+  activePlayer = p;
+  next();
 }
-
-
+int mod(int a, int b) {
+    return (a%b+b)%b;
+}
 void Board::addProperty(string name, string owner, int imp) {
  /*   getSquare(name)->setOwner(getPlayer(owner));
     getPlayer(owner)->properties.push_back(getSquare(name));
@@ -150,16 +157,13 @@ void Board::addProperty(string name, string owner, int imp) {
 }
 Player* Board::getNextPlayer(int n) {
     int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
-    Player *nP = players.at((pos+n)%players.size());
+    Player *nP = players.at(mod((pos+n), players.size()));
     return nP;
 
 }
 void Board::next() {
    activePlayer = getNextPlayer(1);
    cout << "The next player is now: " << activePlayer->name << endl;
-}
-int mod(int a, int b) {
-    return (a%b+b)%b;
 }
 void Board::movePlayer(int numMoves) {
     int n = mod(activePlayer->lIndex+numMoves, 40);

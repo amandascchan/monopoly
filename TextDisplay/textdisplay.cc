@@ -24,6 +24,12 @@ void TextDisplay::addPlayer(char player, int row, int column) {
     players.push_back(player);
     theDisplay[row][column] =player;
 }
+void TextDisplay::removePlayer(string pName, int row, int column) {
+    int pR, pC;
+    pR = playerOptions[pName].row;
+    pC = playerOptions[pName].column;
+    theDisplay[row+pR][column+pC] = ' ';
+}
 void TextDisplay::movePlayer(int oldI, int newI, string pName) {
     int oR, oC, nR,nC;
     oR = spots[oldI][0];

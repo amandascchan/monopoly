@@ -14,6 +14,7 @@ class TextDisplay {
   TextDisplay(); //one arg constructor where the parameter is the gridSize
   void addPlayer(char player,int row, int column);
   void movePlayer(int oldI, int newI, string pName);
+  void removePlayer(std::string pName, int row, int column);
   void addImprov(int row, int column, int numImprovements);
   void removeImprov(int row, int column, int numImprovements);
 
