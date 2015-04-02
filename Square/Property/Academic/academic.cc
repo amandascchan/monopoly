@@ -15,7 +15,6 @@ int Academic::getImCost(){
 int Academic::getIm(int imps){
   int fee = tuition[imps];
   if (owner->ownsBlock(block)&&(numImp == 0)){fee *= 2;}
-  std::cout << numImp << std::endl;
   return fee;
 }
 
@@ -62,6 +61,7 @@ void Academic::improve(std::string buyOrSell){
     if (numImp > 0){
       owner->transaction(impCost/2, NULL);
       --numImp;
+   //   td->removeImprov(row, column, numImp);
     }
     else {
       std::cout << "You do not have any improvements to sell." << std::endl;
