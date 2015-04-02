@@ -216,13 +216,13 @@ bool Board::winner() {
   return false;
 }
 void Board::mortgage(string name) {
-  if(aInfo.count(name)) {
+  if(npInfo.count(name) == 0) {
     Property *p = dynamic_cast<Property *>(getSquare(name));
-    if (name == p->name){
+    if (getAPlayer()->ownsProperty(p)){
       p->mortgage();
     }
     else {
-      cout << name << " " << p->owner->name << endl;
+      //cout << name << " " << p->owner->name << endl;
       cout << "You can not mortgage that which you do not own." << endl;
     }
     return;
@@ -231,9 +231,9 @@ void Board::mortgage(string name) {
 }
 
 void Board::unmortgage(string name) {
-  if(aInfo.count(name)) {
+  if(npInfo.count(name) == 0) {
     Property *p = dynamic_cast<Property *>(getSquare(name));
-    if (name == p->name){
+    if (getAPlayer()->ownsProperty(p)){
       p->unMortgage();
     }
     else {

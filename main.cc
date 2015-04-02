@@ -8,6 +8,9 @@
 #include <sstream>
 
 using namespace std;
+void printError() {
+    cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
+}
 
 int main(int argc, char *argv[]){
 	bool testing = false;
@@ -90,13 +93,24 @@ int main(int argc, char *argv[]){
 		}		
 		else if (command == "mortgage"){
 			string propertyName;
-			commandStream >> propertyName;
-			theBoard.mortgage(propertyName);
+            commandStream >> ws;
+			getline(commandStream, propertyName);
+            try {
+			    theBoard.mortgage(propertyName);
+            } catch(...) {
+                printError();
+            }
 		}
 		else if (command == "unmortgage"){
 			string propertyName;
+            commandStream >> ws;
 			commandStream >> propertyName;
-			theBoard.unmortgage(propertyName);
+            getline(commandStream, propertyName);
+            try {
+            theBoard.unmortgage(propertyName);
+            } catch(...) {
+                printError();
+            }
 		}
 		else if (command == "bankrupt"){
 			theBoard.bankrupt();

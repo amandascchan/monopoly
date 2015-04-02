@@ -66,6 +66,14 @@ void Player::transaction(int amount, Player *p) {
 void Player::addProperty(Property *p) {
   properties.push_back(p);
 }
+bool Player::ownsProperty(Property *p) {
+    for(vector<Property *>::iterator it=properties.begin(); it!=properties.end();it++) {
+        cout << (*it)->name << endl;
+        if((*it)->name == p->getName()) return true;
+    }
+    return false;
+
+}
 void Player::displayAssets() {
 	cout << "Your avatar: " << avatar << endl;
 	cout << "Your savings: " << savings << endl;
