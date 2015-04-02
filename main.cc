@@ -69,7 +69,7 @@ int main(int argc, char *argv[]){
 		}
 		else if (command == "next"){
 			if (currentPlayer->canAfford(0)){
-                cout << board;
+                cout << theBoard;
 				theBoard.next();
 				beginTurn = true;
 				hasRolled = false;
