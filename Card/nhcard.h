@@ -10,6 +10,7 @@ class NHCard: public Card{
 public:
 	NHCard(Board *,int);
 	void action();
+    ~NHCard();
 };
 
 #endif

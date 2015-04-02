@@ -38,6 +38,7 @@ class Player {
   int getSavings();
   int numRez();
   bool canAfford(int number);
+  bool ownsProperty(Property *p);
   void addProperty(Property *p);
 
 };

@@ -12,14 +12,9 @@
 #include <algorithm>
 using namespace std;
 
-Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): creditor(NULL),lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(1500), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
-    avatar = playerOptions[name].avatar;
-    td = t;
-    theBoard = b;
-    location = l;
-    lIndex = lDex;
-    debt = 0;
-}
+Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
+    name(name), location(l), theBoard(b), td(t), cups(0), avatar(playerOptions[name].avatar), savings(0), row (0), column(0), lIndex(lDex), turnsInTimLine(0), bankrupt(false), creditor(NULL), debt(0){}
+
 void Player::setCoords(int row, int column) {
     this->row = row;
     this->column = column;
@@ -71,32 +66,36 @@ void Player::transaction(int amount, Player *p) {
 void Player::addProperty(Property *p) {
   properties.push_back(p);
 }
+bool Player::ownsProperty(Property *p) {
+    for(vector<Property *>::iterator it=properties.begin(); it!=properties.end();it++) {
+        cout << (*it)->name << endl;
+        if((*it)->name == p->getName()) return true;
+    }
+    return false;
+
+}
 void Player::displayAssets() {
 	cout << "Your avatar: " << avatar << endl;
 	cout << "Your savings: " << savings << endl;
 	cout << "Your location: " << location->getName() << endl;
 	cout << "Number of Tim's Cups you have: " << cups << endl;
-  if (properties.size() != 0){
-  	cout << "Your Properties: " << endl;
-  }
+    if (properties.size() != 0) cout << "Your Properties: " << endl;
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {
 		cout << "Name: " << (*it)->getName() << endl;
 		cout << "Block: " << (*it)->getBlock() << endl;
 		cout << "Cost: " << (*it)->getCost() << endl;
-    cout << "Tuition for other players: ";
-    Gym *gymP = dynamic_cast<Gym *>(*it);
-    if (gymP != NULL){
-      cout << gymP->getRent() << " times the sum of the roll of two dice" << endl;
-    }
-    else {
-      cout << (*it)->getRent() << endl;
-    }
-		Academic *acadP = dynamic_cast<Academic *>(*it);
-		if (acadP != NULL){
-			cout << "Improvement Cost: " << acadP->getImCost() << endl;
+        cout << "Tuition for other players: ";
+        if (dynamic_cast<Gym *>(*it) != NULL){
+        cout << dynamic_cast<Gym *>(*it)->getRent() << " times the sum of the roll of two dice" << endl;
+        }
+        else {
+            cout << (*it)->getRent() << endl;
+        }
+		if (dynamic_cast<Academic *>(*it) != NULL){
+			cout << "Improvement Cost: " << dynamic_cast<Academic *>(*it)->getImCost() << endl;
 			cout << "Possible improvements" << endl;
 			for(int k = 0; k < 6; k++) {
-				cout << k << " " << acadP->getIm(k) << endl;        
+				cout << k << " " << dynamic_cast<Academic *>(*it)->getIm(k) << endl;        
 			}
 		}
 	}

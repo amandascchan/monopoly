@@ -70,6 +70,7 @@ void Academic::improve(std::string buyOrSell){
 }
 
 void Academic::mortgage(){
+    std:: cout << "wh" << endl;
   if (numImp == 0){
     isMortgaged = true;
     owner->transaction(price/2, NULL);

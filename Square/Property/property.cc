@@ -7,6 +7,8 @@
 #include "../../Player/player.h"
 #include "../../TextDisplay/textdisplay.h"
 
+Property::Property(Board *theBoard, TextDisplay *td):Square(theBoard, td), isMortgaged(false), owner(NULL){}
+
 int Property::getCost(){
 	return price;
 }
@@ -15,17 +17,14 @@ bool Property::getIsMortgaged(){
 	return isMortgaged;
 }
 
-Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
-					owner(NULL), isMortgaged(false){}
-
 void Property::auction(){
 	isMortgaged = false;
 	std::cout << "Auction time!" << std::endl;
-	Player *highestBidder;
+	//Player *highestBidder;
 	int highestBid=0;
 	int numBidders = theBoard->getNumPlayers()-1;
 	std::vector<Player *> bidders;
-	bool atleastOneBid = false;
+	//bool atleastOneBid = false;
 	for (int i = 1; i <= numBidders; ++i){
 		bidders.push_back(theBoard->getNextPlayer(i));
 	}
@@ -41,9 +40,9 @@ void Property::auction(){
 				cout << "YOU ARE TOO POOR MUHAHA" << endl;
 				continue;
 			}
-			atleastOneBid = true;
+			//atleastOneBid = true;
 			if (bid > highestBid){
-				highestBidder = currentBidder;
+			//	highestBidder = currentBidder;
 				highestBid = bid;
 				++i;
 			}
@@ -84,7 +83,7 @@ std::string Property::getBlock(){
 }
 
 void Property::buy(){
-	cout << "Would you like to buy this property named" << name  << "for $" << price << "(yes/no)" << endl;
+	cout << "Would you like to buy this property named " << name  << " for $" << price << "? (yes/no)" << endl;
     string answer;
     while (cin >> answer){
     	if ((answer == "yes")||(answer == "no"))break;
@@ -104,6 +103,7 @@ void Property::buy(){
 }
 
 void Property::mortgage(){
+    cout << "why" << endl;
     isMortgaged = true;
     owner->transaction(price/2, NULL);
 }

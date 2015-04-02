@@ -27,8 +27,4 @@ SLC::SLC(Board *theBoard, TextDisplay *td):
 	this->deck = myBuilder.buildDeck(config);
 }
 
-SLC::~SLC(){
-	for (std::vector<Card *>::iterator i = this->deck.begin(); i != deck.end(); ++i){
-		delete *i;
-	}
-}
+SLC::~SLC(){}

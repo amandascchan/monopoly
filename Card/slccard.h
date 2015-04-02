@@ -9,6 +9,7 @@ public:
 	int move;
 	SLCCard(Board *, int);
 	void action();
+    ~SLCCard();
 };
 
 #endif
