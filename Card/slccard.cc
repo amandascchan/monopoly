@@ -16,3 +16,4 @@ void SLCCard::action( ){
 }
 
 SLCCard::SLCCard(Board *theBoard, int move): Card(theBoard), move(move){}
+SLCCard::~SLCCard(){}

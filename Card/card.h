@@ -9,6 +9,7 @@ protected:
 public:
 	Card(Board *theBoard): theBoard(theBoard){}
 	virtual void action()=0;
+    virtual ~Card() {};
 };
 
 #endif

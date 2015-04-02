@@ -10,3 +10,4 @@ void NHCard::action(){
 
 
 NHCard::NHCard(Board *theBoard, int transAmt): Card(theBoard), transAmt(transAmt){}
+NHCard::~NHCard() {}

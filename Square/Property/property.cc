@@ -6,6 +6,8 @@
 #include "../../Player/player.h"
 #include "../../TextDisplay/textdisplay.h"
 
+Property::Property(Board *theBoard, TextDisplay *td):Square(theBoard, td), isMortgaged(false), owner(NULL){}
+
 int Property::getCost(){
 	return price;
 }
@@ -14,17 +16,14 @@ bool Property::getIsMortgaged(){
 	return isMortgaged;
 }
 
-Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
-					owner(NULL), isMortgaged(false){}
-
 void Property::auction(){
 	isMortgaged = false;
 	std::cout << "Auction time!" << std::endl;
-	Player *highestBidder;
+	//Player *highestBidder;
 	int highestBid=0;
 	int numBidders = theBoard->getNumPlayers()-1;
 	std::vector<Player *> bidders;
-	bool atleastOneBid = false;
+	//bool atleastOneBid = false;
 	for (int i = 1; i <= numBidders; ++i){
 		bidders.push_back(theBoard->getNextPlayer(i));
 	}
@@ -35,9 +34,9 @@ void Property::auction(){
 		Player *currentBidder = *i;
 		std::cout << currentBidder->getName() << "'s turn to bid/withdraw" << std::endl;
 		if (std::cin >> bid){
-			atleastOneBid = true;
+	//		atleastOneBid = true;
 			if (bid > highestBid){
-				highestBidder = currentBidder;
+			//	highestBidder = currentBidder;
 				highestBid = bid;
 				++i;
 			}

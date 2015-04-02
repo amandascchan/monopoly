@@ -12,14 +12,9 @@
 #include <algorithm>
 using namespace std;
 
-Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): creditor(NULL),lIndex(0), name(name), cups(0), location(NULL), theBoard(NULL), savings(1500), td(NULL), row(0), column(0), turnsInTimLine(0), bankrupt(false) {
-    avatar = playerOptions[name].avatar;
-    td = t;
-    theBoard = b;
-    location = l;
-    lIndex = lDex;
-    debt = 0;
-}
+Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
+    name(name), location(l), theBoard(b), td(t), cups(0), avatar(playerOptions[name].avatar), savings(0), row (0), column(0), lIndex(lDex), turnsInTimLine(0), bankrupt(false), creditor(NULL), debt(0){}
+
 void Player::setCoords(int row, int column) {
     this->row = row;
     this->column = column;
