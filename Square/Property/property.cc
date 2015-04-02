@@ -10,6 +10,10 @@ int Property::getCost(){
 	return price;
 }
 
+bool Property::getIsMortgaged(){
+	return isMortgaged;
+}
+
 Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
 					owner(NULL), isMortgaged(false){}
 

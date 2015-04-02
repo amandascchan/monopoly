@@ -78,11 +78,11 @@ int main(int argc, char *argv[]){
 				cout << "You can not end your turn until you have paid your debt." << endl;
 			}
 		}
-		/*else if (command == "trade"){
-			string counterParty, give, recieve;
+		else if (command == "trade"){
+			string counterParty, give, recieve, response;
 			commandStream >> counterParty >> give >> recieve;
 			theBoard.trade(counterParty, give, recieve);
-		}*/
+		}
 		else if (command == "improve"){
 			string propertyName, buyOrSell;
 			commandStream >> propertyName >> buyOrSell;
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]){
 			theBoard.unmortgage(propertyName);
 		}
 		else if (command == "bankrupt"){
-			theBoard.getNextPlayer(0)->Bankrupt();
+			theBoard.bankrupt();
 		}
 		else if (command == "assets"){
 			theBoard.getNextPlayer(0)->displayAssets();

@@ -104,6 +104,44 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
     playerOptions[name].column = p->column;
     if(players.size() == 1) activePlayer = players[0];
 }
+
+void Board::transfer(Player *counterparty, string offer, string recieve){
+
+}
+
+
+void Board::trade(string counterparty, string offer, string recieve){
+
+
+}
+
+void Board::bankrupt() {
+  activePlayer->bankrupt = true;
+  if (activePlayer->creditor == NULL){
+    for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
+      (*it)->auction();
+    }
+  }
+  else {
+    for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
+      if ((*it)->isMortgaged){
+        transfer(activePlayer->creditor,(*it)->name, "0");
+        cout << activePlayer->name << " is inheriting a mortgaged property named " << (*it)->name << "you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
+        string response;
+        while (cin >> response){
+          if (response == "unmortgage"){
+            (*it)->unMortgage();
+          } else if (response == "pay") {
+              int fee = (1.1*(*it)->getCost())/2; 
+              activePlayer->creditor->transaction(-fee, NULL);
+          }
+        }
+      }
+    }
+ }
+}
+
+
 void Board::addProperty(string name, string owner, int imp) {
  /*   getSquare(name)->setOwner(getPlayer(owner));
     getPlayer(owner)->properties.push_back(getSquare(name));

@@ -30,7 +30,6 @@ class Player {
   void movePlayer(int r, int c); 
   void setCoords(int row, int column);
   Board* getBoard();
-  void Bankrupt();
   void endTurn();
   void displayAssets();
   void transaction(int amount, Player *p);
