@@ -76,7 +76,7 @@ void Player::displayAssets() {
 	cout << "Your savings: " << savings << endl;
 	cout << "Your location: " << location->getName() << endl;
 	cout << "Number of Tim's Cups you have: " << cups << endl;
-  if (properties.size != 0){
+  if (properties.size() != 0){
   	cout << "Your Properties: " << endl;
   }
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {

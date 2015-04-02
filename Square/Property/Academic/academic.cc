@@ -15,6 +15,7 @@ int Academic::getImCost(){
 int Academic::getIm(int imps){
   int fee = tuition[imps];
   if (owner->ownsBlock(block)&&(numImp == 0)){fee *= 2;}
+  std::cout << numImp << std::endl;
   return fee;
 }
 

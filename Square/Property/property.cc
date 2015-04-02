@@ -34,8 +34,13 @@ void Property::auction(){
 			if (bid > highestBid){
 				highestBidder = currentBidder;
 				highestBid = bid;
+				++i;
 			}
-			++i;
+			else {
+				bidders.erase(i);
+				--numBidders;
+				std::cout << currentBidder->getName() << " is disqualified for not raising the bid." << std::endl;
+			}
 			if (i == bidders.end()){
 				i = bidders.begin();
 			}

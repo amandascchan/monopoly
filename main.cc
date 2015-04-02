@@ -27,12 +27,12 @@ int main(int argc, char *argv[]){
 		//theBoard.loadBoard(loadFile);
 	}
 	else {
-		cout << "enter player names: make sure they match the ones on the spec, type q to finish entering players" << endl;
-		string command;
+		cout << "enter player names on seperate lines: make sure they match the ones on the spec, type q to finish entering players" << endl;
+		string line;
 		while(true) {
-        	cin >> command;
-        	if(command == "q") break;
-        	else theBoard.addPlayer(command);
+        	getline(cin,line);
+        	if(line == "q") break;
+        	else theBoard.addPlayer(line);
     	}
 	}
 	theBoard.startGame();
