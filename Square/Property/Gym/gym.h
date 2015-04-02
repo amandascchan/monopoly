@@ -9,9 +9,10 @@ class Board;
 
 class Gym: public Property {
 	friend class Board;
-  std::string desc;
+	std::string desc;
 public:
-  Gym(Board *, TextDisplay *);
-  void action();
+	int getRent();
+	Gym(Board *, TextDisplay *);
+	void action();
 };
 #endif

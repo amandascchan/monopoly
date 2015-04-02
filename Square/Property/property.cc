@@ -6,6 +6,10 @@
 #include "../../Player/player.h"
 #include "../../TextDisplay/textdisplay.h"
 
+int Property::getCost(){
+	return price;
+}
+
 Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
 					owner(NULL), isMortgaged(false){}
 
@@ -52,6 +56,7 @@ void Property::auction(){
 		std::cout << "Sold to " << (*i)->getName() << " for " << highestBid << " dollars!" << std::endl;
 		owner = *i;
 		(*i)->transaction(-highestBid, NULL);
+		owner->addProperty(this);
 	}
 }
 

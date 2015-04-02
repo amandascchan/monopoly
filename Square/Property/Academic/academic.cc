@@ -6,6 +6,18 @@
 #include <iostream>
 
 
+int Academic::getRent(){
+  return getIm(numImp);
+}
+int Academic::getImCost(){
+  return impCost;
+}
+int Academic::getIm(int imps){
+  int fee = tuition[imps];
+  if (owner->ownsBlock(block)&&(numImp == 0)){fee *= 2;}
+  return fee;
+}
+
 Academic::Academic(Board *theBoard, TextDisplay *td): Property(theBoard, td), numImp(0){
     isMortgaged =false;
     owner =NULL;
@@ -20,9 +32,7 @@ void Academic::action(){
   }
   else {
     if (!isMortgaged){
-    int fee = tuition[numImp];
-    if ((owner->ownsBlock(block))&&(numImp == 0)){fee *= 2;}
-    theBoard->getNextPlayer(0)->transaction(-fee, owner);
+      theBoard->getNextPlayer(0)->transaction(-getRent(), owner);
     }
   }
 }

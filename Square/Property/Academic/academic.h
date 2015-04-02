@@ -10,14 +10,17 @@ class Board;
 
 class Academic: public Property {
 	friend class Board;
-  int impCost;
-  int numImp;
-  int tuition[6];
-  std::string desc;
+	int impCost;
+	int numImp;
+	int tuition[6];
+	std::string desc;
 public:
-  Academic(Board *, TextDisplay *);
-  void action();
-  void improve(std::string);
-  void mortgage();
+	Academic(Board *, TextDisplay *);
+	void action();
+	void improve(std::string);
+	void mortgage();
+	int getRent();
+	int getImCost();
+	int getIm(int);
 };
 #endif

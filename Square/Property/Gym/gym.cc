@@ -14,6 +14,11 @@ Gym::Gym(Board *theBoard, TextDisplay *td): Property(theBoard, td){
 	isMortgaged = NULL;
 }
 
+int Gym::getRent(){
+	if (owner->ownsBlock(block)) return 10;
+	else return 4;
+}
+
 void Gym::action(){
 	if (owner == NULL){
 		buy();
@@ -21,9 +26,6 @@ void Gym::action(){
 	else {
 		int r1 = rand() % 6 + 1;
 		int r2 = rand() % 6 + 1;
-		int fee;
-		if (owner->ownsBlock(block)) fee = 10*(r1 + r2);
-		else fee = 4*(r1 + r2);
-		theBoard->getNextPlayer(0)->transaction(-fee, owner);
+		theBoard->getNextPlayer(0)->transaction(-getRent()*(r1+r2), owner);
 	}
 }

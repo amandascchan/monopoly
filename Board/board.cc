@@ -40,7 +40,8 @@ cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
               m->block = aInfo[cNames[i]].block;
               m->impCost = aInfo[cNames[i]].imCost;
               for(int j = 0; j <6; j++) {
-                  m->tuition[j] = aInfo[cNames[j]].imp[j];
+                  m->tuition[j] = aInfo[cNames[i]].imp[j];
+                  cout << m->tuition[j] << endl;
               }
 		m->price = aInfo[cNames[i]].pCost;
 		n = dynamic_cast<Square *>(m);
@@ -53,9 +54,9 @@ cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
           }
       }
       else {
-cout << "ewrewjir" << i << endl;
+//cout << "ewrewjir" << i << endl;
           if(cNames[i] == "SLC") {
-	   cout << "SLC CODE " << i << cNames[i] << endl;
+	//   cout << "SLC CODE " << i << cNames[i] << endl;
               n = new SLC(this, td);
           }
           else if(cNames[i] == "NEEDLES HALL") {
@@ -84,7 +85,7 @@ cout << "ewrewjir" << i << endl;
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
 	theBoard[i] = n;
-	cout << theBoard[i]->name << i << endl;
+//	cout << theBoard[i]->name << i << endl;
   }
 
 }
@@ -181,23 +182,34 @@ bool Board::winner() {
   if(players.size() == 1) return true;
   return false;
 }
-/*void Board::mortage(string name) {
+void Board::mortgage(string name) {
   if(aInfo.count(name)) {
-    Property *p = dynamic_caast<Property *>(getSquare(name));
-    p->mortgage();
+    Property *p = dynamic_cast<Property *>(getSquare(name));
+    if (name == p->owner->name){
+      p->mortgage();
+    }
+    else {
+      cout << "You can not mortgage that which you do not own." << endl;
+    }
     return;
   }
   printError(name);
 }
+
 void Board::unmortgage(string name) {
   if(aInfo.count(name)) {
     Property *p = dynamic_cast<Property *>(getSquare(name));
-    p->unmortgage();
+    if (name == p->owner->name){
+      p->unMortgage();
+    }
+    else {
+      cout << "You can not unmortgage that which you do not own." << endl;
+    }
     return;
   }
   printError(name);
 }
-*/
+
 void Board::improve(string name, string buyOrSell) {
   if(aInfo.count(name)) {
     if(aInfo[name].type == "A") {

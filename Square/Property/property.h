@@ -23,6 +23,8 @@ protected:
 	virtual ~Property();
 public:
 	std::string getBlock();
+	int getCost();
+	virtual int getRent()=0;
 };
 
 #endif

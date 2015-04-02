@@ -14,5 +14,6 @@ class Residence: public Property {
 public:
   Residence(Board *, TextDisplay *);
   void action();
+  int getRent();
 };
 #endif

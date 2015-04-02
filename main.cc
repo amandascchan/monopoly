@@ -87,8 +87,7 @@ int main(int argc, char *argv[]){
 			string propertyName, buyOrSell;
 			commandStream >> propertyName >> buyOrSell;
 			theBoard.improve(propertyName, buyOrSell);
-		}
-		/*
+		}		
 		else if (command == "mortgage"){
 			string propertyName;
 			commandStream >> propertyName;
@@ -98,7 +97,7 @@ int main(int argc, char *argv[]){
 			string propertyName;
 			commandStream >> propertyName;
 			theBoard.mortgage(propertyName);
-		}*/
+		}
 		else if (command == "bankrupt"){
 			theBoard.getNextPlayer(0)->Bankrupt();
 		}
