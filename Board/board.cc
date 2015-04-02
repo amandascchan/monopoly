@@ -128,13 +128,14 @@ void Board::next() {
    activePlayer = getNextPlayer(1);
    cout << "The next player is now: " << activePlayer->name << endl;
 }
+int mod(int a, int b) {
+    return (a%b+b)%b;
+}
 void Board::movePlayer(int numMoves) {
-    int n = (activePlayer->lIndex+numMoves)%40;
+    int n = mod(activePlayer->lIndex+numMoves, 40);
 cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
-cout << "the board at one" << theBoard[1]->name << endl;
     activePlayer->location = theBoard[n];
-    cout << "name:  " <<  activePlayer->location->name << endl;
     activePlayer->lIndex = n;
     activePlayer->displayAssets();
     activePlayer->location->action();
