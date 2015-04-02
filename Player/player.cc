@@ -26,7 +26,16 @@ void Player::setCoords(int row, int column) {
 }
 string Player::getName() {return name;}
 int Player::getSavings() {return savings;}
-void Player::Bankrupt() {bankrupt = true;}
+void Player::Bankrupt() {
+  bankrupt = true;
+  if (creditor == NULL){
+
+  }
+  else {
+
+  }
+
+}
 Board* Player::getBoard() { return theBoard;}
 void Player::endTurn() {theBoard->next();}
 bool Player::isBankrupt() {return bankrupt;}
