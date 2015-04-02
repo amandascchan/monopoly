@@ -1,5 +1,6 @@
 #include "property.h"
 #include <string>
+#include <sstream>
 #include <vector>
 #include <iostream>
 #include "../../Board/board.h"
@@ -30,11 +31,16 @@ void Property::auction(){
 	}
 	std::vector<Player *>::iterator i = bidders.begin();
 	while (numBidders > 1){
-		int bid;
+		unsigned int bid;
 		string command;
 		Player *currentBidder = *i;
 		std::cout << currentBidder->getName() << "'s turn to bid/withdraw" << std::endl;
-		if (std::cin >> bid){
+		while (true){
+			if (std::cin >> bid){
+			if (!currentBidder->canAfford(bid)){
+				cout << "YOU ARE TOO POOR MUHAHA" << endl;
+				continue;
+			}
 			atleastOneBid = true;
 			if (bid > highestBid){
 				highestBidder = currentBidder;
@@ -49,6 +55,7 @@ void Property::auction(){
 			if (i == bidders.end()){
 				i = bidders.begin();
 			}
+			break;
 		}
 		else{
 			std::cin.clear();
@@ -60,7 +67,9 @@ void Property::auction(){
 			if (i == bidders.end()){
 				i = bidders.begin();
 			}
+			break;
 		}
+	}
 	}
 	if (numBidders == 1){
 		std::cout << "Sold to " << (*i)->getName() << " for " << highestBid << " dollars!" << std::endl;
