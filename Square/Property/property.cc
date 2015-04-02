@@ -14,6 +14,7 @@ Property::Property(Board *theBoard, TextDisplay *td): Square(theBoard, td),
 					owner(NULL), isMortgaged(false){}
 
 void Property::auction(){
+	isMortgaged = false;
 	std::cout << "Auction time!" << std::endl;
 	Player *highestBidder;
 	int highestBid=0;
