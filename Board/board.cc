@@ -25,7 +25,7 @@
 #include "board.h"
 using namespace std;
 
-Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
+Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
   td = new TextDisplay();
   //remember to set num players later
   fillLoop();
@@ -81,7 +81,7 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   }
 }
 void Board::printPlayers() {
-    for(int i = 0; i < players.size(); i++) {
+    for(unsigned int i = 0; i < players.size(); i++) {
         cout << players[i]->name << endl;
         cout << players[i]->location->name << endl;
     }
@@ -262,7 +262,7 @@ Board::~Board() {
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
-  for(int i = 0; i < players.size(); i++) {
+  for(unsigned int i = 0; i < players.size(); i++) {
       delete players[i];
   }
   delete [] theBoard;
@@ -282,6 +282,7 @@ Player* Board::getPlayer(string n) {
     for(vector<Player *>::iterator it=players.begin(); it!=players.end();it++) {
         if((*it)->name == n) return *it;
     }
+    throw;
 }
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);
