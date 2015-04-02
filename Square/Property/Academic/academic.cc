@@ -33,6 +33,7 @@ void Academic::improve(std::string buyOrSell){
       if (owner->canAfford(impCost)){
         owner->transaction(-impCost, NULL);
         ++numImp;
+        td->addImprov(row, column, numImp);
       }
       else {
         std::cout << "YOU ARE TO POOR MUHAHA" << endl;

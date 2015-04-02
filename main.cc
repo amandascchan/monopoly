@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
 	string loadFile = "";
 	srand(time(0));
 	for (int i = 1; i < argc; ++i){
-		if (argv[i] == "-testing"){
+		if (strcmp(argv[i], "-testing") == 0){
 			testing = true;
 		}
 		if ((argv[i] == "-load")&&(i + 1 < argc)){
@@ -54,7 +54,7 @@ int main(int argc, char *argv[]){
 			if (!hasRolled){
 				int r1, r2;
 				if (testing&&(commandStream >> r1)){
-					if (!(commandStream >> r2))r2 = rand() % 6 + 1;
+					if (!(commandStream >> r2))r2 = 0;
 				}
 				else {
 					r1 = rand() % 6 + 1;
@@ -81,12 +81,13 @@ int main(int argc, char *argv[]){
 			string counterParty, give, recieve;
 			commandStream >> counterParty >> give >> recieve;
 			theBoard.trade(counterParty, give, recieve);
-		}
+		}*/
 		else if (command == "improve"){
 			string propertyName, buyOrSell;
 			commandStream >> propertyName >> buyOrSell;
 			theBoard.improve(propertyName, buyOrSell);
 		}
+		/*
 		else if (command == "mortgage"){
 			string propertyName;
 			commandStream >> propertyName;

@@ -33,7 +33,8 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
   theBoard = new Square*[40];
   for(int i = 0; i < 40; i++) {
 	Square *n;
-      if(aInfo.count(cNames[i])) {
+      if(npInfo.count(cNames[i]) == 0) {
+cout << "????? " << cNames[i] << aInfo[cNames[i]].type << endl;
           if(aInfo[cNames[i]].type == "A") {
              Academic *m = new Academic(this, td);
               m->block = aInfo[cNames[i]].block;
@@ -52,7 +53,9 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
           }
       }
       else {
+cout << "ewrewjir" << i << endl;
           if(cNames[i] == "SLC") {
+	   cout << "SLC CODE " << i << cNames[i] << endl;
               n = new SLC(this, td);
           }
           else if(cNames[i] == "NEEDLES HALL") {
@@ -81,12 +84,14 @@ Board::Board():td(NULL), theBoard(NULL),numPlayers(0), mode("") {
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
 	theBoard[i] = n;
+	cout << theBoard[i]->name << i << endl;
   }
 
 }
 void Board::printPlayers() {
     for(int i = 0; i < players.size(); i++) {
         cout << players[i]->name << endl;
+        cout << players[i]->location->name << endl;
     }
 }
 void Board::addPlayer(string name) {
@@ -125,11 +130,15 @@ void Board::next() {
 }
 void Board::movePlayer(int numMoves) {
     int n = (activePlayer->lIndex+numMoves)%40;
+cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
+cout << "the board at one" << theBoard[1]->name << endl;
     activePlayer->location = theBoard[n];
+    cout << "name:  " <<  activePlayer->location->name << endl;
     activePlayer->lIndex = n;
     activePlayer->displayAssets();
     activePlayer->location->action();
+    activePlayer->displayAssets();
 }    
 Player* Board::getAPlayer() {
     return activePlayer;
@@ -173,7 +182,7 @@ bool Board::winner() {
 }
 /*void Board::mortage(string name) {
   if(aInfo.count(name)) {
-    Property *p = dynamiccaast<Property *>(getSquare(name));
+    Property *p = dynamic_caast<Property *>(getSquare(name));
     p->mortgage();
     return;
   }
@@ -181,23 +190,25 @@ bool Board::winner() {
 }
 void Board::unmortgage(string name) {
   if(aInfo.count(name)) {
-    Property *p = dynamiccast<Property *>(getSquare(name));
+    Property *p = dynamic_cast<Property *>(getSquare(name));
     p->unmortgage();
     return;
   }
   printError(name);
 }
+*/
 void Board::improve(string name, string buyOrSell) {
   if(aInfo.count(name)) {
     if(aInfo[name].type == "A") {
-      Academic *p = dynamiccast<Academic *>(getSquare(name));
-      p->improve(buyOrSell);
+      Academic *p = dynamic_cast<Academic *>(getSquare(name));
+      if(p->owner == getAPlayer()) p->improve(buyOrSell);
+      else cout << "Dis ain't yo property" << endl;
       return;
     }
     cout << name << " cannot be improved" << endl;
   }
   printError(name);
-}*/
+}
 
 void Board::printError(string name) {
   cout << name << " does not exist" << endl;

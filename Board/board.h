@@ -33,7 +33,7 @@ class Board {
   void Roll(int num);
   void transfer(Player *p, int amount);
   void addProperty(std::string name, std::string owner, int imp);
-  //void improve(std::string name, std::string buyOrSell);
+  void improve(std::string name, std::string buyOrSell);
   //void mortgage(std::string name);
   //void unmortgage(std::string name);
   bool startGame();

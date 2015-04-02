@@ -7,11 +7,14 @@
 #include "../../TextDisplay/textdisplay.h"
 #include "../../Board/board.h"
 #include "../../DeckBuilder/deckbuilder.h"
+#include "../../Card/slccard.h"
+
 
 
 
 void SLC::action(){
-	deck[rand() % deck.size()]->action();
+	int index = rand() % deck.size();
+	deck[index]->action();
 }
 
 

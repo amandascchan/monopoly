@@ -5,8 +5,8 @@
 class Board;
 
 class SLCCard: public Card{
-	int move;
 public:
+	int move;
 	SLCCard(Board *, int);
 	void action();
 };
