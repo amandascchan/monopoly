@@ -40,8 +40,8 @@ class Board {
   bool winner();
   int getNumPlayers() { return players.size(); }
   void bankrupt();
-  void trade(std::string, std::string, std::string);
-  void transfer(Player *, std::string, std::string);
+  void trade(std::string, std::string, std::string, bool);
+  void transfer(Player *, std::string, std::string, bool);
   void save(std::string name);
   
   Board();

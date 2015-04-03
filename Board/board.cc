@@ -20,6 +20,7 @@
 #include "../data/playerdata.h"
 #include "../data/npdata.h"
 #include <string>
+#include <sstream>
 #include <algorithm>
 #include <stdlib.h>
 #include "board.h"
@@ -106,14 +107,89 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
     if(players.size() == 1) activePlayer = players[0];
 }
 
-void Board::transfer(Player *counterparty, string offer, string recieve){
+void Board::trade(string counterPartyName, string offer, string recieve, bool outPut){
+  Player *counterParty = getPlayer(counterPartyName);
+  if (counterParty == NULL){
+    if (outPut){
+      cout << "Invalid trade." << endl;
+    }
+    return;
+  }
+  bool success = true;
+  stringstream offerStream(offer);
+  stringstream recieveStream(recieve);
+  bool offerIsMoney = false;
+  bool recieveIsMoney = false;
+  int offerMoney;
+  int recieveMoney;
+  vector<Property *>::iterator offerIt = activePlayer->properties.begin();
+  vector<Property *>::iterator recieveIt = counterParty->properties.begin();
 
-}
+  if (offerStream >> offerMoney){
+    offerIsMoney = true;
+    if (!(activePlayer->canAfford(offerMoney))) success = false;
+  }
+  else {
+    bool found = false;
+    while (offerIt != activePlayer->properties.end()){
+      if (offer == (*offerIt)->name){
+        found = true;
+        break;
+      }
+      ++offerIt;
+    }
+    if (!found) success = false;
+  }
 
+  if (recieveStream >> recieveMoney){
+      recieveIsMoney = true;
+    if (!(counterParty->canAfford(recieveMoney))) success = false;
+  }
+  else {
+    bool found = false;
+    while(recieveIt != activePlayer->properties.end()){
+      if (recieve == (*recieveIt)->name){
+        found = true;
+        break;
+      }
+      ++recieveIt;
+    }
+    if (!found) success = false;
+  }
 
-void Board::trade(string counterparty, string offer, string recieve){
-
-
+  if (success){
+    if (outPut){
+      string response;
+      cout << activePlayer->name << " is offering to trade " << offer << " for " << recieve << " with " << counterParty->name << " (accept/decline)." << endl;
+      while (cin >> response){
+        if (response == "accept"){break;}
+        else if (response == "decline"){return;}
+      }
+    }
+    Property *offerProperty;
+    Property *recieveProperty;
+    if (!recieveIsMoney){recieveProperty = *recieveIt;}
+    if (!offerIsMoney){offerProperty = *offerIt;}
+    if (offerIsMoney){activePlayer->transaction(-offerMoney, counterParty);}
+    else {
+     // cout << (*offerIt)->name << endl;
+      (*offerIt)->owner = counterParty;
+      // MIGHT CAUSE BUGGGG!!!
+      activePlayer->properties.erase(offerIt);
+    }
+    if (recieveIsMoney){counterParty->transaction(-recieveMoney, activePlayer);}
+    else {
+    //  cout << "why" << endl;
+      (*recieveIt)->owner = activePlayer;
+      // MIGHT CAUSE BUGGGG!!!
+      counterParty->properties.erase(recieveIt);
+    }
+  if (!(offerIsMoney)){counterParty->addProperty(offerProperty);}
+  if (!(recieveIsMoney)){activePlayer->addProperty(recieveProperty);}
+  }
+  else if (outPut) {
+    cout << "Invalid trade." << endl;
+  }
 }
 
 void Board::bankrupt() {
@@ -126,7 +202,7 @@ void Board::bankrupt() {
   else {
     for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
       if ((*it)->isMortgaged){
-        transfer(activePlayer->creditor,(*it)->name, "0");
+        trade(activePlayer->creditor->name,(*it)->name, "0", false);
         cout << activePlayer->name << " is inheriting a mortgaged property named " << (*it)->name << "you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
         string response;
         while (cin >> response){
@@ -287,7 +363,7 @@ Player* Board::getPlayer(string n) {
     for(vector<Player *>::iterator it=players.begin(); it!=players.end();it++) {
         if((*it)->name == n) return *it;
     }
-    throw;
+    return NULL;
 }
 ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);

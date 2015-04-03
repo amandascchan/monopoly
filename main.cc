@@ -84,7 +84,7 @@ int main(int argc, char *argv[]){
 		else if (command == "trade"){
 			string counterParty, give, recieve, response;
 			commandStream >> counterParty >> give >> recieve;
-			theBoard.trade(counterParty, give, recieve);
+			theBoard.trade(counterParty, give, recieve, true);
 		}
 		else if (command == "improve"){
 			string propertyName, buyOrSell;
