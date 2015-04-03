@@ -21,7 +21,7 @@ void Property::auction(){
 	isMortgaged = false;
 	std::cout << "Auction time!" << std::endl;
 	//Player *highestBidder;
-	int highestBid=0;
+	unsigned int highestBid=0;
 	int numBidders = theBoard->getNumPlayers()-1;
 	std::vector<Player *> bidders;
 	//bool atleastOneBid = false;

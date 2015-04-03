@@ -114,7 +114,6 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
     }
     return;
   }
-  int money;
   bool success = true;
   stringstream offerStream(offer);
   stringstream recieveStream(recieve);
