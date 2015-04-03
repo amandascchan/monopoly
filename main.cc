@@ -118,11 +118,11 @@ int main(int argc, char *argv[]){
 		else if (command == "assets"){
 			theBoard.getNextPlayer(0)->displayAssets();
 		}
-	/*	else if (command == "save"){
+		else if (command == "save"){
 			string saveFile;
 			commandStream >> saveFile;
 			theBoard.save(saveFile);
-		}*/
+		}
 	}
 	cout << theBoard.getNextPlayer(0)->getName() << " Wins!" << endl;
 }

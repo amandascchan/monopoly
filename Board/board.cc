@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <stdlib.h>
 #include "board.h"
+#include <fstream>
 using namespace std;
 
 Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
@@ -245,7 +246,7 @@ void Board::unmortgage(string name) {
 }
 
 void Board::improve(string name, string buyOrSell) {
-  if(aInfo.count(name)) {
+  if(npInfo.count(name) == 0) {
     if(aInfo[name].type == "A") {
       Academic *p = dynamic_cast<Academic *>(getSquare(name));
       if(p->owner == getAPlayer()) p->improve(buyOrSell);
@@ -294,4 +295,21 @@ ostream &operator<<(std::ostream &out, const Board &g){
 }
 void Board::transfer(Player *p, int amount) {
   p->savings += amount;
+}
+void Board::save(string name) {
+    ofstream outFile(name.c_str());
+    outFile << players.size()  << "\n";
+    int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
+    int k = 0;
+    for(unsigned int i = pos; i< pos + players.size(); i++) {
+        if(i >= players.size()) k = players.size();
+        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->savings << " " << players[i-k]->cups << " " << players[i-k]->location->getName() << "\n";
+    }
+    for(unsigned int i = 0; i < 40; i++) {
+        string own = (dynamic_cast<Property*>(theBoard[i]) && dynamic_cast<Property*>(theBoard[i])->owner)? dynamic_cast<Property *>(theBoard[i])->owner->name : "BANK";
+        int numI = (dynamic_cast<Academic*>(theBoard[i]))? (dynamic_cast<Property*>(theBoard[i])->isMortgaged)? -1 : dynamic_cast<Academic *>(theBoard[i])->numImp : 0;
+        outFile << theBoard[i]->getName() << " " << own << " " << numI << "\n";
+    }
+    outFile.close();
+    return;
 }

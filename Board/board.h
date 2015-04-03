@@ -42,6 +42,7 @@ class Board {
   void bankrupt();
   void trade(std::string, std::string, std::string);
   void transfer(Player *, std::string, std::string);
+  void save(std::string name);
   
   Board();
   ~Board();  
