@@ -92,9 +92,10 @@ void Board::addPlayer(string name) {
     addPlayer(name, 'c', 1500, 0, 0); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
-    if(playerOptions.count(name) == 0) {
-            cerr << "This player isn't valid" << endl;
-            return;
+     for(map<string, PlayerData>::iterator it = playerOptions.begin(); it!=playerOptions.end();++it) {
+        if(it->second.avatar == avatar) {
+            playerOptions[it->first].name = name;
+        }
     }
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
