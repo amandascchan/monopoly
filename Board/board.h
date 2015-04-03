@@ -27,7 +27,7 @@ class Board {
   Square* getSquare(std::string name);
   void next();
   void addPlayer(std::string name);
-  void addPlayer(std::string name, char a, int money, int nT, int pos);
+  void addPlayer(std::string name, char a, int money, int nT, int pos, int jailTime);
   void Buy();
   void printPlayers();
   void Roll(int num);
@@ -43,6 +43,8 @@ class Board {
   void trade(std::string, std::string, std::string, bool);
   void transfer(Player *, std::string, std::string, bool);
   void save(std::string name);
+  void loadBoard(std::string loadFile);
+  void giveProperty(std::string propName, std::string playerName, int numImp);
   
   Board();
   ~Board();  

@@ -88,10 +88,76 @@ void Board::printPlayers() {
         cout << players[i]->location->name << endl;
     }
 }
-void Board::addPlayer(string name) {
-    addPlayer(name, 'c', 1500, 0, 0); 
+
+void Board::loadBoard(std::string loadFile){
+  fstream loadStream(loadFile.c_str());
+  string line;
+  stringstream lineStream;
+  loadStream >> numPlayers;
+  getline(loadStream, line);
+  for (int i = 0; i < numPlayers; ++i){
+    getline(loadStream, line);
+    stringstream lineStream(line);
+    string namePart;
+    lineStream >> namePart;
+    string name = namePart;
+    char avatar;
+    int money;
+    int timsCups;
+    int pos;
+    int jailTime = 0;
+    lineStream >> namePart;
+    while (namePart.length() != 1){
+      name += " " + namePart;
+      lineStream >> namePart;
+    }
+    avatar = namePart[0];
+    lineStream >> money >> timsCups >> pos;
+    if (!(lineStream >> jailTime)){jailTime = 0;}
+    cout << name << avatar << money << timsCups << pos << jailTime << endl;
+    addPlayer(name, avatar, money, timsCups, pos, jailTime);
+  }
+  
+  while (getline(loadStream, line)){
+    string propName;
+    int numImp;
+    stringstream lineStream(line);
+    lineStream >> propName;
+    string namePart;
+    lineStream >> namePart;
+    string name = namePart;
+    while (!(lineStream >> numImp)){
+      lineStream.clear();
+      lineStream >> namePart;
+      name += " " + namePart;
+    }
+    cout << name << propName << numImp << endl;
+    giveProperty(propName, name, numImp);
+  }
 }
-void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
+
+void Board::giveProperty(string propName, string playerName, int numImp){
+  Player *player = getPlayer(playerName);
+  Property *prop = dynamic_cast<Property *>(getSquare(propName));
+ // cout << "ad dfljkdhf" << player << endl;
+  if ((prop != NULL)&&(player != NULL)){
+    if (numImp == -1){prop->isMortgaged = true;}
+      Academic *acadP = dynamic_cast<Academic *>(prop);
+      if (acadP != NULL){
+        if (numImp != -1){
+          acadP->numImp = numImp;
+        }
+      }
+      prop->owner = player;
+   //   cout << "ad prop" << endl;
+      player->addProperty(prop);
+  }
+}
+
+void Board::addPlayer(string name) {
+    addPlayer(name, 'c', 1500, 0, 0, 0); 
+}
+void Board::addPlayer(string name, char avatar, int money, int nT, int pos, int jailTime) {
      for(map<string, PlayerData>::iterator it = playerOptions.begin(); it!=playerOptions.end();++it) {
         if(it->second.avatar == avatar) {
             playerOptions[it->first].name = name;
@@ -101,6 +167,7 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos) {
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
     p->cups = nT;
+    p->turnsInTimLine = jailTime;
     players.push_back(p);
     td->addPlayer(playerOptions[name].avatar, p->location->row+p->row, p->location->column+p->column);
     playerOptions[name].row = p->row;

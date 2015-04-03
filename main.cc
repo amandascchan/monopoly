@@ -20,14 +20,14 @@ int main(int argc, char *argv[]){
 		if (strcmp(argv[i], "-testing") == 0){
 			testing = true;
 		}
-		if (strcmp(argv[i],"-load")&&(i + 1 < argc)){
+		if ((strcmp(argv[i],"-load") == 0)&&(i + 1 < argc)){
 			loadFile = argv[i + 1];
 		}
 	}
 
 	Board theBoard;
 	if (loadFile != ""){
-		//theBoard.loadBoard(loadFile);
+		theBoard.loadBoard(loadFile);
 	}
 	else {
 		cout << "enter player names on seperate lines: make sure they match the ones on the spec, type q to finish entering players" << endl;
