@@ -475,16 +475,16 @@ void Board::save(string name) {
     for(unsigned int i = pos; i< pos + players.size(); i++) {
         if(i >= players.size()) k = players.size();
         Player *curr = players[i-k];
-        string outString = players[i - k]->name + " " + players[i-k]->avatar + " ";
+        outFile << players[i - k]->name  << " " << players[i-k]->avatar << " " << players[i-k]->cups << " " << players[i-k]->savings <<" " << players[i-k]->location->index;
         if(curr->location->index != 10) {
-            outFile << outString << players[i-k]->cups << " " << players[i-k]->savings << " " << players[i-k]->location->index << "\n";
+            outFile <<  "\n";
         }
         else {
             if(curr->turnsInTimLine ==  0) {
-                outFile << outString << players[i-k]->savings << " " << 10 << " " << 0 << endl; 
+                outFile <<" "  << 0 << endl; 
             }
-            else if(curr->isInLine) {
-                outFile << outString <<  "TimsCups 10 1 " <<  curr->turnsInTimLine <<  "\n";
+            else if(curr->turnsInTimLine > 0) {
+                outFile << " " << 1 << " " << curr->turnsInTimLine << endl;
             }
         }
     }
