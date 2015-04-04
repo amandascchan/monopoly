@@ -494,12 +494,13 @@ void Board::save(string name) {
     return;
 }
 void Board::giveJailTime() {
-    getAPlayer()->turnsInTimLine++;
+  activePlayer->isInLine = true;
+  activePlayer->turnsInTimLine++;
 }
 
 void Board::giveTCup() {
-    cupD->giveCup(getAPlayer());
+    cupD->giveCup(activePlayer);
 }
 void Board::returnTCup() {
-    cupD->returnCup(getAPlayer());
+    cupD->returnCup(activePlayer);
 }

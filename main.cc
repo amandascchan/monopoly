@@ -10,8 +10,8 @@
 
 using namespace std;
 void printError(string name) {
-    if(name == "a") cout << "Open yo eyes and look accurately at the avatar selections" << endl;
-    else if(name == "p") cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
+	if(name == "a") cout << "Open yo eyes and look accurately at the avatar selections" << endl;
+	else if(name == "p") cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
 
 }
 
@@ -130,7 +130,7 @@ int main(int argc, char *argv[]){
 			}
 			else {
 				cout << "You can not view your assets until you have paid your debt." << endl;
-			}			
+			}
 		}
 		else if (command == "save"){
 			string saveFile;
