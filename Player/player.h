@@ -2,12 +2,14 @@
 #ifndef __PLAYER_H__
 #define __PLAYER_H__
 #include "../all.h.gch"
+class TCUP;
 class Board;
 class Property;
 class Square;
 class TextDisplay;
 class Player {
     friend class Board;
+    friend class TCUP;
   std::string name;
   Square *location;
   std::vector<Property*> properties;

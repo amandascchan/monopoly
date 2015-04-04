@@ -46,6 +46,9 @@ class Board {
   void save(std::string name);
   void loadBoard(std::string loadFile);
   void giveProperty(std::string propName, std::string playerName, int numImp);
+  void giveJailTime();
+  void giveTCup();
+  void removeTCup();
  
   
   Board();
