@@ -9,8 +9,7 @@
 #include "../../DeckBuilder/deckbuilder.h"
 
 void NeedlesHall::action(){
-    srand(time(0));
-    int rNumber = rand() % 101;
+    int rNumber = rand() % 100;
     if(rNumber == 1) {
         theBoard->giveTCup();
     }

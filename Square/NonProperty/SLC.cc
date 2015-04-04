@@ -13,6 +13,10 @@
 
 
 void SLC::action(){
+	int rNumber = rand() % 100;
+	if(rNumber == 1) {
+		theBoard->giveTCup();
+	}
 	int index = rand() % deck.size();
 	deck[index]->action();
 }
@@ -20,7 +24,7 @@ void SLC::action(){
 
 
 SLC::SLC(Board *theBoard, TextDisplay *td):
-		NonProperty(theBoard, td){
+	NonProperty(theBoard, td){
 	name = "SLC";
 	deckBuilder myBuilder(theBoard);
 	std::string config = "24 SLCCard -4 1 -3 3 -2 4 -1 4 1 3 2 4 3 4 4 1";
