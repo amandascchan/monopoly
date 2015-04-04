@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include "board.h"
 #include <fstream>
+#include <stdexcept>
 using namespace std;
 
 Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
@@ -153,16 +154,24 @@ void Board::giveProperty(string propName, string playerName, int numImp){
       player->addProperty(prop);
   }
 }
-
-void Board::addPlayer(string name) {
-    addPlayer(name, 'c', 1500, 0, 0, 0); 
+void Board::setAvatar(string name, char avatar) {
+ for(map<string, PlayerData>::iterator it = playerOptions.begin(); it!=playerOptions.end();++it) {
+     if(it->second.avatar == avatar) {
+         playerOptions[it->first].name = name;
+         PlayerData newNode = {playerOptions[it->first].name, avatar, playerOptions[it->first].row, playerOptions[it->first].column};
+         playerOptions.erase(it);
+         playerOptions[name] = newNode;
+         return;
+     }
+ }
+ throw invalid_argument("avatar not found");
+}
+void Board::addPlayer(string name, char avatar) {
+    setAvatar(name, avatar);
+    addPlayer(name, avatar, 1500, 0, 0, 0); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos, int jailTime) {
-     for(map<string, PlayerData>::iterator it = playerOptions.begin(); it!=playerOptions.end();++it) {
-        if(it->second.avatar == avatar) {
-            playerOptions[it->first].name = name;
-        }
-    }
+    setAvatar(name, avatar);
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
@@ -447,12 +456,14 @@ void Board::save(string name) {
     int k = 0;
     for(unsigned int i = pos; i< pos + players.size(); i++) {
         if(i >= players.size()) k = players.size();
-        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->savings << " " << players[i-k]->cups << " " << players[i-k]->location->getName() << "\n";
+        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->savings << " " << players[i-k]->cups << " " << i-k << "\n";
     }
     for(unsigned int i = 0; i < 40; i++) {
-        string own = (dynamic_cast<Property*>(theBoard[i]) && dynamic_cast<Property*>(theBoard[i])->owner)? dynamic_cast<Property *>(theBoard[i])->owner->name : "BANK";
-        int numI = (dynamic_cast<Academic*>(theBoard[i]))? (dynamic_cast<Property*>(theBoard[i])->isMortgaged)? -1 : dynamic_cast<Academic *>(theBoard[i])->numImp : 0;
-        outFile << theBoard[i]->getName() << " " << own << " " << numI << "\n";
+        if(npInfo.count(cNames[i]) == 0) {
+            string own = (dynamic_cast<Property*>(theBoard[i]) && dynamic_cast<Property*>(theBoard[i])->owner)? dynamic_cast<Property *>(theBoard[i])->owner->name : "BANK";
+            int numI = (dynamic_cast<Academic*>(theBoard[i]))? (dynamic_cast<Property*>(theBoard[i])->isMortgaged)? -1 : dynamic_cast<Academic *>(theBoard[i])->numImp : 0;
+            outFile << theBoard[i]->getName() << " " << own << " " << numI << "\n";
+        }
     }
     outFile.close();
     return;
