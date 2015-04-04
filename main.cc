@@ -52,6 +52,7 @@ int main(int argc, char *argv[]){
 	bool beginTurn = true;
 	Player *currentPlayer;
 	bool hasRolled = false;
+    int doublesCount = 0;
 	while(!theBoard.winner()){
 		if (beginTurn){
 			currentPlayer = theBoard.getNextPlayer(0);
@@ -72,8 +73,18 @@ int main(int argc, char *argv[]){
 					r1 = rand() % 6 + 1;
 					r2 = rand() % 6 + 1;
 				}
-				theBoard.Roll(r1 + r2);
-				hasRolled = true;
+                if(r1 == r2 && doublesCount < 2) {
+                    cout << "You rolled doubles, roll again" << endl;
+                    doublesCount++;
+                }
+                else if(r1 == r2 && doublesCount == 2) {
+                    theBoard.movePlayer("DC Tims Line");
+                    doublesCount = 0;
+                }
+                else {
+                    theBoard.Roll(r1 + r2);
+				    hasRolled = true;
+                }
 			}
 			else {
 				cout << "You have already rolled this turn." << endl;
