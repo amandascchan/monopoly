@@ -7,6 +7,7 @@
 class Square;
 class Player;
 class TextDisplay;
+class TCUP;
 class Board {
   int numPlayers;                    // Number of players
   TextDisplay *td;                  // The text display.
@@ -17,6 +18,7 @@ class Board {
   int column(int i);
   void printError(std::string name);
   void setAvatar(std::string name, char avatar);
+  TCUP *cupD;
  public:
   std::string mode;
   Square *getSquare(int i);
@@ -47,7 +49,7 @@ class Board {
   void giveProperty(std::string propName, std::string playerName, int numImp);
   void giveJailTime();
   void giveTCup();
-  void removeTCup();
+  void returnTCup();
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   

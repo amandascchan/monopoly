@@ -31,6 +31,7 @@ using namespace std;
 
 Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
   td = new TextDisplay();
+ cupD = new TCUP(); 
   //remember to set num players later
   fillLoop();
   srand(time(0));
@@ -430,6 +431,7 @@ Board::~Board() {
   }
   delete [] theBoard;
   delete td;
+  delete cupD;
 }
 Square* Board::getSquare(int i) {
     if(theBoard[i]) return theBoard[i];
@@ -472,7 +474,14 @@ void Board::save(string name) {
     int k = 0;
     for(unsigned int i = pos; i< pos + players.size(); i++) {
         if(i >= players.size()) k = players.size();
-        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->cups << " " << players[i-k]->savings << " " << players[i-k]->location->index<< "\n";
+        Player *curr = players[i-k];
+        string outString = players[i - k]->name << " " << players[i-k]->avatar << " ";
+        if(curr->location->index != 10)outString = outString + ->name << " " << players[i-k]->cups << " " << players[i-k]->savings << " " << players[i-k]->location->index<< "\n";
+        else {
+            if(curr->turnsInTimLine == 0) {
+
+            }
+        }
     }
     for(unsigned int i = 0; i < 40; i++) {
         if(npInfo.count(cNames[i]) == 0) {
@@ -485,11 +494,12 @@ void Board::save(string name) {
     return;
 }
 void Board::giveJailTime() {
-//    getAPlayer()->turnsInTimLine++;
+    getAPlayer()->turnsInTimLine++;
 }
 
 void Board::giveTCup() {
-    //TCUP c= TCUP();
-   // c.giveCup(getAPlayer());
+    cupD->giveCup(getAPlayer());
 }
-void Board::removeTCup() {}
+void Board::returnTCup() {
+    cupD->returnCup(getAPlayer());
+}
