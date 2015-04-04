@@ -103,9 +103,15 @@ void Property::buy(){
 }
 
 void Property::mortgage(){
-    cout << "why" << endl;
-    isMortgaged = true;
-    theBoard->giveMoney(owner, price/2);
+   // cout << "why" << endl;
+	if (!isMortgaged){
+		isMortgaged = true;
+    	theBoard->giveMoney(owner, price/2);
+
+	}
+	else {
+		std::cout << "Already mortgaged." << std::endl;
+	}
 }
 
 void Property::action(){

@@ -68,39 +68,12 @@ void Player::payDebt() {
   savings = savings - payment;
 }
 
-/*void Player::transaction(int amount, Player *p) {
-  cout << "my debt" << debt << "amount" << amount << "savings" << savings << endl;
-  if(debt > 0 && savings - debt >= 0) {
-    if(p) {
-      theBoard->transfer(creditor, debt);
-    }
-      savings = savings - debt;
-    }
-    else if(debt > 0 && (savings - debt < 0)) {
-      cout <<"lol you still can't pay it off" << endl;
-      if(p) theBoard->transfer(creditor, savings);
-      debt = debt-savings;
-      savings = 0;
-    }
-    if(savings + amount >= 0) {
-
-      if(p) theBoard->transfer(p, -amount);
-      savings = savings + amount;
-    }
-    else if(savings + amount <= 0) {
-      cout << "putting into debt" << endl;
-      creditor = p;
-      if(p) theBoard->transfer(creditor, savings);
-      debt = -(savings + amount);
-      savings = 0;
-    }
-}*/
 void Player::addProperty(Property *p) {
   properties.push_back(p);
 }
 bool Player::ownsProperty(Property *p) {
     for(vector<Property *>::iterator it=properties.begin(); it!=properties.end();it++) {
-        cout << (*it)->name << endl;
+        //cout << (*it)->name << endl;
         if((*it)->name == p->getName()) return true;
     }
     return false;
@@ -111,7 +84,7 @@ void Player::displayAssets() {
 	cout << "Your savings: " << savings << endl;
   if (debt > 0){
     cout << "Your debt: " << debt << endl;
-    cout << "Your creditor ";
+    cout << "Your creditor: ";
     if (creditor == NULL){cout << "BANK";}
     else {cout << creditor->getName();}
     cout << endl;
@@ -125,7 +98,7 @@ void Player::displayAssets() {
 		cout << "Cost: " << (*it)->getCost() << endl;
         cout << "Tuition for other players: ";
         if (dynamic_cast<Gym *>(*it) != NULL){
-        cout << dynamic_cast<Gym *>(*it)->getRent() << " times the sum of the roll of two dice" << endl;
+        cout << dynamic_cast<Gym *>(*it)->getMult() << " times the sum of the roll of two dice" << endl;
         }
         else {
             cout << (*it)->getRent() << endl;

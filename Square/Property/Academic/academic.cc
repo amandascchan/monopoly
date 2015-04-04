@@ -62,12 +62,16 @@ int Academic::getNumImp(){
 }
 
 void Academic::mortgage(){
-    std:: cout << "wh" << endl;
-  if (numImp == 0){
-    isMortgaged = true;
-    theBoard->giveMoney(owner,price/2);
+  if (!isMortgaged){
+    if (numImp == 0){
+      isMortgaged = true;
+      theBoard->giveMoney(owner,price/2);
+    }
+    else {
+     std::cout << "Can not mortgage property that has improvements." << std::endl;
+    }
   }
   else {
-    std::cout << "Can not mortgage property that has improvements." << endl;
+    std::cout << "Already mortgaged." << std::endl;
   }
 }

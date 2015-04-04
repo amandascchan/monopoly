@@ -12,6 +12,7 @@ class Gym: public Property {
 	std::string desc;
 public:
 	int getRent();
+	int getMult();
 	Gym(Board *, TextDisplay *);
 };
 #endif
