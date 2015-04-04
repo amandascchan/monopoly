@@ -500,7 +500,7 @@ void Board::save(string name) {
 }
 void Board::giveJailTime() {
   activePlayer->isInLine = true;
-  activePlayer->turnsInTimLine++;
+  activePlayer->turnsInTimLine--;
 }
 
 void Board::giveTCup() {
