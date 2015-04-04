@@ -117,7 +117,8 @@ void Board::loadBoard(std::string loadFile){
     }
     avatar = namePart[0];
     lineStream >> timsCups >> money >> pos;
-    if (!(lineStream >> jailTime)){jailTime = 0;}
+    bool inLine;
+    if (!(lineStream >> inLine >> jailTime)){jailTime = 0;}
     cout << name << avatar << timsCups << money << pos << jailTime << endl;
     addPlayer(name, avatar, money, timsCups, pos, jailTime);
   }

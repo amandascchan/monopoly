@@ -27,4 +27,8 @@ NeedlesHall::NeedlesHall(Board *theBoard, TextDisplay *td):
 	deck = myBuilder.buildDeck(config);
 }
 
-NeedlesHall::~NeedlesHall(){}
+NeedlesHall::~NeedlesHall(){
+	for (std::vector<Card *>::iterator it = deck.begin(); it != deck.end(); ++it){
+		delete *it;
+	}
+}
