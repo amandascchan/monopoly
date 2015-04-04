@@ -476,7 +476,7 @@ void Board::save(string name) {
     for(unsigned int i = pos; i< pos + players.size(); i++) {
         if(i >= players.size()) k = players.size();
         Player *curr = players[i-k];
-        outFile << players[i - k]->name  << " " << players[i-k]->avatar << " " << players[i-k]->cups << " " << players[i-k]->savings <<" " << players[i-k]->location->index;
+        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->cups << " " << players[i-k]->savings <<" " << players[i-k]->location->index;
         if(curr->location->index != 10) {
             outFile <<  "\n";
         }
