@@ -250,14 +250,14 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
     Property *recieveProperty;
     if (!recieveIsMoney){recieveProperty = *recieveIt;}
     if (!offerIsMoney){offerProperty = *offerIt;}
-    if (offerIsMoney){activePlayer->transaction(-offerMoney, counterParty);}
+    if (offerIsMoney){giveDebt(activePlayer, offerMoney, counterParty);}
     else {
      // cout << (*offerIt)->name << endl;
       (*offerIt)->owner = counterParty;
       // MIGHT CAUSE BUGGGG!!!
       activePlayer->properties.erase(offerIt);
     }
-    if (recieveIsMoney){counterParty->transaction(-recieveMoney, activePlayer);}
+    if (recieveIsMoney){giveDebt(counterParty, recieveMoney, activePlayer);}
     else {
     //  cout << "why" << endl;
       (*recieveIt)->owner = activePlayer;
@@ -289,8 +289,8 @@ void Board::bankrupt() {
           if (response == "unmortgage"){
             (*it)->unMortgage();
           } else if (response == "pay") {
-              int fee = (1.1*(*it)->getCost())/2; 
-              activePlayer->creditor->transaction(-fee, NULL);
+              int fee = (1.1*(*it)->getCost())/2;
+              giveDebt(activePlayer->creditor, fee, NULL);
           }
         }
       }
@@ -450,9 +450,20 @@ ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);
   return out;
 }
-void Board::transfer(Player *p, int amount) {
-  p->savings += amount;
+void Board::giveMoney(Player *p, int amount) {
+  if(p){
+    p->savings += amount;
+    if (p->debt){
+      p->payDebt();
+    }
+  }
 }
+void Board::giveDebt(Player *p, int amount, Player *c) {
+  p->debt = amount;
+  p->creditor = c;
+  p->payDebt();
+}
+
 void Board::save(string name) {
     ofstream outFile(name.c_str());
     outFile << players.size()  << "\n";

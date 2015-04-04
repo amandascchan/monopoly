@@ -13,7 +13,6 @@ class Residence: public Property {
   std::string desc;
 public:
   Residence(Board *, TextDisplay *);
-  void action();
   int getRent();
 };
 #endif

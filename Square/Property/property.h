@@ -19,7 +19,7 @@ protected:
 	void unMortgage();
 	Property(Board *, TextDisplay *);
 	virtual void mortgage();
-	virtual void action()=0;
+	virtual void action();
 	virtual ~Property();
 public:
 	std::string getBlock();

@@ -73,7 +73,7 @@ void Property::auction(){
 	if (numBidders == 1){
 		std::cout << "Sold to " << (*i)->getName() << " for " << highestBid << " dollars!" << std::endl;
 		owner = *i;
-		(*i)->transaction(-highestBid, NULL);
+		theBoard->giveDebt(owner, highestBid, NULL);
 		owner->addProperty(this);
 	}
 }
@@ -93,7 +93,7 @@ void Property::buy(){
 		if (buyer->canAfford(price)){
 			owner = buyer;
 			owner->addProperty(this);
-			buyer->transaction(-price, NULL);
+			theBoard->giveDebt(buyer, price, NULL);
 		}
 		else{
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
@@ -105,7 +105,21 @@ void Property::buy(){
 void Property::mortgage(){
     cout << "why" << endl;
     isMortgaged = true;
-    owner->transaction(price/2, NULL);
+    theBoard->giveMoney(owner, price/2);
+}
+
+void Property::action(){
+  if (owner == NULL){
+    buy();
+  }
+  else {
+    if (!isMortgaged){
+      Player *currentPlayer = theBoard->getNextPlayer(0);
+      if (currentPlayer != owner){
+        theBoard->giveDebt(currentPlayer,getRent(), owner);
+      }
+    }
+  }
 }
 
 void Property::unMortgage(){
@@ -113,7 +127,7 @@ void Property::unMortgage(){
 		int fee = (price*1.1)/2;
 		if (owner->canAfford(fee)){
 			isMortgaged = false;
-			owner->transaction(-fee, NULL);
+			theBoard->giveDebt(owner, fee, NULL);
 		}
 		else {
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;

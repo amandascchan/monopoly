@@ -34,7 +34,7 @@ class Player {
   Board* getBoard();
   void endTurn();
   void displayAssets();
-  void transaction(int amount, Player *p);
+//  void transaction(int amount, Player *p);
   bool isBankrupt();
   bool ownsBlock(std::string name);
   int getSavings();
@@ -42,6 +42,8 @@ class Player {
   bool canAfford(int number);
   bool ownsProperty(Property *p);
   void addProperty(Property *p);
+  int totalWorth();
+  void payDebt();
 
 };
 

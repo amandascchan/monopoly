@@ -13,6 +13,5 @@ class Gym: public Property {
 public:
 	int getRent();
 	Gym(Board *, TextDisplay *);
-	void action();
 };
 #endif

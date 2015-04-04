@@ -19,6 +19,18 @@ void Player::setCoords(int row, int column) {
     this->row = row;
     this->column = column;
 }
+
+int Player::totalWorth(){
+  int worth = savings;
+  for(vector<Property *>::iterator it = properties.begin(); it != properties.end(); ++it){
+    worth += (*it)->getCost();
+    Academic *acadP = dynamic_cast<Academic *>(*it);
+    if (acadP != NULL){
+        worth += (acadP->getImCost())*(acadP->getNumImp());
+    }
+  }
+  return worth;
+}
 string Player::getName() {return name;}
 int Player::getSavings() {return savings;}
 
@@ -44,25 +56,45 @@ int Player::numRez() {
   return count;
 }
 bool Player::canAfford(int number) {
+  if (debt > 0) {return false;}
   return (savings - number >= 0);
 }
-void Player::transaction(int amount, Player *p) {
-  int result  = savings + amount;
-  if(p && p != this) {
-    if(result < 0) {
-      creditor = p;
-      savings = 0;
-      debt = result;
-    }
-    else {
-      theBoard->transfer(p, -1*amount);
-      savings = result;
-    }
-  }
-  else if(p == NULL) {
-      savings = result;
-    }
+
+void Player::payDebt() {
+  int payment = debt;
+  if(savings < debt) payment = savings;
+  theBoard->giveMoney(creditor, payment);
+  debt = debt - payment;
+  savings = savings - payment;
 }
+
+/*void Player::transaction(int amount, Player *p) {
+  cout << "my debt" << debt << "amount" << amount << "savings" << savings << endl;
+  if(debt > 0 && savings - debt >= 0) {
+    if(p) {
+      theBoard->transfer(creditor, debt);
+    }
+      savings = savings - debt;
+    }
+    else if(debt > 0 && (savings - debt < 0)) {
+      cout <<"lol you still can't pay it off" << endl;
+      if(p) theBoard->transfer(creditor, savings);
+      debt = debt-savings;
+      savings = 0;
+    }
+    if(savings + amount >= 0) {
+
+      if(p) theBoard->transfer(p, -amount);
+      savings = savings + amount;
+    }
+    else if(savings + amount <= 0) {
+      cout << "putting into debt" << endl;
+      creditor = p;
+      if(p) theBoard->transfer(creditor, savings);
+      debt = -(savings + amount);
+      savings = 0;
+    }
+}*/
 void Player::addProperty(Property *p) {
   properties.push_back(p);
 }
@@ -77,6 +109,13 @@ bool Player::ownsProperty(Property *p) {
 void Player::displayAssets() {
 	cout << "Your avatar: " << avatar << endl;
 	cout << "Your savings: " << savings << endl;
+  if (debt > 0){
+    cout << "Your debt: " << debt << endl;
+    cout << "Your creditor ";
+    if (creditor == NULL){cout << "BANK";}
+    else {cout << creditor->getName();}
+    cout << endl;
+  }
 	cout << "Your location: " << location->getName() << endl;
 	cout << "Number of Tim's Cups you have: " << cups << endl;
     if (properties.size() != 0) cout << "Your Properties: " << endl;

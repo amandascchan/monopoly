@@ -42,14 +42,14 @@ class Board {
   int getNumPlayers() { return players.size(); }
   void bankrupt();
   void trade(std::string, std::string, std::string, bool);
-  void transfer(Player *, std::string, std::string, bool);
   void save(std::string name);
   void loadBoard(std::string loadFile);
   void giveProperty(std::string propName, std::string playerName, int numImp);
   void giveJailTime();
   void giveTCup();
   void removeTCup();
- 
+  void giveMoney(Player *p, int amount);
+  void giveDebt(Player *p, int amount, Player *c);
   
   Board();
   ~Board();  

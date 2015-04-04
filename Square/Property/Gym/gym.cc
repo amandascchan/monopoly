@@ -15,17 +15,9 @@ Gym::Gym(Board *theBoard, TextDisplay *td): Property(theBoard, td){
 }
 
 int Gym::getRent(){
-	if (owner->ownsBlock(block)) return 10;
-	else return 4;
-}
-
-void Gym::action(){
-	if (owner == NULL){
-		buy();
-	}
-	else {
-		int r1 = rand() % 6 + 1;
-		int r2 = rand() % 6 + 1;
-		theBoard->getNextPlayer(0)->transaction(-getRent()*(r1+r2), owner);
-	}
+	int r1 = rand() % 6 + 1;
+	int r2 = rand() % 6 + 1;
+	int mult = 4;
+	if (owner->ownsBlock(block)) mult = 10;
+	return mult*(r1 + r2);
 }
