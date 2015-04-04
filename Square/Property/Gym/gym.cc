@@ -14,10 +14,14 @@ Gym::Gym(Board *theBoard, TextDisplay *td): Property(theBoard, td){
 	isMortgaged = NULL;
 }
 
+int Gym::getMult(){
+	int mult = 4;
+	if (owner->ownsBlock(block)) mult = 10;
+	return mult;
+}
+
 int Gym::getRent(){
 	int r1 = rand() % 6 + 1;
 	int r2 = rand() % 6 + 1;
-	int mult = 4;
-	if (owner->ownsBlock(block)) mult = 10;
-	return mult*(r1 + r2);
+	return getMult()*(r1 + r2);
 }

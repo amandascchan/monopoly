@@ -116,9 +116,9 @@ void Board::loadBoard(std::string loadFile){
       lineStream >> namePart;
     }
     avatar = namePart[0];
-    lineStream >> timsCups>> money >> pos;
+    lineStream >> timsCups >> money >> pos;
     if (!(lineStream >> jailTime)){jailTime = 0;}
-    cout << name << avatar << money << timsCups << pos << jailTime << endl;
+    cout << name << avatar << timsCups << money << pos << jailTime << endl;
     addPlayer(name, avatar, money, timsCups, pos, jailTime);
   }
   
@@ -282,9 +282,9 @@ void Board::bankrupt() {
   }
   else {
     for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
+      trade(activePlayer->creditor->name,(*it)->name, "0", false);
       if ((*it)->isMortgaged){
-        trade(activePlayer->creditor->name,(*it)->name, "0", false);
-        cout << activePlayer->name << " is inheriting a mortgaged property named " << (*it)->name << "you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
+        cout << activePlayer->creditor->name << " is inheriting a mortgaged property named " << (*it)->name << " you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
         string response;
         while (cin >> response){
           if (response == "unmortgage"){

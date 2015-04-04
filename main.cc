@@ -33,14 +33,14 @@ int main(int argc, char *argv[]){
 		theBoard.loadBoard(loadFile);
 	}
 	else {
-		cout << "enter player names on seperate lines: make sure they match the ones on the spec, type q to finish entering players" << endl;
+		cout << "enter player names on seperate lines followed by Piece Chars: make sure they match the ones on the spec, type q to finish entering players" << endl;
 		string line;
 		while(true) {
         	getline(cin,line);
         	if(line == "q") break;
         	else {
                 try {
-                    theBoard.addPlayer(line.substr(0, line.size()-1), line[line.length()-1]);
+                    theBoard.addPlayer(line.substr(0, line.size()-2), line[line.length()-1]);
                 } catch(invalid_argument& e) {
                     printError("a");
                 }
