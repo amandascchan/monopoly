@@ -13,7 +13,7 @@
 using namespace std;
 
 Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
-    name(name), location(l), theBoard(b), td(t), cups(0), avatar(playerOptions[name].avatar), savings(0), row (0), column(0), lIndex(lDex), turnsInTimLine(0), bankrupt(false), creditor(NULL), debt(0){}
+    name(name), location(l), theBoard(b), td(t), cups(0), avatar(playerOptions[name].avatar), savings(0), row (0), column(0), lIndex(lDex), turnsInTimLine(0), bankrupt(false), creditor(NULL), debt(0), isInLine(false){}
 
 void Player::setCoords(int row, int column) {
     this->row = row;

@@ -24,6 +24,7 @@ class Player {
   bool bankrupt;
   Player *creditor;
   int debt;
+  bool isInLine;
   
  public:
   std::string getName();
