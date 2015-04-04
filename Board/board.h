@@ -30,7 +30,7 @@ class Board {
   Square* getSquare(std::string name);
   void next();
   void addPlayer(std::string name, char avatar);
-  void addPlayer(std::string name, char a, int money, int nT, int pos, int jailTime);
+  void addPlayer(std::string name, char a, int money, int nT, int pos, bool inLine, int jailTime);
   void Buy();
   void printPlayers();
   void Roll(int num);

@@ -120,7 +120,7 @@ void Board::loadBoard(std::string loadFile){
     bool inLine;
     if (!(lineStream >> inLine >> jailTime)){jailTime = 0;}
     cout << name << avatar << timsCups << money << pos << jailTime << endl;
-    addPlayer(name, avatar, money, timsCups, pos, jailTime);
+    addPlayer(name, avatar, money, timsCups, pos, inLine, jailTime);
   }
   
   while (getline(loadStream, line)){
@@ -172,15 +172,16 @@ void Board::setAvatar(string name, char avatar) {
 }
 void Board::addPlayer(string name, char avatar) {
     setAvatar(name, avatar);
-    addPlayer(name, avatar, 1500, 0, 0, 0); 
+    addPlayer(name, avatar, 1500, 0, 0, false, 0); 
 }
-void Board::addPlayer(string name, char avatar, int money, int nT, int pos, int jailTime) {
+void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool inLine, int jailTime) {
     setAvatar(name, avatar);
     cout << "position: " << pos << endl;
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
     p->cups = nT;
+    p->isInLine = inLine;
     p->turnsInTimLine = jailTime;
     players.push_back(p);
     td->addPlayer(playerOptions[name].avatar, p->location->row+p->row, p->location->column+p->column);
