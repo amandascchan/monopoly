@@ -20,4 +20,5 @@ Board/board.o: Board/board.cc Board/../all.h.gch Board/../Square/square.h \
  Board/../Player/player.h Board/../Player/../all.h.gch \
  Board/../TextDisplay/textdisplay.h \
  Board/../TextDisplay/../data/squaredata.h Board/../data/squaredata.h \
- Board/../data/playerdata.h Board/../data/npdata.h Board/board.h
+ Board/../data/playerdata.h Board/../data/npdata.h Board/../TCUP/tcup.h \
+ Board/board.h

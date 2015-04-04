@@ -19,6 +19,7 @@
 #include "../data/squaredata.h"
 #include "../data/playerdata.h"
 #include "../data/npdata.h"
+#include "../TCUP/tcup.h"
 #include <string>
 #include <sstream>
 #include <algorithm>
@@ -80,6 +81,7 @@ Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
       }
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
+      n->index = i;
       theBoard[i] = n;
   }
 }
@@ -172,6 +174,7 @@ void Board::addPlayer(string name, char avatar) {
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos, int jailTime) {
     setAvatar(name, avatar);
+    cout << "position: " << pos << endl;
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
@@ -320,8 +323,9 @@ void Board::next() {
    cout << "The next player is now: " << activePlayer->name << endl;
 }
 void Board::movePlayer(int numMoves) {
+    if(numMoves + activePlayer->lIndex >= 40) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
-cout << activePlayer->lIndex << "lol" << numMoves << endl;
+    cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
@@ -467,15 +471,24 @@ void Board::save(string name) {
     int k = 0;
     for(unsigned int i = pos; i< pos + players.size(); i++) {
         if(i >= players.size()) k = players.size();
-        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->savings << " " << players[i-k]->cups << " " << i-k << "\n";
+        outFile << players[i - k]->name << " " << players[i-k]->avatar << " " << players[i-k]->cups << " " << players[i-k]->savings << " " << players[i-k]->location->index<< "\n";
     }
     for(unsigned int i = 0; i < 40; i++) {
         if(npInfo.count(cNames[i]) == 0) {
             string own = (dynamic_cast<Property*>(theBoard[i]) && dynamic_cast<Property*>(theBoard[i])->owner)? dynamic_cast<Property *>(theBoard[i])->owner->name : "BANK";
-            int numI = (dynamic_cast<Academic*>(theBoard[i]))? (dynamic_cast<Property*>(theBoard[i])->isMortgaged)? -1 : dynamic_cast<Academic *>(theBoard[i])->numImp : 0;
+            int numI = (dynamic_cast<Property*>(theBoard[i]))? (dynamic_cast<Property*>(theBoard[i])->isMortgaged)? -1 : (dynamic_cast<Academic *>(theBoard[i]))? dynamic_cast<Academic *>(theBoard[i])->numImp : 0 : 0;
             outFile << theBoard[i]->getName() << " " << own << " " << numI << "\n";
         }
     }
     outFile.close();
     return;
 }
+void Board::giveJailTime() {
+//    getAPlayer()->turnsInTimLine++;
+}
+
+void Board::giveTCup() {
+    //TCUP c= TCUP();
+   // c.giveCup(getAPlayer());
+}
+void Board::removeTCup() {}

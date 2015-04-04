@@ -1,7 +1,7 @@
 CXX = g++
 CXXFLAGS = -Wall -MMD
 EXEC = Monopoly
-OBJECTS = ./Board/board.o ./Card/nhcard.o ./Card/slccard.o ./data/npdata.o ./data/playerdata.o ./data/squaredata.o ./DeckBuilder/deckbuilder.o ./main.o ./Player/player.o ./Square/NonProperty/collectOSAP.o ./Square/NonProperty/coopFee.o ./Square/NonProperty/gooseNest.o ./Square/NonProperty/goToTimsLine.o ./Square/NonProperty/needlesHall.o ./Square/NonProperty/nonproperty.o ./Square/NonProperty/SLC.o ./Square/NonProperty/timsLine.o ./Square/NonProperty/tuition.o ./Square/Property/Academic/academic.o ./Square/Property/Gym/gym.o ./Square/Property/property.o ./Square/Property/Residence/residence.o ./Square/square.o ./TextDisplay/textdisplay.o
+OBJECTS = ./Board/board.o ./Card/nhcard.o ./Card/slccard.o ./data/npdata.o ./data/playerdata.o ./data/squaredata.o ./DeckBuilder/deckbuilder.o ./main.o ./Player/player.o ./Square/NonProperty/collectOSAP.o ./Square/NonProperty/coopFee.o ./Square/NonProperty/gooseNest.o ./Square/NonProperty/goToTimsLine.o ./Square/NonProperty/needlesHall.o ./Square/NonProperty/nonproperty.o ./Square/NonProperty/SLC.o ./Square/NonProperty/timsLine.o ./Square/NonProperty/tuition.o ./Square/Property/Academic/academic.o ./Square/Property/Gym/gym.o ./Square/Property/property.o ./Square/Property/Residence/residence.o ./Square/square.o ./TextDisplay/textdisplay.o ./TCUP/tcup.o
 DEPENDS = ${OBJECTS:.o=.d}
 
 ${EXEC}: ${OBJECTS}

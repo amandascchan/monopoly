@@ -14,6 +14,7 @@ protected:
 	Board *theBoard;
 	int row, column;              //co-ordinates of the cell
 	TextDisplay * td; 
+    int index;
 	       //pointer to the text display
   	// Add private members, if necessary (access to Xwindow, location in the window etc)
   	//int x, y, width, height;

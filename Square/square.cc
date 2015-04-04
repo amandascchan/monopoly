@@ -4,7 +4,7 @@
 using namespace std;
 Square::~Square(){}
 
-Square::Square(Board *theBoard, TextDisplay *td): theBoard(theBoard), td(td){}
+Square::Square(Board *theBoard, TextDisplay *td): theBoard(theBoard), td(td){ index = 0;}
 
 void Square::setPosition(int r, int c){
 	row = r;

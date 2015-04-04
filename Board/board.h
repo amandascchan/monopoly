@@ -45,6 +45,9 @@ class Board {
   void save(std::string name);
   void loadBoard(std::string loadFile);
   void giveProperty(std::string propName, std::string playerName, int numImp);
+  void giveJailTime();
+  void giveTCup();
+  void removeTCup();
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   
