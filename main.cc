@@ -116,7 +116,12 @@ int main(int argc, char *argv[]){
 			theBoard.bankrupt();
 		}
 		else if (command == "assets"){
-			theBoard.getNextPlayer(0)->displayAssets();
+			if (currentPlayer->canAfford(0)){
+				theBoard.getNextPlayer(0)->displayAssets();
+			}
+			else {
+				cout << "You can not view your assets until you have paid your debt." << endl;
+			}			
 		}
 		else if (command == "save"){
 			string saveFile;

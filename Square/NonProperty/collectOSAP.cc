@@ -6,8 +6,9 @@
 
 void CollectOSAP::action(){
 	Player *currentPlayer = theBoard->getNextPlayer(0);
-	currentPlayer->transaction(200, NULL);
+	theBoard->transfer(currentPlayer, 200);
 }
+
 
 CollectOSAP::CollectOSAP(Board *theBoard, TextDisplay *td):
 		NonProperty(theBoard, td){

@@ -5,7 +5,7 @@
 
 
 void NHCard::action(){
-	theBoard->getNextPlayer(0)->transaction(transAmt, NULL);
+	theBoard->transfer(theBoard->getNextPlayer(0), transAmt);
 }
 
 

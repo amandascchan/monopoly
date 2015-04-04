@@ -437,9 +437,14 @@ ostream &operator<<(std::ostream &out, const Board &g){
   out << *(g.td);
   return out;
 }
-void Board::transfer(Player *p, int amount) {
-  p->savings += amount;
+void Board::giveMoney(Player *p, int amount) {
+  if(p) p->savings += amount;
 }
+void Board::giveDebt(Player *p, int amount, Player *c) {
+  p->debt = amount;
+  p->creditor = c;
+}
+
 void Board::save(string name) {
     ofstream outFile(name.c_str());
     outFile << players.size()  << "\n";

@@ -22,5 +22,6 @@ public:
 	int getRent();
 	int getImCost();
 	int getIm(int);
+	int getNumImp();
 };
 #endif

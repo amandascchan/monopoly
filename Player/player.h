@@ -40,6 +40,8 @@ class Player {
   bool canAfford(int number);
   bool ownsProperty(Property *p);
   void addProperty(Property *p);
+  int totalWorth();
+  void payDebt(Player *p);
 
 };
 

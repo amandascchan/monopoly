@@ -105,7 +105,7 @@ void Property::buy(){
 void Property::mortgage(){
     cout << "why" << endl;
     isMortgaged = true;
-    owner->transaction(price/2, NULL);
+    theBoard->transfer(owner, price/2);
 }
 
 void Property::unMortgage(){
