@@ -16,6 +16,7 @@ class Board {
   int row(int i);
   int column(int i);
   void printError(std::string name);
+  void setAvatar(std::string name, char avatar);
  public:
   std::string mode;
   Square *getSquare(int i);
@@ -26,7 +27,7 @@ class Board {
   Player* getPlayer(std::string n);
   Square* getSquare(std::string name);
   void next();
-  void addPlayer(std::string name);
+  void addPlayer(std::string name, char avatar);
   void addPlayer(std::string name, char a, int money, int nT, int pos, int jailTime);
   void Buy();
   void printPlayers();

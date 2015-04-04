@@ -16,7 +16,6 @@ class Academic: public Property {
 	std::string desc;
 public:
 	Academic(Board *, TextDisplay *);
-	void action();
 	void improve(std::string);
 	void mortgage();
 	int getRent();

@@ -10,11 +10,11 @@ void Tuition::action(){
 	std::string command;
 	while (cin >> command){
 		if (command == "1"){
-			currentPlayer->transaction(-300, NULL);
+			theBoard->giveDebt(currentPlayer, 300, NULL);
 			break;
 		}
 		else if (command == "2"){
-			currentPlayer->transaction(-0.1*currentPlayer->totalWorth(), NULL);
+			theBoard->giveDebt(currentPlayer, 0.1*currentPlayer->totalWorth(), NULL);
 			break;
 		}
 	}

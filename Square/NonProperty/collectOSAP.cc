@@ -6,7 +6,7 @@
 
 void CollectOSAP::action(){
 	Player *currentPlayer = theBoard->getNextPlayer(0);
-	theBoard->transfer(currentPlayer, 200);
+	theBoard->giveMoney(currentPlayer, 200);
 }
 
 

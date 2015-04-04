@@ -26,18 +26,6 @@ Academic::Academic(Board *theBoard, TextDisplay *td): Property(theBoard, td), nu
     }
 }
 
-void Academic::action(){
-  if (owner == NULL){
-    buy();
-  }
-  else {
-    if (!isMortgaged){
-      //std::cout << "about to charge player" << std::endl;
-      theBoard->getNextPlayer(0)->transaction(-getRent(), owner);
-    }
-  }
-}
-
 void Academic::improve(std::string buyOrSell){
   if (buyOrSell == "buy"){
     if (numImp >= 5){
@@ -45,7 +33,7 @@ void Academic::improve(std::string buyOrSell){
     }
     else if (owner->ownsBlock(block)){
       if (owner->canAfford(impCost)){
-        owner->transaction(-impCost, NULL);
+        theBoard->giveDebt(owner, impCost, NULL);
         ++numImp;
         td->addImprov(row, column, numImp);
       }
@@ -59,7 +47,7 @@ void Academic::improve(std::string buyOrSell){
   }
   else if (buyOrSell == "sell"){
     if (numImp > 0){
-      theBoard->transfer(owner, impCost/2);
+      theBoard->giveMoney(owner, impCost/2);
       --numImp;
       td->removeImprov(row, column, numImp);
     }
@@ -77,7 +65,7 @@ void Academic::mortgage(){
     std:: cout << "wh" << endl;
   if (numImp == 0){
     isMortgaged = true;
-    theBoard->transfer(owner,price/2);
+    theBoard->giveMoney(owner,price/2);
   }
   else {
     std::cout << "Can not mortgage property that has improvements." << endl;

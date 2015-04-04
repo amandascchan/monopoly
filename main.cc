@@ -6,10 +6,13 @@
 #include <ctime>
 #include <cstdlib>
 #include <sstream>
+#include <stdexcept>
 
 using namespace std;
-void printError() {
-    cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
+void printError(string name) {
+    if(name == "a") cout << "Open yo eyes and look accurately at the avatar selections" << endl;
+    else if(name == "p") cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
+
 }
 
 int main(int argc, char *argv[]){
@@ -35,7 +38,13 @@ int main(int argc, char *argv[]){
 		while(true) {
         	getline(cin,line);
         	if(line == "q") break;
-        	else theBoard.addPlayer(line);
+        	else {
+                try {
+                    theBoard.addPlayer(line.substr(0, line.size()-1), line[line.length()-1]);
+                } catch(invalid_argument& e) {
+                    printError("a");
+                }
+            }
     	}
 	}
 	theBoard.startGame();
@@ -98,7 +107,7 @@ int main(int argc, char *argv[]){
             try {
 			    theBoard.mortgage(propertyName);
             } catch(...) {
-                printError();
+                printError("p");
             }
 		}
 		else if (command == "unmortgage"){
@@ -109,7 +118,7 @@ int main(int argc, char *argv[]){
             try {
             theBoard.unmortgage(propertyName);
             } catch(...) {
-                printError();
+                printError("p");
             }
 		}
 		else if (command == "bankrupt"){

@@ -25,12 +25,3 @@ int Residence::getRent(){
 	return fee;
 
 }
-
-void Residence::action(){
-	if (owner == NULL){
-		buy();
-	}
-	else {
-		theBoard->getNextPlayer(0)->transaction(-getRent(), owner);
-	}
-}

@@ -60,15 +60,15 @@ bool Player::canAfford(int number) {
   return (savings - number >= 0);
 }
 
-void Player::payDebt(Player *p) {
+void Player::payDebt() {
   int payment = debt;
   if(savings < debt) payment = savings;
   theBoard->giveMoney(creditor, payment);
   debt = debt - payment;
-  savings = saving - payment;
+  savings = savings - payment;
 }
 
-void Player::transaction(int amount, Player *p) {
+/*void Player::transaction(int amount, Player *p) {
   cout << "my debt" << debt << "amount" << amount << "savings" << savings << endl;
   if(debt > 0 && savings - debt >= 0) {
     if(p) {
@@ -94,7 +94,7 @@ void Player::transaction(int amount, Player *p) {
       debt = -(savings + amount);
       savings = 0;
     }
-}
+}*/
 void Player::addProperty(Property *p) {
   properties.push_back(p);
 }
