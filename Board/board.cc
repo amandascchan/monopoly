@@ -109,7 +109,7 @@ void Board::loadBoard(std::string loadFile){
     int money;
     int timsCups;
     int pos;
-    int jailTime = 0;
+    int jailTime = 2;
     lineStream >> namePart;
     while (namePart.length() != 1){
       name += " " + namePart;
@@ -545,12 +545,9 @@ void Board::inTLine(int r1, int r2) {
         string response;
         while(cin >> response) {
             if(response == "pay") {
-               if(activePlayer->canAfford(50)) {
-                   cout << "Congrats, you are now out of the DC Tims Line" << endl;
                    giveDebt(activePlayer, 50, NULL); 
+                   cout << "Congrats, you are now out of the DC Tims Line" << endl;
                    break;
-               }
-               else cout << "you don't have enough money to pay" << endl;
             }
             else if (response == "cup") {
                 if(returnTCup()) break;
