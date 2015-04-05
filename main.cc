@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
                     cout << "You rolled: " << r1 << " and " << r2 << endl; 
 				}
 				if (theBoard.getNextPlayer(0)->isInTLine()){
-					cout << theBoard.getNextPlayer(0)->getName() << endl; 
+					cout << theBoard.getNextPlayer(0)->getName() << " is in Tims Line" << endl; 
 					theBoard.inTLine(r1,r2);
                     doublesCount = 0;
                     hasRolled = true;
@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
                 }
                 else if(r1 == r2 && doublesCount == 2) {
                     cout << "Sorry, we are sending you to DC Tims Line" << endl;
-                    theBoard.movePlayer("DC Tims Line");
+                    theBoard.movePlayer("GO TO TIMS");
                     doublesCount = 0;
                     hasRolled = true;
                 }

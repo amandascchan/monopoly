@@ -6,9 +6,10 @@
 void GoToTimsLine::action(){
     cout << "I GET HERE" << endl;
     theBoard->getNextPlayer(0)->setTLine(true);
+    theBoard->movePlayer("DC Tims Line");
 }
 
 GoToTimsLine::GoToTimsLine(Board *theBoard, TextDisplay *td):
 		NonProperty(theBoard, td){
-			name = "Go to Tims Line";
+			name = "Go To Tims";
 		}
