@@ -295,9 +295,11 @@ void Board::bankrupt() {
         while (cin >> response){
           if (response == "unmortgage"){
             theProperty->unMortgage();
+            break;
           } else if (response == "pay") {
               int fee = (1.1*theProperty->getCost())/2;
               giveDebt(activePlayer->creditor, fee, NULL);
+              break;
           }
         }
       }
@@ -330,7 +332,7 @@ void Board::next() {
    cout << "The next player is now: " << activePlayer->name << endl;
 }
 void Board::movePlayer(int numMoves) {
-    if(numMoves + activePlayer->lIndex >= 40) getSquare(0)->action();
+    if((numMoves + activePlayer->lIndex >= 40)||(numMoves + activePlayer->lIndex < 0)) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
     cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);

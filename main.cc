@@ -160,9 +160,17 @@ int main(int argc, char *argv[]){
 			}
 		}
 		else if (command == "save"){
-			string saveFile;
-			commandStream >> saveFile;
-			theBoard.save(saveFile);
+			if (!(currentPlayer->canAfford(0))){
+				cout << "You can not save until you have paid your debt." << endl;
+			}
+			else {
+				string saveFile;
+				commandStream >> saveFile;
+				theBoard.save(saveFile);
+			}
+		}
+		else if (command == "board"){
+			cout << theBoard;
 		}
 	}
 	cout << theBoard.getNextPlayer(0)->getName() << " Wins!" << endl;

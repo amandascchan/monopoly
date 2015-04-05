@@ -27,7 +27,11 @@ NeedlesHall::NeedlesHall(Board *theBoard, TextDisplay *td):
 }
 
 NeedlesHall::~NeedlesHall(){
+	Card *justDeleted = NULL;
 	for (std::vector<Card *>::iterator it = deck.begin(); it != deck.end(); ++it){
-		delete *it;
+		if (*it != justDeleted){
+			justDeleted = *it;
+			delete *it;
+		}
 	}
 }
