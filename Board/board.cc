@@ -178,7 +178,9 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool 
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
-    p->cups = nT;
+    for(int i  = 0; i < nT; i++) {
+        cupD->giveCup(p);
+    }
     p->isInLine = inLine;
     p->turnsInTimLine = jailTime;
     players.push_back(p);
@@ -547,7 +549,6 @@ void Board::inTLine(int r1, int r2) {
         while(cin >> response) {
             if(response == "pay") {
                    giveDebt(activePlayer, 50, NULL); 
-                   cout << "Congrats, you are now out of the DC Tims Line" << endl;
                    break;
             }
             else if (response == "cup") {
@@ -559,6 +560,7 @@ void Board::inTLine(int r1, int r2) {
                 return;
             }
         }
+            cout << "Congrats, you are out of the DC Tims Line!" << endl;
             activePlayer->isInLine = false;
             activePlayer->turnsInTimLine = 2;
             movePlayer(r1+r2);
