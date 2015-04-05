@@ -74,6 +74,7 @@ int main(int argc, char *argv[]){
                     cout << "You rolled: " << r1 << " and " << r2 << endl; 
 				}
 				if (theBoard.getNextPlayer(0)->isInTLine()){
+					cout << theBoard.getNextPlayer(0)->getName() << endl; 
 					theBoard.inTLine(r1,r2);
                     doublesCount = 0;
                     hasRolled = true;

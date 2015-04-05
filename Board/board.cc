@@ -117,7 +117,7 @@ void Board::loadBoard(std::string loadFile){
     }
     avatar = namePart[0];
     lineStream >> timsCups >> money >> pos;
-    bool inLine;
+    bool inLine = false;
     if(lineStream >> inLine) lineStream >> jailTime;
     cout << name << avatar << timsCups << money << pos << jailTime << endl;
     addPlayer(name, avatar, money, timsCups, pos, inLine, jailTime);
@@ -190,6 +190,9 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool 
 
 void Board::trade(string counterPartyName, string offer, string recieve, bool outPut){
   Player *counterParty = getPlayer(counterPartyName);
+  if (counterParty == activePlayer){
+    cout << "You cant trade with your self" << endl;
+    return;}
   if (counterParty == NULL){
     if (outPut){
       cout << "Invalid trade." << endl;
@@ -228,7 +231,7 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
   }
   else {
     bool found = false;
-    while(recieveIt != activePlayer->properties.end()){
+    while(recieveIt != counterParty->properties.end()){
       if (recieve == (*recieveIt)->name){
         found = true;
         break;

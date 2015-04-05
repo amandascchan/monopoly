@@ -5,8 +5,7 @@
 
 void GoToTimsLine::action(){
     cout << "I GET HERE" << endl;
-	theBoard->movePlayer("DC Tims Line");
-	theBoard->giveJailTime();
+    theBoard->getNextPlayer(0)->setTLine(true);
 }
 
 GoToTimsLine::GoToTimsLine(Board *theBoard, TextDisplay *td):
