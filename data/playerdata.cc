@@ -13,14 +13,14 @@ PlayerData LAPTOP = {"Laptop", 'L', 0,0};
 PlayerData PT = {"Pink tie", 'T', 0,0};
 
 pair<string, PlayerData> playerDataBox[] = {
-    make_pair("Goose", GOOSE),
-    make_pair("GRT Bus",  GRT),
-    make_pair("Tim Hortons Doughnut", THD),
-    make_pair("Professor", PROF),
-    make_pair("Student", STUDENT),
-    make_pair("Money", MONEY),
-    make_pair("Laptop", LAPTOP),
-    make_pair("Pink tie", PT)
+    make_pair("1", GOOSE),
+    make_pair("2",  GRT),
+    make_pair("3", THD),
+    make_pair("4", PROF),
+    make_pair("5", STUDENT),
+    make_pair("6", MONEY),
+    make_pair("7", LAPTOP),
+    make_pair("8", PT)
 };
 
 map<string, PlayerData> playerOptions(playerDataBox, playerDataBox+sizeof playerDataBox / sizeof playerDataBox[0]);

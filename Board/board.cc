@@ -171,12 +171,10 @@ void Board::setAvatar(string name, char avatar) {
  throw invalid_argument("avatar not found");
 }
 void Board::addPlayer(string name, char avatar) {
-    setAvatar(name, avatar);
     addPlayer(name, avatar, 1500, 0, 0, false, 2); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool inLine, int jailTime) {
     setAvatar(name, avatar);
-    cout << "position: " << pos << endl;
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
