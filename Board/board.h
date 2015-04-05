@@ -49,7 +49,7 @@ class Board {
   void giveProperty(std::string propName, std::string playerName, int numImp);
   void giveJailTime();
   void giveTCup();
-  void returnTCup();
+  bool returnTCup();
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   void inTLine(int r1, int r2);

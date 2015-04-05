@@ -349,6 +349,10 @@ void Board::movePlayer(string name) {
             break;
         }
     }
+    if(nI == 39) {
+        cout << "Error, wrong name" << endl;
+        return;
+    }
     td->movePlayer(activePlayer->lIndex, nI, activePlayer->name);
     activePlayer->location = theBoard[nI];
     activePlayer->lIndex = nI;
@@ -513,10 +517,12 @@ void Board::giveTCup() {
     cupD->giveCup(activePlayer);
     return;
 }
-void Board::returnTCup() {
-    if(activePlayer->cups > 0) cupD->returnCup(activePlayer);
-    else cout << "You dont have any tims cups" << endl;
-    return;
+bool Board::returnTCup() {
+    if(activePlayer->cups == 0) return false;
+    else {
+        cupD->returnCup(activePlayer);
+        return true;
+    }
 }
 void Board::inTLine(int r1, int r2) {
     if(r1 == r2) {
@@ -525,23 +531,34 @@ void Board::inTLine(int r1, int r2) {
         movePlayer(r1 + r2);
     }
     else {
-        if(activePlayer->turnsInTimLine == 0) {
+        bool force = false;
+        if(activePlayer->turnsInTimLine > 0) {
+            cout << "Would you like to use a roll up the rim cup or pay $50 to get out of jail? (cup/pay/no)" << endl;
+        }
+        else if(activePlayer->turnsInTimLine == 0) {
             cout << "You must either use a roll up the rim cup or pay $50 (cup/pay)" << endl;
-            string response;
-            while(cin >> response) {
-                if(response == "pay") {
-                    giveDebt(activePlayer, 50, NULL); 
-                    break;
-                }
-                else if (response == "cup") {
-                    returnTCup();
-                }
+            force = true;
+        }
+        string response;
+        while(cin >> response) {
+            if(response == "pay") {
+               if(activePlayer->canAfford(50)) {
+                   cout << "Congrats, you are now out of the DC Tims Line" << endl;
+                   giveDebt(activePlayer, 50, NULL); 
+                   break;
+               }
+               else cout << "you don't have enough money to pay" << endl;
             }
+            else if (response == "cup") {
+                if(returnTCup()) break;
+                cout << "You don't have enough Tim's cups!" << endl;
+            }
+            else if(!force && response == "no") {
+                giveJailTime();
+                return;
+            }
+        }
             activePlayer->isInLine = false;
             activePlayer->turnsInTimLine = 2;
-        }
-        else {
-            giveJailTime();
-        }
     }
 }
