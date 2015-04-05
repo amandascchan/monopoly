@@ -14,7 +14,6 @@ void printError(string name) {
 	else if(name == "p") cout << "Not valid name of property: Spelling of properties are as listed on board" << endl;
 
 }
-
 int main(int argc, char *argv[]){
 	bool testing = false;
 	string loadFile = "";
@@ -27,7 +26,6 @@ int main(int argc, char *argv[]){
 			loadFile = argv[i + 1];
 		}
 	}
-
 	Board theBoard;
 	if (loadFile != ""){
 		theBoard.loadBoard(loadFile);
@@ -73,25 +71,8 @@ int main(int argc, char *argv[]){
 					r1 = rand() % 6 + 1;
 					r2 = rand() % 6 + 1;
 				}
-				if (theBoard->getNextPlayer(0)->isInLine){
-					if (r1 == r2){
-						theBoard->getNextPlayer(0)->isInLine = false;
-					}
-					else {
-						if (theBoard->getNextPlayer(0)->turnsInTimLine == 0){
-							cout << "you must either use a roll up the rim cup or pay 50 dollars. (cup/pay)" << endl;
-							stirng response;
-							while(cin >> response){
-								if (response == "pay"){
-									theBoard->giveDebt(theBoard->getNextPlayer(0), 50);
-									break;
-								} else if (response == "cup"){
-									theBoard->returnTCup();
-								}
-							}
-							theBoard->getNextPlayer(0)->isInLine = false;
-						}
-					}
+				if (theBoard.getNextPlayer(0)->isInTLine()){
+					theBoard.inTLine(r1,r2);
 				}
                 if(r1 == r2 && doublesCount < 2) {
                     cout << "You rolled doubles, roll again" << endl;

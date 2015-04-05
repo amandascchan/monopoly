@@ -118,7 +118,7 @@ void Board::loadBoard(std::string loadFile){
     avatar = namePart[0];
     lineStream >> timsCups >> money >> pos;
     bool inLine;
-    if (!(lineStream >> inLine >> jailTime)){jailTime = 0;}
+    if(lineStream >> inLine) lineStream >> jailTime;
     cout << name << avatar << timsCups << money << pos << jailTime << endl;
     addPlayer(name, avatar, money, timsCups, pos, inLine, jailTime);
   }
@@ -175,6 +175,7 @@ void Board::addPlayer(string name, char avatar) {
     addPlayer(name, avatar, 1500, 0, 0, false, 0); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool inLine, int jailTime) {
+    cout << "name: " << name << "jail time: " << jailTime << "in line: " << inLine << endl;
     setAvatar(name, avatar);
     cout << "position: " << pos << endl;
     Player *p = new Player(name, td, this, theBoard[pos], pos);
@@ -464,7 +465,7 @@ void Board::giveMoney(Player *p, int amount) {
 }
 void Board::giveDebt(Player *p, int amount, Player *c) {
   p->debt = amount;
-  p->creditor = c;
+  if(c) p->creditor = c;
   p->payDebt();
 }
 
@@ -481,10 +482,10 @@ void Board::save(string name) {
             outFile <<  "\n";
         }
         else {
-            if(curr->turnsInTimLine ==  0) {
+            if(!curr->isInLine) {
                 outFile <<" "  << 0 << endl; 
             }
-            else if(curr->turnsInTimLine > 0) {
+            else if(curr->isInLine) {
                 outFile << " " << 1 << " " << curr->turnsInTimLine << endl;
             }
         }
@@ -509,4 +510,25 @@ void Board::giveTCup() {
 }
 void Board::returnTCup() {
     cupD->returnCup(activePlayer);
+}
+void Board::inTLine(int r1, int r2) {
+    if(r1 == r2) {
+        activePlayer->isInLine = false;
+    }
+    else {
+        if(activePlayer->turnsInTimLine == 0) {
+            cout << "You must either use a roll up the rim cup or pay $50 (cup/pay)" << endl;
+            string response;
+            while(cin >> response) {
+                if(response == "pay") {
+                    giveDebt(activePlayer, 50, NULL); 
+                    break;
+                }
+                else if (response == "cup") {
+                    returnTCup();
+                }
+            }
+            activePlayer->isInLine = false;
+        }
+    }
 }

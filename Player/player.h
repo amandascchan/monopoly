@@ -44,6 +44,7 @@ class Player {
   void addProperty(Property *p);
   int totalWorth();
   void payDebt();
+  bool isInTLine();
 };
 
 #endif

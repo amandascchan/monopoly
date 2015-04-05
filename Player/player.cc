@@ -112,3 +112,6 @@ void Player::displayAssets() {
 		}
 	}
 }
+bool Player::isInTLine() {
+    return isInLine;
+}

@@ -52,6 +52,7 @@ class Board {
   void returnTCup();
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
+  void inTLine(int r1, int r2);
   
   Board();
   ~Board();  
