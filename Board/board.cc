@@ -309,6 +309,7 @@ void Board::bankrupt() {
   int pos = find(players.begin(), players.end(), activePlayer) - players.begin();
   td->removePlayer(activePlayer->name, activePlayer->location->row, activePlayer->location->column);
   players.erase(players.begin()+pos);
+  delete activePlayer;
   activePlayer = p;
   next();
 }
@@ -332,7 +333,7 @@ void Board::next() {
    cout << "The next player is now: " << activePlayer->name << endl;
 }
 void Board::movePlayer(int numMoves) {
-    if((numMoves + activePlayer->lIndex >= 40)||(numMoves + activePlayer->lIndex < 0)) getSquare(0)->action();
+    if((numMoves + activePlayer->lIndex > 40)||(numMoves + activePlayer->lIndex < 0)) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
     cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
@@ -563,5 +564,6 @@ void Board::inTLine(int r1, int r2) {
         }
             activePlayer->isInLine = false;
             activePlayer->turnsInTimLine = 2;
+            movePlayer(r1+r2);
     }
 }
