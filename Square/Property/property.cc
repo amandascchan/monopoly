@@ -21,7 +21,7 @@ void Property::auction(){
 	isMortgaged = false;
 	std::cout << "Auction time!" << std::endl;
 	//Player *highestBidder;
-	unsigned int highestBid=0;
+	int highestBid=0;
 	int numBidders = theBoard->getNumPlayers()-1;
 	std::vector<Player *> bidders;
 	//bool atleastOneBid = false;
@@ -30,7 +30,7 @@ void Property::auction(){
 	}
 	std::vector<Player *>::iterator i = bidders.begin();
 	while (numBidders > 1){
-		unsigned int bid;
+		int bid;
 		string command;
 		Player *currentBidder = *i;
 		std::cout << currentBidder->getName() << "'s turn to bid/withdraw" << std::endl;

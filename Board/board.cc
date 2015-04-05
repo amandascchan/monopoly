@@ -284,16 +284,18 @@ void Board::bankrupt() {
     }
   }
   else {
-    for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
-      trade(activePlayer->creditor->name,(*it)->name, "0", false);
-      if ((*it)->isMortgaged){
-        cout << activePlayer->creditor->name << " is inheriting a mortgaged property named " << (*it)->name << " you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
+    for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end();){
+      Property *theProperty = *it;
+      cout << "havent seg faulted yet " << endl;
+      trade(activePlayer->creditor->name, theProperty->name, "0", false);
+      if (theProperty->isMortgaged){
+        cout << activePlayer->creditor->name << " is inheriting a mortgaged property named " << theProperty->name << " you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
         string response;
         while (cin >> response){
           if (response == "unmortgage"){
-            (*it)->unMortgage();
+            theProperty->unMortgage();
           } else if (response == "pay") {
-              int fee = (1.1*(*it)->getCost())/2;
+              int fee = (1.1*theProperty->getCost())/2;
               giveDebt(activePlayer->creditor, fee, NULL);
           }
         }

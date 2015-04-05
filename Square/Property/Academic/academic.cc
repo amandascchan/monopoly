@@ -55,6 +55,9 @@ void Academic::improve(std::string buyOrSell){
       std::cout << "You do not have any improvements to sell." << std::endl;
     }
   }
+  else {
+    std::cout << "Usage: Last argument is buy/sell" << std::endl;
+  }
 }
 
 int Academic::getNumImp(){

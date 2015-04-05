@@ -99,7 +99,8 @@ int main(int argc, char *argv[]){
 			}
 		}
 		else if (command == "next"){
-			if (currentPlayer->canAfford(0)){
+			if (!hasRolled){cout << "You can not end your turn until you have rolled." << endl;}
+			else if (currentPlayer->canAfford(0)){
                 cout << theBoard;
 				theBoard.next();
 				beginTurn = true;
@@ -141,7 +142,14 @@ int main(int argc, char *argv[]){
             }
 		}
 		else if (command == "bankrupt"){
-			theBoard.bankrupt();
+			if (theBoard.getNextPlayer(0)->canAfford(0)){
+				cout << "You can not declare bankruptcy as you do not have debt you can not pay." << endl;
+			}
+			else{
+				theBoard.bankrupt();
+				beginTurn = true;
+				hasRolled = false;
+			}
 		}
 		else if (command == "assets"){
 			if (currentPlayer->canAfford(0)){

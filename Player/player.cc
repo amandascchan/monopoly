@@ -56,8 +56,7 @@ int Player::numRez() {
   return count;
 }
 bool Player::canAfford(int number) {
-  if (debt > 0) {return false;}
-  return (savings - number >= 0);
+  return (savings - number - debt >= 0);
 }
 
 void Player::payDebt() {
