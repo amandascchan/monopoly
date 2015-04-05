@@ -3,7 +3,9 @@
 #include "../../TextDisplay/textdisplay.h"
 #include "../../Board/board.h"
 
-void TimsLine::action(){}
+void TimsLine::action(){
+    theBoard->getNextPlayer(0)->setTLine(true);
+}
 
 TimsLine::TimsLine(Board *theBoard, TextDisplay *td):
 					NonProperty(theBoard, td){

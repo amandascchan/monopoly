@@ -61,6 +61,7 @@ int main(int argc, char *argv[]){
         getline(cin,line);
         stringstream commandStream(line);
         commandStream >> command;
+       
 		if (command == "roll"){
 			if (!hasRolled){
 				int r1, r2;
@@ -70,19 +71,24 @@ int main(int argc, char *argv[]){
 				else {
 					r1 = rand() % 6 + 1;
 					r2 = rand() % 6 + 1;
+                    cout << "You rolled: " << r1 << " and " << r2 << endl; 
 				}
 				if (theBoard.getNextPlayer(0)->isInTLine()){
 					theBoard.inTLine(r1,r2);
+                    doublesCount = 0;
+                    hasRolled = true;
 				}
-                if(r1 == r2 && doublesCount < 2) {
+                else if(r1 == r2 && doublesCount < 2) {
                     cout << "You rolled doubles, roll again" << endl;
                     doublesCount++;
                 }
                 else if(r1 == r2 && doublesCount == 2) {
+                    cout << "Sorry, we are sending you to DC Tims Line" << endl;
                     theBoard.movePlayer("DC Tims Line");
                     doublesCount = 0;
+                    hasRolled = true;
                 }
-                else {
+                else if(!theBoard.getNextPlayer(0)->isInTLine()){
                     theBoard.Roll(r1 + r2);
 				    hasRolled = true;
                 }

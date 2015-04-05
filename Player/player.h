@@ -45,6 +45,7 @@ class Player {
   int totalWorth();
   void payDebt();
   bool isInTLine();
+  void setTLine(bool);
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include "../../Board/board.h"
 
 void GoToTimsLine::action(){
+    cout << "I GET HERE" << endl;
 	theBoard->movePlayer("DC Tims Line");
 	theBoard->giveJailTime();
 }

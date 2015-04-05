@@ -172,10 +172,9 @@ void Board::setAvatar(string name, char avatar) {
 }
 void Board::addPlayer(string name, char avatar) {
     setAvatar(name, avatar);
-    addPlayer(name, avatar, 1500, 0, 0, false, 0); 
+    addPlayer(name, avatar, 1500, 0, 0, false, 2); 
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool inLine, int jailTime) {
-    cout << "name: " << name << "jail time: " << jailTime << "in line: " << inLine << endl;
     setAvatar(name, avatar);
     cout << "position: " << pos << endl;
     Player *p = new Player(name, td, this, theBoard[pos], pos);
@@ -333,7 +332,6 @@ void Board::movePlayer(int numMoves) {
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
-    activePlayer->displayAssets();
     activePlayer->location->action();
     activePlayer->displayAssets();
 }    
@@ -351,6 +349,8 @@ void Board::movePlayer(string name) {
     td->movePlayer(activePlayer->lIndex, nI, activePlayer->name);
     activePlayer->location = theBoard[nI];
     activePlayer->lIndex = nI;
+    activePlayer->location->action();
+    activePlayer->displayAssets();
 }
 int Board::row(int i) {
   int xCoord = i/11;
@@ -503,17 +503,23 @@ void Board::save(string name) {
 void Board::giveJailTime() {
   activePlayer->isInLine = true;
   activePlayer->turnsInTimLine--;
+  cout << "turns in T Line: " << activePlayer->turnsInTimLine << endl;
 }
 
 void Board::giveTCup() {
     cupD->giveCup(activePlayer);
+    return;
 }
 void Board::returnTCup() {
-    cupD->returnCup(activePlayer);
+    if(activePlayer->cups > 0) cupD->returnCup(activePlayer);
+    else cout << "You dont have any tims cups" << endl;
+    return;
 }
 void Board::inTLine(int r1, int r2) {
     if(r1 == r2) {
         activePlayer->isInLine = false;
+        activePlayer->turnsInTimLine = 2;
+        movePlayer(r1 + r2);
     }
     else {
         if(activePlayer->turnsInTimLine == 0) {
@@ -529,6 +535,10 @@ void Board::inTLine(int r1, int r2) {
                 }
             }
             activePlayer->isInLine = false;
+            activePlayer->turnsInTimLine = 2;
+        }
+        else {
+            giveJailTime();
         }
     }
 }
