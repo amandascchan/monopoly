@@ -62,9 +62,9 @@ bool Player::canAfford(int number) {
 void Player::payDebt() {
   int payment = debt;
   if(savings < debt) payment = savings;
-  theBoard->giveMoney(creditor, payment);
   debt = debt - payment;
   savings = savings - payment;
+  theBoard->giveMoney(creditor, payment);
 }
 
 void Player::addProperty(Property *p) {
