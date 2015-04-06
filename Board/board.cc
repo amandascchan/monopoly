@@ -144,17 +144,16 @@ void Board::loadBoard(std::string loadFile){
 void Board::giveProperty(string propName, string playerName, int numImp){
   Player *player = getPlayer(playerName);
   Property *prop = dynamic_cast<Property *>(getSquare(propName));
- // cout << "ad dfljkdhf" << player << endl;
   if ((prop != NULL)&&(player != NULL)){
     if (numImp == -1){prop->isMortgaged = true;}
       Academic *acadP = dynamic_cast<Academic *>(prop);
       if (acadP != NULL){
         if (numImp != -1){
           acadP->numImp = numImp;
+          td->addImprov(acadP->row, acadP->column, numImp);
         }
       }
       prop->owner = player;
-   //   cout << "ad prop" << endl;
       player->addProperty(prop);
   }
 }
