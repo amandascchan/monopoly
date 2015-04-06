@@ -109,7 +109,7 @@ void Board::loadBoard(std::string loadFile){
     int money;
     int timsCups;
     int pos;
-    int jailTime = 0;
+    int jailTime = 2;
     lineStream >> namePart;
     while (namePart.length() != 1){
       name += " " + namePart;
@@ -144,17 +144,16 @@ void Board::loadBoard(std::string loadFile){
 void Board::giveProperty(string propName, string playerName, int numImp){
   Player *player = getPlayer(playerName);
   Property *prop = dynamic_cast<Property *>(getSquare(propName));
- // cout << "ad dfljkdhf" << player << endl;
   if ((prop != NULL)&&(player != NULL)){
     if (numImp == -1){prop->isMortgaged = true;}
       Academic *acadP = dynamic_cast<Academic *>(prop);
       if (acadP != NULL){
         if (numImp != -1){
           acadP->numImp = numImp;
+          td->addImprov(acadP->row, acadP->column, numImp);
         }
       }
       prop->owner = player;
-   //   cout << "ad prop" << endl;
       player->addProperty(prop);
   }
 }
@@ -178,7 +177,9 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool 
     Player *p = new Player(name, td, this, theBoard[pos], pos);
     (players.size() >= 4)? p->setCoords(players.size()/4+3, (players.size()+1)%4+2) : p->setCoords(players.size()/4+3,players.size()%4+2);
     p->savings = money;
-    p->cups = nT;
+    for(int i  = 0; i < nT; i++) {
+        cupD->giveCup(p);
+    }
     p->isInLine = inLine;
     p->turnsInTimLine = jailTime;
     players.push_back(p);
@@ -548,12 +549,8 @@ void Board::inTLine(int r1, int r2) {
         string response;
         while(cin >> response) {
             if(response == "pay") {
-               if(activePlayer->canAfford(50)) {
-                   cout << "Congrats, you are now out of the DC Tims Line" << endl;
                    giveDebt(activePlayer, 50, NULL); 
                    break;
-               }
-               else cout << "you don't have enough money to pay" << endl;
             }
             else if (response == "cup") {
                 if(returnTCup()) break;
@@ -564,6 +561,7 @@ void Board::inTLine(int r1, int r2) {
                 return;
             }
         }
+            cout << "Congrats, you are out of the DC Tims Line!" << endl;
             activePlayer->isInLine = false;
             activePlayer->turnsInTimLine = 2;
             movePlayer(r1+r2);
