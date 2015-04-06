@@ -10,7 +10,7 @@ class deckBuilder{
 	Board *theBoard;
 public:
 	deckBuilder(Board *);
-	std::vector<Card *> buildDeck(std::string config);
+	std::vector<Card *> buildDeck(std::string config, std::string name);
 };
 
 #endif

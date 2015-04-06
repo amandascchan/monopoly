@@ -7,9 +7,12 @@ class Board;
 class Property;
 class Square;
 class TextDisplay;
+class StreetRepairsCard;
+
 class Player {
     friend class Board;
     friend class TCUP;
+    friend class StreetRepairsCard;
   std::string name;
   Square *location;
   std::vector<Property*> properties;

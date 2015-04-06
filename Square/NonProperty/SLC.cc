@@ -27,7 +27,9 @@ SLC::SLC(Board *theBoard, TextDisplay *td):
 	name = "SLC";
 	deckBuilder myBuilder(theBoard);
 	std::string config = "24 SLCCard -4 1 -3 3 -2 4 -1 4 1 3 2 4 3 4 4 1";
-	this->deck = myBuilder.buildDeck(config);
+	string name = "Chance";
+	if (theBoard->modeMap.count("chance")){config = "5 AdvanceToGoCard 0 1 GetOutOfJailCard 0 1 GoToJailCard 0 1 GrandOperaNightCard 0 1 StreetRepairsCard 0 1";}
+	this->deck = myBuilder.buildDeck(config, name);
 }
 
 SLC::~SLC(){

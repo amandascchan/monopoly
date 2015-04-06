@@ -22,8 +22,10 @@ NeedlesHall::NeedlesHall(Board *theBoard, TextDisplay *td):
 	NonProperty(theBoard, td){
 	name = "Needles Hall";
 	deckBuilder myBuilder(theBoard);
+	std::string name = "Community Chest";
 	std::string config = "18 NHCard -200 1 -100 2 -50 3 25 6 50 3 100 2 200 1";
-	deck = myBuilder.buildDeck(config);
+	if (theBoard->modeMap.count("communityChest")){config = "5 AdvanceToGoCard 0 1 GetOutOfJailCard 0 1 GoToJailCard 0 1 GrandOperaNightCard 0 1 StreetRepairsCard 0 1";}
+	deck = myBuilder.buildDeck(config, name);
 }
 
 NeedlesHall::~NeedlesHall(){

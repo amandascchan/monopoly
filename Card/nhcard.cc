@@ -14,5 +14,5 @@ void NHCard::action(){
 	}
 }
 
-NHCard::NHCard(Board *theBoard, int transAmt): Card(theBoard), transAmt(transAmt){}
+NHCard::NHCard(Board *theBoard, int transAmt): Card(theBoard, "Needles Hall Card"), transAmt(transAmt){}
 NHCard::~NHCard() {}

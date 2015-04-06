@@ -26,8 +26,11 @@
 #include <stdlib.h>
 #include "board.h"
 #include <fstream>
+#include <cstdlib>
 #include <stdexcept>
 using namespace std;
+
+Board *Board::daBoard =NULL;
 
 Board::Board(map<string, bool> modeMap):numPlayers(0), theGoose(NULL), td(NULL), theBoard(NULL), modeMap(modeMap){
   td = new TextDisplay();
@@ -80,15 +83,28 @@ Board::Board(map<string, bool> modeMap):numPlayers(0), theGoose(NULL), td(NULL),
           }
           //n->desc = npInfo[cNames[i]].desc;
       }
-      int gooseMoney = 0;
-      if (modeMap.count("richGoose")) gooseMoney = 500;
-      if (modeMap.count("goose")) theGoose = new Player("Goose", NULL, this, NULL, gooseMoney);
+      if (modeMap.count("goose")) theGoose = new Player("Goose", NULL, this, NULL, 0);
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
       n->index = i;
       theBoard[i] = n;
   }
 }
+
+void Board::cleanUp(){
+  delete daBoard;
+}
+
+
+Board *Board::getDaBoard(std::map<std::string, bool> modeMap){
+  if (daBoard == NULL){
+    daBoard = new Board(modeMap);
+    atexit(cleanUp);
+  }
+  return daBoard;
+}
+
+
 void Board::printPlayers() {
     for(unsigned int i = 0; i < players.size(); i++) {
         cout << players[i]->name << endl;
@@ -345,7 +361,7 @@ void Board::next() {
 void Board::movePlayer(int numMoves) {
     if(((numMoves + activePlayer->lIndex > 40)||(numMoves + activePlayer->lIndex < 0))&&(activePlayer->lIndex !=0)) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
-    cout << activePlayer->lIndex << "lol" << numMoves << endl;
+  //  cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
@@ -473,8 +489,8 @@ Player* Board::getPlayer(string n) {
     }
     return NULL;
 }
-ostream &operator<<(std::ostream &out, const Board &g){
-  out << *(g.td);
+ostream &operator<<(std::ostream &out, const Board *g){
+  out << *(g->td);
   return out;
 }
 void Board::giveMoney(Player *p, int amount) {

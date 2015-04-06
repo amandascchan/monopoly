@@ -8,12 +8,12 @@ void SLCCard::action( ){
 		theBoard->movePlayer(move);
 	}
 	else if (move > 3){
-		theBoard->movePlayer("Go To Tims");
+		theBoard->movePlayer("GO TO TIMS");
 	}
 	else if (move < -3){
 		theBoard->movePlayer("Collect OSAP");
 	}
 }
 
-SLCCard::SLCCard(Board *theBoard, int move): Card(theBoard), move(move){}
+SLCCard::SLCCard(Board *theBoard, int move): Card(theBoard, "SLC Card"), move(move){}
 SLCCard::~SLCCard(){}

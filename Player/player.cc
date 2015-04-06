@@ -17,20 +17,20 @@ Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex):
 
 
 void Player::setCoords(int row, int column) {
-    this->row = row;
-    this->column = column;
+	this->row = row;
+	this->column = column;
 }
 
 int Player::totalWorth(){
-  int worth = savings;
-  for(vector<Property *>::iterator it = properties.begin(); it != properties.end(); ++it){
-    worth += (*it)->getCost();
-    Academic *acadP = dynamic_cast<Academic *>(*it);
-    if (acadP != NULL){
-        worth += (acadP->getImCost())*(acadP->getNumImp());
-    }
-  }
-  return worth;
+	int worth = savings;
+	for(vector<Property *>::iterator it = properties.begin(); it != properties.end(); ++it){
+		worth += (*it)->getCost();
+		Academic *acadP = dynamic_cast<Academic *>(*it);
+		if (acadP != NULL){
+			worth += (acadP->getImCost())*(acadP->getNumImp());
+		}
+	}
+	return worth;
 }
 string Player::getName() {return name;}
 int Player::getSavings() {return savings;}
@@ -40,42 +40,41 @@ void Player::endTurn() {theBoard->next();}
 bool Player::isBankrupt() {return bankrupt;}
 Player::~Player() {}
 bool Player::ownsBlock(string name) {
-    for(map<string, SquareData>::iterator it = aInfo.begin(); it!= aInfo.end(); ++it) {
-      if(it->second.block == name) {
-        bool present = (find(properties.begin(), properties.end(), theBoard->getSquare(it->second.name)) != properties.end());
-        if(!present) return false;
-      }
-    }
-    return true;
-    
+	for(map<string, SquareData>::iterator it = aInfo.begin(); it!= aInfo.end(); ++it) {
+	if(it->second.block == name) {
+		bool present = (find(properties.begin(), properties.end(), theBoard->getSquare(it->second.name)) != properties.end());
+		if(!present) return false;
+		}
+	}
+	return true;    
 }
 int Player::numRez() {
-  int count = 0;
-  for(vector<Property *>::iterator it = properties.begin(); it != properties.end(); ++it) {
-    if((*it)->getBlock() == "Residence") count++;
-  }
-  return count;
+	int count = 0;
+	for(vector<Property *>::iterator it = properties.begin(); it != properties.end(); ++it) {
+		if((*it)->getBlock() == "Residence") count++;
+	}
+	return count;
 }
 bool Player::canAfford(int number) {
-  return (savings - number >= 0);
+	return (savings - number >= 0);
 }
 
 bool Player::hasDebt(){
-  return (debt > 0);
+	return (debt > 0);
 }
 
 bool Player::payingTuition(){
-  bool retVal = false;
-  Academic *acadP = dynamic_cast<Academic *>(location);
-  if (hasDebt()){
-    if (acadP != NULL){
-      retVal = true;
-    }
-    else if (location->name == "Tuition"){
-        retVal = true;
-    }
-  }
-  return retVal;
+	bool retVal = false;
+	Academic *acadP = dynamic_cast<Academic *>(location);
+	if (hasDebt()){
+	if (acadP != NULL){
+		retVal = true;
+	}
+	else if (location->name == "Tuition"){
+		retVal = true;
+	}
+}
+	return retVal;
 }
 
 void Player::payDebt() {

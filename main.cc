@@ -39,10 +39,16 @@ int main(int argc, char *argv[]){
 		if (strcmp(argv[i],"-doubleOSAP") == 0){
 			modeMap["doubleOSAP"] = 1;
 		}
+		if (strcmp(argv[i],"-communityChest") == 0){
+			modeMap["communityChest"] = 1;
+		}
+		if (strcmp(argv[i],"-chance") == 0){
+			modeMap["chance"] = 1;
+		}
 	}
-	Board theBoard(modeMap);
+	Board *theBoard = Board::getDaBoard(modeMap);
 	if (loadFile != ""){
-		theBoard.loadBoard(loadFile);
+		theBoard->loadBoard(loadFile);
 	}
 	else {
 		cout << "enter player names on seperate lines followed by piece Chars: make sure they match the ones on the spec, type q to finish entering players" << endl;
@@ -52,22 +58,22 @@ int main(int argc, char *argv[]){
         	if(line == "q") break;
         	else {
                 try {
-                    theBoard.addPlayer(line.substr(0, line.size()-2), line[line.length()-1]);
+                    theBoard->addPlayer(line.substr(0, line.size()-2), line[line.length()-1]);
                 } catch(invalid_argument& e) {
                     printError("a");
                 }
             }
     	}
 	}
-	theBoard.startGame();
+	theBoard->startGame();
 	cout << theBoard;
 	bool beginTurn = true;
 	Player *currentPlayer;
 	bool hasRolled = false;
     int doublesCount = 0;
-	while(!theBoard.winner()){
+	while(!theBoard->winner()){
 		if (beginTurn){
-			currentPlayer = theBoard.getNextPlayer(0);
+			currentPlayer = theBoard->getNextPlayer(0);
 			cout << currentPlayer->getName() << "'s turn" << endl;
 			beginTurn = false;
 		}
@@ -87,9 +93,9 @@ int main(int argc, char *argv[]){
 					r2 = rand() % 6 + 1;
                     cout << "You rolled: " << r1 << " and " << r2 << endl; 
 				}
-				if (theBoard.getNextPlayer(0)->isInTLine()){
-					cout << theBoard.getNextPlayer(0)->getName() << " is in Tims Line" << endl; 
-					theBoard.inTLine(r1,r2);
+				if (theBoard->getNextPlayer(0)->isInTLine()){
+					cout << theBoard->getNextPlayer(0)->getName() << " is in Tims Line" << endl; 
+					theBoard->inTLine(r1,r2);
                     doublesCount = 0;
                     hasRolled = true;
 				}
@@ -99,12 +105,12 @@ int main(int argc, char *argv[]){
                 }
                 else if(r1 == r2 && doublesCount == 2) {
                     cout << "Sorry, we are sending you to DC Tims Line" << endl;
-                    theBoard.movePlayer("GO TO TIMS");
+                    theBoard->movePlayer("GO TO TIMS");
                     doublesCount = 0;
                     hasRolled = true;
                 }
-                else if(!theBoard.getNextPlayer(0)->isInTLine()){
-                    theBoard.Roll(r1 + r2);
+                else if(!theBoard->getNextPlayer(0)->isInTLine()){
+                    theBoard->Roll(r1 + r2);
 				    hasRolled = true;
                 }
 			}
@@ -116,7 +122,7 @@ int main(int argc, char *argv[]){
 			if (!hasRolled){cout << "You can not end your turn until you have rolled." << endl;}
 			else if (!currentPlayer->hasDebt()){
                 cout << theBoard;
-				theBoard.next();
+				theBoard->next();
 				beginTurn = true;
 				hasRolled = false;
 			}
@@ -127,19 +133,19 @@ int main(int argc, char *argv[]){
 		else if (command == "trade"){
 			string counterParty, give, recieve, response;
 			commandStream >> counterParty >> give >> recieve;
-			theBoard.trade(counterParty, give, recieve, true);
+			theBoard->trade(counterParty, give, recieve, true);
 		}
 		else if (command == "improve"){
 			string propertyName, buyOrSell;
 			commandStream >> propertyName >> buyOrSell;
-			theBoard.improve(propertyName, buyOrSell);
+			theBoard->improve(propertyName, buyOrSell);
 		}		
 		else if (command == "mortgage"){
 			string propertyName;
             commandStream >> ws;
 			getline(commandStream, propertyName);
             try {
-			    theBoard.mortgage(propertyName);
+			    theBoard->mortgage(propertyName);
             } catch(...) {
                 printError("p");
             }
@@ -150,24 +156,24 @@ int main(int argc, char *argv[]){
 			commandStream >> propertyName;
             getline(commandStream, propertyName);
             try {
-            theBoard.unmortgage(propertyName);
+            theBoard->unmortgage(propertyName);
             } catch(...) {
                 printError("p");
             }
 		}
 		else if (command == "bankrupt"){
-			if (theBoard.getNextPlayer(0)->canAfford(0)){
+			if (theBoard->getNextPlayer(0)->canAfford(0)){
 				cout << "You can not declare bankruptcy as you do not have debt you can not pay." << endl;
 			}
 			else{
-				theBoard.bankrupt();
+				theBoard->bankrupt();
 				beginTurn = true;
 				hasRolled = false;
 			}
 		}
 		else if (command == "assets"){
 			if (!(currentPlayer->payingTuition())){
-				theBoard.getNextPlayer(0)->displayAssets();
+				theBoard->getNextPlayer(0)->displayAssets();
 			}
 			else {
 				cout << "You can not view your assets until you have paid your tuition." << endl;
@@ -180,12 +186,12 @@ int main(int argc, char *argv[]){
 			else {
 				string saveFile;
 				commandStream >> saveFile;
-				theBoard.save(saveFile);
+				theBoard->save(saveFile);
 			}
 		}
 		else if (command == "board"){
 			cout << theBoard;
 		}
 	}
-	cout << theBoard.getNextPlayer(0)->getName() << " Wins!" << endl;
+	cout << theBoard->getNextPlayer(0)->getName() << " Wins!" << endl;
 }

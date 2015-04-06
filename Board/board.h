@@ -2,6 +2,7 @@
 #ifndef __BOARD_H__
 #define __BOARD_H__
 
+#include <cstdlib>
 #include <string>
 #include <vector>
 #include <map>
@@ -11,7 +12,8 @@ class TextDisplay;
 class TCUP;
 class Board {
   int numPlayers;                    // Number of players
-  TextDisplay *td;                  // The text display.
+  TextDisplay *td; 
+  static Board *daBoard;
   Square **theBoard; 
   std::vector<Player*> players;
   Player *activePlayer;
@@ -20,6 +22,8 @@ class Board {
   void printError(std::string name);
   void setAvatar(std::string name, char avatar);
   TCUP *cupD;
+  Board(std::map<std::string, bool> );
+  static void cleanUp();
  public:
   Player *theGoose;
   std::map<std::string, bool> modeMap;
@@ -55,10 +59,9 @@ class Board {
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   void inTLine(int r1, int r2);
-
-  Board(std::map<std::string, bool> );
+  static Board *getDaBoard(std::map<std::string, bool> modeMap);
   ~Board();  
-  friend std::ostream &operator<<(std::ostream &out, const Board &g);
+  friend std::ostream &operator<<(std::ostream &out, const Board *g);
 };
 
 #endif

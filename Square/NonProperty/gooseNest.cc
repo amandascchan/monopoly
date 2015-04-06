@@ -9,10 +9,8 @@ GooseNest::GooseNest(Board *theBoard, TextDisplay *td):
 			name = "Goose Nest";
 		}
 void GooseNest::action(){
-	std::cout << "goose NEsT" << std::endl;
 	if (theBoard->theGoose != NULL){
-		std::cout << "the goose is real" << std::endl;
 		theBoard->giveDebt(theBoard->theGoose, theBoard->theGoose->getSavings(), theBoard->getNextPlayer(0));
-		if (theBoard->modeMap.count("richGoose")){theBoard->giveMoney(theBoard->theGoose, 500);}
+		if (theBoard->modeMap.count("richGoose")){theBoard->giveMoney(theBoard->getNextPlayer(0), 500);}
 	}
 }
