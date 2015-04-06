@@ -6,6 +6,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <sstream>
+#include <map>
 #include <stdexcept>
 
 using namespace std;
@@ -18,6 +19,7 @@ int main(int argc, char *argv[]){
 	bool testing = false;
 	string loadFile = "";
 	srand(time(0));
+	map<string , bool> modeMap;
 	for (int i = 1; i < argc; ++i){
 		if (strcmp(argv[i], "-testing") == 0){
 			testing = true;
@@ -25,13 +27,25 @@ int main(int argc, char *argv[]){
 		if ((strcmp(argv[i],"-load") == 0)&&(i + 1 < argc)){
 			loadFile = argv[i + 1];
 		}
+		if (strcmp(argv[i],"-bruceWayne") == 0){
+			modeMap["Bruce Wayne"] = 1;
+		}
+		if (strcmp(argv[i],"-richGoose") == 0){
+			modeMap["richGoose"] = 1;
+		}
+		if (strcmp(argv[i],"-goose") == 0){
+			modeMap["goose"] = 1;
+		}
+		if (strcmp(argv[i],"-doubleOSAP") == 0){
+			modeMap["doubleOSAP"] = 1;
+		}
 	}
-	Board theBoard;
+	Board theBoard(modeMap);
 	if (loadFile != ""){
 		theBoard.loadBoard(loadFile);
 	}
 	else {
-		cout << "enter player names on seperate lines followed by Piece Chars: make sure they match the ones on the spec, type q to finish entering players" << endl;
+		cout << "enter player names on seperate lines followed by piece Chars: make sure they match the ones on the spec, type q to finish entering players" << endl;
 		string line;
 		while(true) {
         	getline(cin,line);
@@ -100,7 +114,7 @@ int main(int argc, char *argv[]){
 		}
 		else if (command == "next"){
 			if (!hasRolled){cout << "You can not end your turn until you have rolled." << endl;}
-			else if (currentPlayer->hasDebt()){
+			else if (!currentPlayer->hasDebt()){
                 cout << theBoard;
 				theBoard.next();
 				beginTurn = true;

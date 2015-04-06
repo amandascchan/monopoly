@@ -6,7 +6,7 @@
 
 void CoopFee::action(){
 	Player *currentPlayer = theBoard->getNextPlayer(0);
-	theBoard->giveDebt(currentPlayer, -150, NULL);
+	theBoard->giveDebt(currentPlayer, 150, theBoard->theGoose);
 }
 
 CoopFee::CoopFee(Board *theBoard, TextDisplay *td):

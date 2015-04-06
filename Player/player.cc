@@ -15,6 +15,7 @@ using namespace std;
 Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
     name(name), location(l), theBoard(b), td(t), cups(0), avatar(playerOptions[name].avatar), savings(0), row (0), column(0), lIndex(lDex), turnsInTimLine(2), bankrupt(false), creditor(NULL), debt(0), isInLine(false){}
 
+
 void Player::setCoords(int row, int column) {
     this->row = row;
     this->column = column;
@@ -79,10 +80,13 @@ bool Player::payingTuition(){
 
 void Player::payDebt() {
   int payment = debt;
-  if(savings < debt) payment = savings;
+  Player *tmp = creditor;
+  if(savings < debt) {payment = savings;}
+  else {creditor = NULL;}
   debt = debt - payment;
   savings = savings - payment;
-  theBoard->giveMoney(creditor, payment);
+  theBoard->giveMoney(tmp, payment);
+
 }
 
 void Player::addProperty(Property *p) {

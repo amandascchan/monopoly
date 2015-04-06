@@ -4,6 +4,7 @@
 
 #include <string>
 #include <vector>
+#include <map>
 class Square;
 class Player;
 class TextDisplay;
@@ -20,7 +21,8 @@ class Board {
   void setAvatar(std::string name, char avatar);
   TCUP *cupD;
  public:
-  std::string mode;
+  Player *theGoose;
+  std::map<std::string, bool> modeMap;
   Square *getSquare(int i);
   void movePlayer(int numMoves);
   void movePlayer(std::string location);
@@ -53,8 +55,8 @@ class Board {
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   void inTLine(int r1, int r2);
-  
-  Board();
+
+  Board(std::map<std::string, bool> );
   ~Board();  
   friend std::ostream &operator<<(std::ostream &out, const Board &g);
 };
