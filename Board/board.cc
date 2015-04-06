@@ -475,9 +475,11 @@ void Board::giveMoney(Player *p, int amount) {
   }
 }
 void Board::giveDebt(Player *p, int amount, Player *c) {
-  p->debt = amount;
-  if(c) p->creditor = c;
-  p->payDebt();
+  if (amount > 0){
+    p->debt = amount;
+    if(c) p->creditor = c;
+    p->payDebt();
+  }
 }
 
 void Board::save(string name) {

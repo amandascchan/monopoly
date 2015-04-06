@@ -100,7 +100,7 @@ int main(int argc, char *argv[]){
 		}
 		else if (command == "next"){
 			if (!hasRolled){cout << "You can not end your turn until you have rolled." << endl;}
-			else if (currentPlayer->canAfford(0)){
+			else if (currentPlayer->hasDebt()){
                 cout << theBoard;
 				theBoard.next();
 				beginTurn = true;
@@ -152,15 +152,15 @@ int main(int argc, char *argv[]){
 			}
 		}
 		else if (command == "assets"){
-			if (currentPlayer->canAfford(0)){
+			if (!(currentPlayer->payingTuition())){
 				theBoard.getNextPlayer(0)->displayAssets();
 			}
 			else {
-				cout << "You can not view your assets until you have paid your debt." << endl;
+				cout << "You can not view your assets until you have paid your tuition." << endl;
 			}
 		}
 		else if (command == "save"){
-			if (!(currentPlayer->canAfford(0))){
+			if (!(currentPlayer->hasDebt())){
 				cout << "You can not save until you have paid your debt." << endl;
 			}
 			else {

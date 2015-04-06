@@ -56,7 +56,25 @@ int Player::numRez() {
   return count;
 }
 bool Player::canAfford(int number) {
-  return (savings - number - debt >= 0);
+  return (savings - number >= 0);
+}
+
+bool Player::hasDebt(){
+  return (debt > 0);
+}
+
+bool Player::payingTuition(){
+  bool retVal = false;
+  Academic *acadP = dynamic_cast<Academic *>(location);
+  if (hasDebt()){
+    if (acadP != NULL){
+      retVal = true;
+    }
+    else if (location->name == "Tuition"){
+        retVal = true;
+    }
+  }
+  return retVal;
 }
 
 void Player::payDebt() {

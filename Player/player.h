@@ -46,6 +46,8 @@ class Player {
   void payDebt();
   bool isInTLine();
   void setTLine(bool);
+  bool payingTuition();
+  bool hasDebt();
 };
 
 #endif
