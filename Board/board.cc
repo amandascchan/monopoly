@@ -29,7 +29,7 @@
 #include <stdexcept>
 using namespace std;
 
-Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
+Board::Board(map<string, bool> modeMap):numPlayers(0), theGoose(NULL), td(NULL), theBoard(NULL), modeMap(modeMap){
   td = new TextDisplay();
  cupD = new TCUP(); 
   //remember to set num players later
@@ -80,6 +80,9 @@ Board::Board():numPlayers(0), td(NULL), theBoard(NULL), mode("") {
           }
           //n->desc = npInfo[cNames[i]].desc;
       }
+      int gooseMoney = 0;
+      if (modeMap.count("richGoose")) gooseMoney = 500;
+      if (modeMap.count("goose")) theGoose = new Player("Goose", NULL, this, NULL, gooseMoney);
       n->name = cNames[i];
       n->setPosition(spots[i][0], spots[i][1]);
       n->index = i;
@@ -170,7 +173,13 @@ void Board::setAvatar(string name, char avatar) {
  throw invalid_argument("avatar not found");
 }
 void Board::addPlayer(string name, char avatar) {
-    addPlayer(name, avatar, 1500, 0, 0, false, 2); 
+  int money = 1500;
+  if ((modeMap.count("Bruce Wayne"))&&(name == "Bruce Wayne")){money *=10;}
+  addPlayer(name, avatar, money, 0, 0, false, 2);
+  if (money != 1500){
+    giveProperty("MC", "Bruce Wayne", 0);
+    giveProperty("DC", "Bruce Wayne", 0);
+  }
 }
 void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool inLine, int jailTime) {
     setAvatar(name, avatar);
@@ -334,7 +343,7 @@ void Board::next() {
    cout << "The next player is now: " << activePlayer->name << endl;
 }
 void Board::movePlayer(int numMoves) {
-    if((numMoves + activePlayer->lIndex > 40)||(numMoves + activePlayer->lIndex < 0)) getSquare(0)->action();
+    if(((numMoves + activePlayer->lIndex > 40)||(numMoves + activePlayer->lIndex < 0))&&(activePlayer->lIndex !=0)) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
     cout << activePlayer->lIndex << "lol" << numMoves << endl;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
@@ -437,6 +446,7 @@ void Board::printError(string name) {
 }
 
 Board::~Board() {
+  delete theGoose;
   for(int i = 0; i< 40 ;i++) {
     delete theBoard[i];
   }
@@ -475,11 +485,15 @@ void Board::giveMoney(Player *p, int amount) {
     }
   }
 }
+
 void Board::giveDebt(Player *p, int amount, Player *c) {
-  if (amount > 0){
-    p->debt = amount;
-    if(c) p->creditor = c;
-    p->payDebt();
+  cout << "havent segfaulted yet" << endl;
+  if (p != NULL){
+    if (amount > 0){
+      p->debt = amount;
+      if(c) p->creditor = c;
+      p->payDebt();
+    }
   }
 }
 
@@ -549,7 +563,7 @@ void Board::inTLine(int r1, int r2) {
         string response;
         while(cin >> response) {
             if(response == "pay") {
-                   giveDebt(activePlayer, 50, NULL); 
+                   giveDebt(activePlayer, 50, theGoose); 
                    break;
             }
             else if (response == "cup") {

@@ -4,7 +4,6 @@
 #include "../../Board/board.h"
 
 void GoToTimsLine::action(){
-    cout << "I GET HERE" << endl;
     theBoard->getNextPlayer(0)->setTLine(true);
     theBoard->movePlayer("DC Tims Line");
 }

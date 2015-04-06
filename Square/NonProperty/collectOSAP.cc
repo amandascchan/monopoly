@@ -6,7 +6,9 @@
 
 void CollectOSAP::action(){
 	Player *currentPlayer = theBoard->getNextPlayer(0);
-	theBoard->giveMoney(currentPlayer, 200);
+	int money = 200;
+	if (theBoard->modeMap.count("doubleOSAP")) money *=2;
+	theBoard->giveMoney(currentPlayer, money);
 }
 
 
