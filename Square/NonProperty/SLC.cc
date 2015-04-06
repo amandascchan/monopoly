@@ -13,12 +13,11 @@
 
 
 void SLC::action(){
-	int rNumber = rand() % 100;
-	if(rNumber == 1) {
-		theBoard->giveTCup();
-	}
-	int index = rand() % deck.size();
-	deck[index]->action();
+    int rNumber = rand() % 100;
+    if(rNumber == 1) {
+        theBoard->giveTCup();
+    }
+    else deck[rand() % deck.size()]->action();
 }
 
 
