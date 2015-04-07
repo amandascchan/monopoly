@@ -11,6 +11,7 @@ class TextDisplay {
   std::vector<char>players;
   void drawBox(int row, int column, std::string name, bool property);
   void init();
+  void printInside();
  public:
   TextDisplay(); //one arg constructor where the parameter is the gridSize
   void addPlayer(char player,int row, int column);

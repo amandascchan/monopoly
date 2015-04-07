@@ -9,10 +9,15 @@
 #include "../Player/player.h"
 #include "../data/playerdata.h"
 #include <ncurses.h>
+#include <fstream>
 using namespace std;
 
 TextDisplay::TextDisplay(): theDisplay(NULL)  {
 #ifdef toilet
+start_color();
+  init_pair(1, COLOR_RED, COLOR_BLACK);
+  init_pair(2, COLOR_YELLOW, COLOR_BLACK);
+
 #endif
 
   theDisplay = new char *[56];
@@ -66,6 +71,15 @@ void TextDisplay::init() {
         drawBox(i*5, 0, names[11 + (i-1)*2], prop[11 + (i-1)*2]);
         drawBox(i*5, 10*8, names[11 + (i-1)*2 + 1], prop[11+(i-1)*2 + 1]);
     }
+    ifstream ff("data/toilet.txt");
+    string line;
+    int index = 0;
+    while(getline(ff, line)) {
+        for(int i = 0; i < line.length();i++) {
+            theDisplay[10+index][9 + i] = line[i];
+        }
+        index++;
+    }
 }
 void TextDisplay::drawBox(int row, int column, string name, bool property) {
     int i = name.length();
@@ -115,10 +129,25 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   }
   return out;
 }
+void TextDisplay::printInside() {
+#ifdef toilet
+    for(int i = 0 ; i < 56; i++) {
+        for(int j = 0; j < 90; j++) {
+            if(i>= 10 && i < 47 && j >= 9 && j < 80)
+                addch(theDisplay[i][j]);
+        }
+        addch( '\n');
+    }
+#endif
+
+}
 
 void TextDisplay::printBoard() {
+
   for(int i = 0; i < 56; i++) {
     for(int j = 0; j < 90; j++) {
+         if(i >= 10 && i < 47 && j >= 9 && j <80) attron(COLOR_PAIR(1));
+        else attron(COLOR_PAIR(2));
       addch(theDisplay[i][j]);
     }
     addch('\n');
