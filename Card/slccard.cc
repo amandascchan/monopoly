@@ -3,7 +3,7 @@
 #include "../Board/board.h"
 
 void SLCCard::action( ){
-	std::cout << "SLC moved you."<< std::endl;
+	std::cout << "SLC moved you " << move << std::endl;
 	if ((move<=3)&&(-3<=move)){
 		theBoard->movePlayer(move);
 	}

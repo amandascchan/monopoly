@@ -35,8 +35,6 @@ std::vector<Card *> deckBuilder::buildDeck(std::string config, std::string name)
 				}
 				else if (cardType == "GetOutOfJailCard"){
 					myCardP = new GetOutOfJailCard(theBoard, name);
-					//std::cout << myCardP->name << std::endl;
-					//std::cout << name << std::endl;
 				}
 				else if (cardType == "GoToJailCard"){
 					myCardP = new GoToJailCard(theBoard, name);

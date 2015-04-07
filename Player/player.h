@@ -51,6 +51,7 @@ class Player {
   void setTLine(bool);
   bool payingTuition();
   bool hasDebt();
+  void displayAssetsN();
 };
 
 #endif

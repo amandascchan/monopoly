@@ -4,7 +4,7 @@
 #include "academic.h"
 #include <string>
 #include <iostream>
-
+#include <ncurses.h>
 
 int Academic::getRent(){
   return getIm(numImp);
@@ -29,7 +29,9 @@ Academic::Academic(Board *theBoard, TextDisplay *td): Property(theBoard, td), nu
 void Academic::improve(std::string buyOrSell){
   if (buyOrSell == "buy"){
     if (numImp >= 5){
+#ifndef toilet
       std::cout << "You can not improve "<< name <<" further." << endl;
+#endif
     }
     else if (owner->ownsBlock(block)){
       if (owner->canAfford(impCost)){
@@ -38,11 +40,15 @@ void Academic::improve(std::string buyOrSell){
         td->addImprov(row, column, numImp);
       }
       else {
+#ifndef toilet
         std::cout << "YOU ARE TO POOR MUHAHA" << endl;
+#endif
       }
     }
     else {
+#ifndef toilet
       std::cout << "You can not improve this property as you do not own the entire block." << std::endl;
+#endif
     }
   }
   else if (buyOrSell == "sell"){
@@ -52,11 +58,15 @@ void Academic::improve(std::string buyOrSell){
       td->removeImprov(row, column, numImp);
     }
     else {
+#ifndef toilet
       std::cout << "You do not have any improvements to sell." << std::endl;
+#endif
     }
   }
   else {
+#ifndef toilet
     std::cout << "Usage: Last argument is buy/sell" << std::endl;
+#endif
   }
 }
 
@@ -71,10 +81,14 @@ void Academic::mortgage(){
       theBoard->giveMoney(owner,price/2);
     }
     else {
+#ifndef toilet
      std::cout << "Can not mortgage property that has improvements." << std::endl;
+#endif
     }
   }
   else {
+#ifndef toilet
     std::cout << "Already mortgaged." << std::endl;
+#endif
   }
 }

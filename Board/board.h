@@ -59,6 +59,7 @@ class Board {
   void giveMoney(Player *p, int amount);
   void giveDebt(Player *p, int amount, Player *c);
   void inTLine(int r1, int r2);
+  void printBoard();
   static Board *getDaBoard(std::map<std::string, bool> modeMap);
   ~Board();  
   friend std::ostream &operator<<(std::ostream &out, const Board *g);

@@ -10,6 +10,7 @@
 #include "../data/playerdata.h"
 #include "player.h"
 #include <algorithm>
+#include <ncurses.h>
 using namespace std;
 
 Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
@@ -93,44 +94,122 @@ void Player::addProperty(Property *p) {
 }
 bool Player::ownsProperty(Property *p) {
     for(vector<Property *>::iterator it=properties.begin(); it!=properties.end();it++) {
-        //cout << (*it)->name << endl;
+#ifdef toilet
+        //#ifndef cout << (*it)->name << endl; #endif
+#endif
         if((*it)->name == p->getName()) return true;
     }
     return false;
 
 }
 void Player::displayAssets() {
-	cout << "Your avatar: " << avatar << endl;
-	cout << "Your savings: " << savings << endl;
+#ifdef toilet
+    cout << "Your avatar: " << avatar << endl; 
+#endif
+#ifdef toilet
+    cout << "Your savings: " << savings << endl; 
+#endif
   if (debt > 0){
-    cout << "Your debt: " << debt << endl;
-    cout << "Your creditor: ";
-    if (creditor == NULL){cout << "BANK";}
-    else {cout << creditor->getName();}
-    cout << endl;
+#ifdef toilet
+      cout << "Your debt: " << debt << endl; 
+#endif
+#ifdef toilet
+      cout << "Your creditor: ";
+#endif
+    if (creditor == NULL){
+#ifdef toilet
+        cout << "BANK";
+#endif
+    }
+    else {
+#ifdef toilet
+        cout << creditor->getName();
+#endif
+    }
+#ifdef toilet
+        cout << endl; 
+#endif
   }
-	cout << "Your location: " << location->getName() << endl;
-	cout << "Number of Tim's Cups you have: " << cups << endl;
-    if (properties.size() != 0) cout << "Your Properties: " << endl;
+#ifdef toilet
+    cout << "Your location: " << location->getName() << endl; 
+#endif
+#ifdef toilet
+    cout << "Number of Tim's Cups you have: " << cups << endl; 
+#endif
+    if (properties.size() != 0)  
+#ifdef toilet
+        cout << "Your Properties: " << endl;
+#endif
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {
-		cout << (*it)->getName() << endl;
-		/*cout << "Block: " << (*it)->getBlock() << endl;
-		cout << "Cost: " << (*it)->getCost() << endl;
-        cout << "Tuition for other players: ";
+#ifdef toilet
+        cout << (*it)->getName() << endl; 
+#endif
+		/*#ifndef cout << "Block: " << (*it)->getBlock() << endl; #endif
+#endif
+#ifdef toilet
+		#ifndef cout << "Cost: " << (*it)->getCost() << endl; #endif
+#endif
+#ifdef toilet
+        #ifndef cout << "Tuition for other players: ";
+#endif
         if (dynamic_cast<Gym *>(*it) != NULL){
-        cout << dynamic_cast<Gym *>(*it)->getMult() << " times the sum of the roll of two dice" << endl;
+#ifdef toilet
+        #ifndef cout << dynamic_cast<Gym *>(*it)->getMult() << " times the sum of the roll of two dice" << endl; #endif
+#endif
         }
         else {
-            cout << (*it)->getRent() << endl;
+#ifdef toilet
+            #ifndef cout << (*it)->getRent() << endl; #endif
+#endif
         }
 		if (dynamic_cast<Academic *>(*it) != NULL){
-			cout << "Improvement Cost: " << dynamic_cast<Academic *>(*it)->getImCost() << endl;
-			cout << "Possible improvements" << endl;
+#ifdef toilet
+			#ifndef cout << "Improvement Cost: " << dynamic_cast<Academic *>(*it)->getImCost() << endl; #endif
+#endif
+#ifdef toilet
+			#ifndef cout << "Possible improvements" << endl; #endif
+#endif
 			for(int k = 0; k < 6; k++) {
-				cout << k << " " << dynamic_cast<Academic *>(*it)->getIm(k) << endl;        
+#ifdef toilet
+				#ifndef cout << k << " " << dynamic_cast<Academic *>(*it)->getIm(k) << endl; #endif        
+#endif
 			}
 		}*/
 	}
+}
+
+void Player::displayAssetsN() {
+    addstr( "Your avatar: " +avatar);
+    addch('\n');
+    addstr("Your savings: " + savings);
+    addch('\n');
+    addstr("Your Properties: \n");
+    string x = "Your location: " + location->getName();
+    printw(x.c_str());
+    addch('\n');
+    addstr("Number of Tim's Cups you have: " +cups); 
+    addch('\n');
+  /*  for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
+        string n = "Name: " + (*it)->getName();
+        string c = "Cost: " + (*it)->getCost();
+        addstr(n.c_str());
+        addch('\n');
+        addstr(c.c_str()); 
+        addch('\n');
+        addstr("Tuition for other players: " +(*it)->getRent());
+        addch('\n');
+        addstr("Improvement Cost: " + (*it)->getImCost());
+        addch('\n');
+        addstr("Property possible improvements");
+        addch('\n');
+        for(int i = 0; i < 6; i++) {
+            addch(i + '0');
+            addch(':');
+            char k = (*it)->getIm(i) + '0';
+            addch(k);         
+            addch('\n');
+        }
+    }*/
 }
 bool Player::isInTLine() {
     return isInLine;

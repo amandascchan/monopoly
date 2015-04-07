@@ -5,6 +5,6 @@
 GoToJailCard::GoToJailCard(Board *theBoard, std::string name): Card(theBoard, name){}
 
 void GoToJailCard::action(){
-	std::cout << "GO TO JAIL" << std::endl;
+	std::cout << name << ": GO TO JAIL" << std::endl;
 	theBoard->movePlayer("GO TO TIMS");
 }
