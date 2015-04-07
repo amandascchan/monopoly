@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
 	else {
 		cout << "enter player names on seperate lines followed by piece Chars: make sure they match the ones on the spec, type q to finish entering players" << endl;
 		string line;
-		while(true) {
+		while(!cin.eof()) {
         	getline(cin,line);
         	if(line == "q") break;
         	else {
@@ -65,13 +65,14 @@ int main(int argc, char *argv[]){
             }
     	}
 	}
+	if (cin.eof()){return 1;}
 	theBoard->startGame();
 	cout << theBoard;
 	bool beginTurn = true;
 	Player *currentPlayer;
 	bool hasRolled = false;
     int doublesCount = 0;
-	while(!theBoard->winner()){
+	while(!(cin.eof())&&(!theBoard->winner())){
 		if (beginTurn){
 			currentPlayer = theBoard->getNextPlayer(0);
 			cout << currentPlayer->getName() << "'s turn" << endl;
@@ -162,7 +163,8 @@ int main(int argc, char *argv[]){
             }
 		}
 		else if (command == "bankrupt"){
-			if (!currentPlayer->hasDebt()){
+			if (!
+				currentPlayer->hasDebt()){
 				cout << "You can not declare bankruptcy as you do not have debt you can not pay." << endl;
 			}
 			else{
