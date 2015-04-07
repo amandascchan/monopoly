@@ -28,6 +28,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <stdexcept>
+#include <ncurses.h>
 using namespace std;
 
 Board *Board::daBoard =NULL;
@@ -107,8 +108,12 @@ Board *Board::getDaBoard(std::map<std::string, bool> modeMap){
 
 void Board::printPlayers() {
     for(unsigned int i = 0; i < players.size(); i++) {
-        cout << players[i]->name << endl;
-        cout << players[i]->location->name << endl;
+        #ifndef toilet 
+        cout << players[i]->name << endl; 
+        #endif
+        #ifndef toilet 
+            cout << players[i]->location->name << endl; 
+        #endif
     }
 }
 
@@ -138,7 +143,9 @@ void Board::loadBoard(std::string loadFile){
     lineStream >> timsCups >> money >> pos;
     bool inLine = false;
     if(lineStream >> inLine) lineStream >> jailTime;
-   // cout << name << avatar << timsCups << money << pos << jailTime << endl;
+    #ifndef toilet 
+    cout << name << avatar << timsCups << money << pos << jailTime << endl;
+#endif
     addPlayer(name, avatar, money, timsCups, pos, inLine, jailTime);
   }
   
@@ -155,7 +162,9 @@ void Board::loadBoard(std::string loadFile){
       lineStream >> namePart;
       name += " " + namePart;
     }
-    cout << name << propName << numImp << endl;
+    #ifndef toilet 
+    cout << name << propName << numImp << endl; 
+#endif
     giveProperty(propName, name, numImp);
   }
 }
@@ -217,11 +226,15 @@ void Board::addPlayer(string name, char avatar, int money, int nT, int pos,bool 
 void Board::trade(string counterPartyName, string offer, string recieve, bool outPut){
   Player *counterParty = getPlayer(counterPartyName);
   if (counterParty == activePlayer){
-    cout << "You cant trade with your self" << endl;
+    #ifndef toilet 
+      cout << "You cant trade with your self" << endl;
+    #endif
     return;}
   if (counterParty == NULL){
     if (outPut){
-      cout << "Invalid trade." << endl;
+      #ifndef toilet 
+        cout << "Invalid trade." << endl; 
+    #endif
     }
     return;
   }
@@ -270,7 +283,9 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
   if (success){
     if (outPut){
       string response;
-      cout << activePlayer->name << " is offering to trade " << offer << " for " << recieve << " with " << counterParty->name << " (accept/decline)." << endl;
+      #ifndef toilet 
+      cout << activePlayer->name << " is offering to trade " << offer << " for " << recieve << " with " << counterParty->name << " (accept/decline)." << endl; 
+       #endif
       while (cin >> response){
         if (response == "accept"){break;}
         else if (response == "decline"){return;}
@@ -282,14 +297,14 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
     if (!offerIsMoney){offerProperty = *offerIt;}
     if (offerIsMoney){giveDebt(activePlayer, offerMoney, counterParty);}
     else {
-     // cout << (*offerIt)->name << endl;
+     // #ifndef toilet cout << (*offerIt)->name << endl #endif;
       (*offerIt)->owner = counterParty;
       // MIGHT CAUSE BUGGGG!!!
       activePlayer->properties.erase(offerIt);
     }
     if (recieveIsMoney){giveDebt(counterParty, recieveMoney, activePlayer);}
     else {
-    //  cout << "why" << endl;
+    //  #ifndef toilet cout << "why" << endl #endif;
       (*recieveIt)->owner = activePlayer;
       // MIGHT CAUSE BUGGGG!!!
       counterParty->properties.erase(recieveIt);
@@ -298,7 +313,9 @@ void Board::trade(string counterPartyName, string offer, string recieve, bool ou
   if (!(recieveIsMoney)){activePlayer->addProperty(recieveProperty);}
   }
   else if (outPut) {
-    cout << "Invalid trade." << endl;
+    #ifndef toilet 
+      cout << "Invalid trade." << endl; 
+    #endif
   }
 }
 
@@ -312,10 +329,15 @@ void Board::bankrupt() {
   else {
     for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
       Property *theProperty = *it;
+      #ifndef toilet 
+      cout << "havent seg faulted yet " << endl; 
+    #endif
       theProperty->owner = activePlayer->creditor;
       activePlayer->creditor->addProperty(theProperty);
       if (theProperty->isMortgaged){
-        cout << activePlayer->creditor->name << " is inheriting a mortgaged property named " << theProperty->name << " you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl;
+        #ifndef toilet 
+          cout << activePlayer->creditor->name << " is inheriting a mortgaged property named " << theProperty->name << " you must immediatly either unmortgage it, or pay 10 percent of the principle (unmortgage/pay)" << endl ;
+        #endif
         string response;
         while (cin >> response){
           if (response == "unmortgage"){
@@ -355,17 +377,24 @@ Player* Board::getNextPlayer(int n) {
 }
 void Board::next() {
    activePlayer = getNextPlayer(1);
-   cout << "The next player is now: " << activePlayer->name << endl;
+   #ifndef toilet 
+    cout << "The next player is now: " << activePlayer->name << endl ;
+   #endif
 }
 void Board::movePlayer(int numMoves) {
     if(((numMoves + activePlayer->lIndex > 40)||(numMoves + activePlayer->lIndex < 0))&&(activePlayer->lIndex !=0)) getSquare(0)->action();
     int n = mod(activePlayer->lIndex+numMoves, 40);
-  //  cout << activePlayer->lIndex << "lol" << numMoves << endl;
+  //  #ifndef toilet cout << activePlayer->lIndex << "lol" << numMoves << endl #endif;
     td->movePlayer(activePlayer->lIndex, n, activePlayer->name);
     activePlayer->location = theBoard[n];
     activePlayer->lIndex = n;
     activePlayer->location->action();
+#ifndef toilet
     activePlayer->displayAssets();
+#endif
+#ifdef toilet
+    //activePlayer->displayAssetsN();
+#endif
 }    
 Player* Board::getAPlayer() {
     return activePlayer;
@@ -379,14 +408,16 @@ void Board::movePlayer(string name) {
         }
     }
     if(nI == 39) {
-        cout << "Error, wrong name" << endl;
+        #ifndef toilet 
+        cout << "Error, wrong name" << endl ;
+        #endif
         return;
     }
     td->movePlayer(activePlayer->lIndex, nI, activePlayer->name);
     activePlayer->location = theBoard[nI];
     activePlayer->lIndex = nI;
     activePlayer->location->action();
-   // activePlayer->displayAssets();
+    activePlayer->displayAssets();
 }
 int Board::row(int i) {
   int xCoord = i/11;
@@ -406,7 +437,9 @@ bool Board::startGame() {
     return true;
 }
 void Board::Roll(int num) {
-   cout << "Number rolled: " << num << endl;
+   #ifndef toilet 
+    cout << "Number rolled: " << num << endl ;
+    #endif
     movePlayer(num);
 }
 bool Board::winner() {
@@ -420,8 +453,10 @@ void Board::mortgage(string name) {
       p->mortgage();
     }
     else {
-      //cout << name << " " << p->owner->name << endl;
-      cout << "You can not mortgage that which you do not own." << endl;
+      //#ifndef toilet cout << name << " " << p->owner->name << endl #endif;
+      #ifndef toilet 
+        cout << "You can not mortgage that which you do not own." << endl; 
+      #endif
     }
     return;
   }
@@ -435,7 +470,9 @@ void Board::unmortgage(string name) {
       p->unMortgage();
     }
     else {
-      cout << "You can not unmortgage that which you do not own." << endl;
+      #ifndef toilet 
+        cout << "You can not unmortgage that which you do not own." << endl; 
+        #endif
     }
     return;
   }
@@ -447,16 +484,24 @@ void Board::improve(string name, string buyOrSell) {
     if(aInfo[name].type == "A") {
       Academic *p = dynamic_cast<Academic *>(getSquare(name));
       if(p->owner == getAPlayer()) p->improve(buyOrSell);
-      else cout << "Dis ain't yo property" << endl;
-      return;
+      else {
+          #ifndef toilet 
+            cout << "Dis ain't yo property" << endl; 
+          #endif
+          return;
+      }
     }
-    cout << name << " cannot be improved" << endl;
+    #ifndef toilet 
+        cout << name << " cannot be improved" << endl; 
+    #endif
   }
   printError(name);
 }
 
 void Board::printError(string name) {
-  cout << name << " does not exist or is not a Property" << endl;
+  #ifndef toilet 
+    cout << name << " does not exist or is not a Property" << endl; 
+    #endif
   return;
 }
 
@@ -525,10 +570,10 @@ void Board::save(string name) {
         }
         else {
             if(!curr->isInLine) {
-                outFile <<" "  << 0 << endl; 
+                outFile <<" "  << 0 << endl ; 
             }
             else if(curr->isInLine) {
-                outFile << " " << 1 << " " << curr->turnsInTimLine << endl;
+                outFile << " " << 1 << " " << curr->turnsInTimLine << endl ;
             }
         }
     }
@@ -545,7 +590,9 @@ void Board::save(string name) {
 void Board::giveJailTime() {
   activePlayer->isInLine = true;
   activePlayer->turnsInTimLine--;
+  #ifndef toilet 
   cout << "turns in T Line: " << activePlayer->turnsInTimLine << endl;
+    #endif
 }
 
 void Board::giveTCup() {
@@ -561,7 +608,6 @@ bool Board::returnTCup() {
 }
 void Board::inTLine(int r1, int r2) {
     if(r1 == r2) {
-		cout << "Congrats, you are out of the DC Tims Line!" << endl;
         activePlayer->isInLine = false;
         activePlayer->turnsInTimLine = 2;
         movePlayer(r1 + r2);
@@ -569,12 +615,17 @@ void Board::inTLine(int r1, int r2) {
     else {
         bool force = false;
         if(activePlayer->turnsInTimLine > 0) {
+            #ifndef toilet 
             cout << "Would you like to use a roll up the rim cup or pay $50 to get out of jail? (cup/pay/no)" << endl;
+            #endif
         }
         else if(activePlayer->turnsInTimLine == 0) {
-            cout << "You must either use a roll up the rim cup or pay $50 (cup/pay)" << endl;
+            #ifndef toilet 
+            cout << "You must either use a roll up the rim cup or pay $50 (cup/pay)" << endl; 
+            #endif
             force = true;
         }
+             
         string response;
         while(cin >> response) {
             if(response == "pay") {
@@ -583,16 +634,24 @@ void Board::inTLine(int r1, int r2) {
             }
             else if (response == "cup") {
                 if(returnTCup()) break;
+                #ifndef toilet 
                 cout << "You don't have enough Tim's cups!" << endl;
+                #endif
             }
             else if(!force && response == "no") {
                 giveJailTime();
                 return;
             }
         }
+            #ifndef toilet 
             cout << "Congrats, you are out of the DC Tims Line!" << endl;
+            #endif
+
             activePlayer->isInLine = false;
             activePlayer->turnsInTimLine = 2;
             movePlayer(r1+r2);
     }
+}
+void Board::printBoard() {
+    td->printBoard();
 }

@@ -6,6 +6,7 @@
 #include "../../Board/board.h"
 #include "../../Player/player.h"
 #include "../../TextDisplay/textdisplay.h"
+#include <ncurses.h>
 
 Property::Property(Board *theBoard, TextDisplay *td):Square(theBoard, td), isMortgaged(false), owner(NULL){}
 
@@ -19,7 +20,9 @@ bool Property::getIsMortgaged(){
 
 void Property::auction(){
 	isMortgaged = false;
+#ifndef toilet
 	std::cout << "Auction time!" << std::endl;
+#endif
 	//Player *highestBidder;
 	int highestBid=0;
 	int numBidders = theBoard->getNumPlayers()-1;
@@ -33,11 +36,15 @@ void Property::auction(){
 		int bid;
 		string command;
 		Player *currentBidder = *i;
+#ifndef toilet
 		std::cout << currentBidder->getName() << "'s turn to bid/withdraw" << std::endl;
+#endif
 		while (true){
 			if (std::cin >> bid){
 			if (!currentBidder->canAfford(bid)){
+#ifndef toilet
 				cout << "YOU ARE TOO POOR MUHAHA" << endl;
+#endif
 				continue;
 			}
 			//atleastOneBid = true;
@@ -49,7 +56,9 @@ void Property::auction(){
 			else {
 				bidders.erase(i);
 				--numBidders;
+#ifndef toilet
 				std::cout << currentBidder->getName() << " is disqualified for not raising the bid." << std::endl;
+#endif
 			}
 			if (i == bidders.end()){
 				i = bidders.begin();
@@ -71,7 +80,9 @@ void Property::auction(){
 	}
 	}
 	if (numBidders == 1){
+#ifndef toilet
 		std::cout << "Sold to " << (*i)->getName() << " for " << highestBid << " dollars!" << std::endl;
+#endif
 		owner = *i;
 		theBoard->giveDebt(owner, highestBid, NULL);
 		owner->addProperty(this);
@@ -83,10 +94,33 @@ std::string Property::getBlock(){
 }
 
 void Property::buy(){
+string answer;
+#ifndef toilet
 	cout << "Would you like to buy this property named " << name  << " for $" << price << "? (yes/no)" << endl;
-    string answer;
+#endif
+
+#ifdef toilet
+    string temp =  "Would you like to buy this property named " + name +"? (yes/no)";
+    addstr(temp.c_str());
+    refresh();
+        char line[10000];
+        getstr(line);
+        doupdate();
+        int x,y;
+        getyx(stdscr, y,x);
+        move(y,0);
+        clrtoeol();
+        move(y,x);
+        stringstream ss(line);
+#endif
+    #ifndef toilet
     while (cin >> answer){
+    #endif
+    #ifdef toilet
+    while(ss >> answer) {
+    #endif
     	if ((answer == "yes")||(answer == "no"))break;
+
     }
     if (answer == "yes"){
 		Player *buyer = theBoard->getNextPlayer(0);
@@ -96,21 +130,27 @@ void Property::buy(){
 			theBoard->giveDebt(buyer, price, NULL);
 		}
 		else{
+#ifndef toilet
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
+#endif
 		}
     }
     else if (answer == "no") auction();
 }
 
 void Property::mortgage(){
+#ifndef toilet
    // cout << "why" << endl;
+#endif
 	if (!isMortgaged){
 		isMortgaged = true;
     	theBoard->giveMoney(owner, price/2);
 
 	}
 	else {
+#ifndef toilet
 		std::cout << "Already mortgaged." << std::endl;
+#endif
 	}
 }
 
@@ -136,11 +176,15 @@ void Property::unMortgage(){
 			theBoard->giveDebt(owner, fee, NULL);
 		}
 		else {
+#ifndef toilet
 			std::cout << "YOU ARE TOO POOR MUHAHA" << std::endl;
+#endif
 		}
 	}
 	else {
+#ifndef toilet
 		std::cout << "No mortgage to remove." << std::endl;
+#endif
 	}
 }
 

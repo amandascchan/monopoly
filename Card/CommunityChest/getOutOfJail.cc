@@ -5,6 +5,6 @@
 GetOutOfJailCard::GetOutOfJailCard(Board *theBoard, std::string name): Card(theBoard, name){}
 
 void GetOutOfJailCard::action(){
-	std::cout << "GET OUT OF JAIL FREE CARD" << std::endl;
+	std::cout << "Community Chest: GET OUT OF JAIL FREE CARD" << std::endl;
 	theBoard->giveTCup();
 }

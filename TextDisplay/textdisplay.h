@@ -5,6 +5,7 @@
 #include <vector>
 #include "../data/squaredata.h"
 
+
 class TextDisplay {
   char **theDisplay;          //the n x n display 
   std::vector<char>players;
@@ -17,6 +18,7 @@ class TextDisplay {
   void removePlayer(std::string pName, int row, int column);
   void addImprov(int row, int column, int numImprovements);
   void removeImprov(int row, int column, int numImprovements);
+  void printBoard();
 
 
 	

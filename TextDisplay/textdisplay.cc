@@ -8,9 +8,13 @@
 #include <stdlib.h>
 #include "../Player/player.h"
 #include "../data/playerdata.h"
+#include <ncurses.h>
 using namespace std;
 
 TextDisplay::TextDisplay(): theDisplay(NULL)  {
+#ifdef toilet
+#endif
+
   theDisplay = new char *[56];
   for(int i = 0; i < 56; i++) {
     theDisplay[i] = new char [90];
@@ -111,3 +115,14 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   }
   return out;
 }
+
+void TextDisplay::printBoard() {
+  for(int i = 0; i < 56; i++) {
+    for(int j = 0; j < 90; j++) {
+      addch(theDisplay[i][j]);
+    }
+    addch('\n');
+  }
+  refresh();
+}
+
