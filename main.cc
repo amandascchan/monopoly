@@ -8,8 +8,10 @@
 #include <sstream>
 #include <map>
 #include <stdexcept>
+#ifdef toilet
 #include <ncurses.h>
 #include <list>
+#endif
 using namespace std;
 
 class snake {
@@ -163,7 +165,9 @@ int main(int argc, char *argv[]){
         commandStream >> command;
        
 		if (command == "roll"){
-            clear();
+#ifdef toilet
+      clear();
+#endif
 			if (!hasRolled){
 				int r1, r2;
 				if (testing&&(commandStream >> r1)){
@@ -249,6 +253,7 @@ r1 = points + 3 %6;
 r2 = points + 5%6;
 addstr("Your roll was determined by your points in the snake game");
 addch('\n');
+theBoard->printBoard();
     refresh();
 #endif
 					#ifndef toilet
@@ -260,7 +265,9 @@ addch('\n');
                     #endif
 				}
 				if (theBoard->getNextPlayer(0)->isInTLine()){
+#ifdef toilet
                     clear();
+#endif
                     #ifndef toilet
 					    cout << theBoard->getNextPlayer(0)->getName() << " is in Tims Line" << endl; 
                     #endif
@@ -271,7 +278,9 @@ addch('\n');
 					theBoard->inTLine(r1,r2);
                     doublesCount = 0;
                     hasRolled = true;
+#ifdef toilet
                     refresh();
+#endif
 				}
                 else if(r1 == r2 && doublesCount < 2) {
                     #ifndef toilet
@@ -284,7 +293,9 @@ addch('\n');
                     doublesCount++;
                 }
                 else if(r1 == r2 && doublesCount == 2) {
+#ifdef toilet
                     clear();
+#endif
                     #ifndef toilet
                     cout << "Sorry, we are sending you to DC Tims Line" << endl;
                     #endif
@@ -292,7 +303,9 @@ addch('\n');
                     addstr("Sorry we are sending you to DC Tims Line");
                     addch('\n');
                     #endif
+#ifdef toilet
                     refresh();
+#endif
                     theBoard->movePlayer("GO TO TIMS");
                     doublesCount = 0;
                     hasRolled = true;
@@ -305,7 +318,6 @@ addch('\n');
 			else {
                 #ifndef toilet
 				 cout << "You have already rolled this turn." << endl;
-                 addch('\n');
                 #endif
                 #ifdef toilet
                 addstr("You have already rolled this turn." );
@@ -314,7 +326,9 @@ addch('\n');
 			}
 		}
 		else if (command == "next"){
+#ifdef toilet
             clear();
+#endif
 			if (!hasRolled){
                 #ifndef toilet
                 cout << "You can not end your turn until you have rolled." << endl;

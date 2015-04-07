@@ -8,7 +8,9 @@
 #include <stdlib.h>
 #include "../Player/player.h"
 #include "../data/playerdata.h"
+#ifdef toilet
 #include <ncurses.h>
+#endif
 using namespace std;
 
 TextDisplay::TextDisplay(): theDisplay(NULL)  {
@@ -115,8 +117,8 @@ ostream &operator<<(std::ostream &out, const TextDisplay &td) {
   }
   return out;
 }
-
 void TextDisplay::printBoard() {
+#ifdef toilet
   for(int i = 0; i < 56; i++) {
     for(int j = 0; j < 90; j++) {
       addch(theDisplay[i][j]);
@@ -124,5 +126,6 @@ void TextDisplay::printBoard() {
     addch('\n');
   }
   refresh();
+#endif
 }
 

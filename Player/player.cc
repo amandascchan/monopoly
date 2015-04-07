@@ -10,7 +10,9 @@
 #include "../data/playerdata.h"
 #include "player.h"
 #include <algorithm>
+#ifdef toilet
 #include <ncurses.h>
+#endif
 using namespace std;
 
 Player::Player(string name, TextDisplay *t, Board *b, Square *l, int lDex): 
@@ -179,6 +181,7 @@ void Player::displayAssets() {
 }
 
 void Player::displayAssetsN() {
+#ifdef toilet
     addstr( "Your avatar: " +avatar);
     addch('\n');
     addstr("Your savings: " + savings);
@@ -189,6 +192,7 @@ void Player::displayAssetsN() {
     addch('\n');
     addstr("Number of Tim's Cups you have: " +cups); 
     addch('\n');
+#endif
   /*  for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
         string n = "Name: " + (*it)->getName();
         string c = "Cost: " + (*it)->getCost();
