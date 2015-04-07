@@ -138,7 +138,7 @@ void Board::loadBoard(std::string loadFile){
     lineStream >> timsCups >> money >> pos;
     bool inLine = false;
     if(lineStream >> inLine) lineStream >> jailTime;
-    cout << name << avatar << timsCups << money << pos << jailTime << endl;
+   // cout << name << avatar << timsCups << money << pos << jailTime << endl;
     addPlayer(name, avatar, money, timsCups, pos, inLine, jailTime);
   }
   
@@ -312,7 +312,6 @@ void Board::bankrupt() {
   else {
     for (vector<Property *>::iterator it = activePlayer->properties.begin(); it != activePlayer->properties.end(); ++it){
       Property *theProperty = *it;
-      cout << "havent seg faulted yet " << endl;
       theProperty->owner = activePlayer->creditor;
       activePlayer->creditor->addProperty(theProperty);
       if (theProperty->isMortgaged){
@@ -387,7 +386,7 @@ void Board::movePlayer(string name) {
     activePlayer->location = theBoard[nI];
     activePlayer->lIndex = nI;
     activePlayer->location->action();
-    activePlayer->displayAssets();
+   // activePlayer->displayAssets();
 }
 int Board::row(int i) {
   int xCoord = i/11;
@@ -503,7 +502,6 @@ void Board::giveMoney(Player *p, int amount) {
 }
 
 void Board::giveDebt(Player *p, int amount, Player *c) {
-  cout << "havent segfaulted yet" << endl;
   if (p != NULL){
     if (amount > 0){
       p->debt = amount;
@@ -563,6 +561,7 @@ bool Board::returnTCup() {
 }
 void Board::inTLine(int r1, int r2) {
     if(r1 == r2) {
+		cout << "Congrats, you are out of the DC Tims Line!" << endl;
         activePlayer->isInLine = false;
         activePlayer->turnsInTimLine = 2;
         movePlayer(r1 + r2);

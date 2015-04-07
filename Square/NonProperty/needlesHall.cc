@@ -10,6 +10,7 @@
 
 void NeedlesHall::action(){
     int rNumber = rand() % 100;
+    if (theBoard->modeMap.count("communityChest")){std::cout << "Community Chest: ";}
     if(rNumber == 1) {
         theBoard->giveTCup();
     }

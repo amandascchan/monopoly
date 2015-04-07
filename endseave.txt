@@ -1,0 +1,31 @@
+2
+Alice S 4 2678 39
+Bob $ 0 250 10 0
+AL Alice 3
+ML Alice 3
+MKV Bob 0
+ECH Alice 5
+PAS Alice 5
+HH Alice 5
+RCH Alice 5
+PAC Alice 0
+DWE Alice 5
+CPH Alice 5
+UWP Bob 0
+LHI Alice 5
+BMH Alice 5
+OPT Alice 5
+EV1 Alice 5
+EV2 Alice 5
+EV3 Alice 5
+V1 Bob -1
+PHYS Alice 5
+B1 Alice 5
+CIF Alice 0
+B2 Alice 5
+EIT Alice 5
+ESC Alice 5
+C2 Alice 5
+REV Bob 0
+MC Alice 4
+DC Alice 4

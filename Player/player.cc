@@ -113,8 +113,8 @@ void Player::displayAssets() {
 	cout << "Number of Tim's Cups you have: " << cups << endl;
     if (properties.size() != 0) cout << "Your Properties: " << endl;
 	for(vector<Property*>::iterator it = properties.begin(); it != properties.end(); ++it) {
-		cout << "Name: " << (*it)->getName() << endl;
-		cout << "Block: " << (*it)->getBlock() << endl;
+		cout << (*it)->getName() << endl;
+		/*cout << "Block: " << (*it)->getBlock() << endl;
 		cout << "Cost: " << (*it)->getCost() << endl;
         cout << "Tuition for other players: ";
         if (dynamic_cast<Gym *>(*it) != NULL){
@@ -129,7 +129,7 @@ void Player::displayAssets() {
 			for(int k = 0; k < 6; k++) {
 				cout << k << " " << dynamic_cast<Academic *>(*it)->getIm(k) << endl;        
 			}
-		}
+		}*/
 	}
 }
 bool Player::isInTLine() {

@@ -162,7 +162,7 @@ int main(int argc, char *argv[]){
             }
 		}
 		else if (command == "bankrupt"){
-			if (theBoard->getNextPlayer(0)->canAfford(0)){
+			if (!currentPlayer->hasDebt()){
 				cout << "You can not declare bankruptcy as you do not have debt you can not pay." << endl;
 			}
 			else{
@@ -180,7 +180,7 @@ int main(int argc, char *argv[]){
 			}
 		}
 		else if (command == "save"){
-			if (!(currentPlayer->hasDebt())){
+			if (currentPlayer->hasDebt()){
 				cout << "You can not save until you have paid your debt." << endl;
 			}
 			else {
