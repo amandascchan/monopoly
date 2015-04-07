@@ -187,8 +187,8 @@ void Player::displayAssetsN() {
     string x = "Your location: " + location->getName();
     printw(x.c_str());
     addch('\n');
-    addstr("Number of Tim's Cups you have: " +cups); 
-    addch('\n');
+  //  addstr("Number of Tim's Cups you have: " +cups); 
+  //  addch('\n');
   /*  for(vector<Square*>::iterator it = properties.begin(); it != properties.end(); ++it) {
         string n = "Name: " + (*it)->getName();
         string c = "Cost: " + (*it)->getCost();

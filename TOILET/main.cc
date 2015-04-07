@@ -134,8 +134,9 @@ int main(int argc, char *argv[]){
 		if (beginTurn){
 			currentPlayer = theBoard->getNextPlayer(0);
             #ifdef toilet
-      string play = currentPlayer->getName() + "'s turn'n";
+      string play = currentPlayer->getName() + "'s turn";
                 addstr(play.c_str());
+                addch('\n');
             #endif 
             #ifndef toilet
 			    cout << currentPlayer->getName() << "'s turn" << endl;
@@ -299,6 +300,11 @@ addch('\n');
                 }
                 else if(!theBoard->getNextPlayer(0)->isInTLine()){
                     theBoard->Roll(r1 + r2);
+#ifdef toilet
+                    clear();
+                    theBoard->printBoard();
+                    refresh();
+#endif
 				    hasRolled = true;
                 }
 			}
@@ -315,6 +321,9 @@ addch('\n');
 		}
 		else if (command == "next"){
             clear();
+#ifdef toilet
+            theBoard->printBoard();
+#endif
 			if (!hasRolled){
                 #ifndef toilet
                 cout << "You can not end your turn until you have rolled." << endl;
@@ -420,7 +429,6 @@ addch('\n');
 		}
 #ifdef toilet
         refresh();
-        theBoard->printBoard();
 #endif
 
 	}
