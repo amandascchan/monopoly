@@ -172,7 +172,6 @@ int main(int argc, char *argv[]){
 				else {
 
 #ifdef toilet
- noecho();
   curs_set(0);
   keypad(stdscr, TRUE);
   timeout(100);
