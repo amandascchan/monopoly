@@ -85,9 +85,9 @@ int main(int argc, char *argv[]){
 		theBoard->loadBoard(loadFile);
 	}
 	else {
-        string line;
-		while(true) {
-        #ifdef toilet
+		string line;
+		while(!cin.eof()) {
+ #ifdef toilet
             addstr( "enter player names on seperate lines followed by piece Chars: make sure they match the ones on the spec, type q to finish entering players" );
             addch('\n');
 	        char l1[10000];
@@ -105,6 +105,7 @@ int main(int argc, char *argv[]){
              cout <<  "enter player names on seperate lines followed by piece Chars: make sure they match the ones on the spec, type q to finish entering players"  << endl;
             getline(cin, line);
         #endif
+
         	if(line == "q") break;
         	else {
                 try {
@@ -115,6 +116,7 @@ int main(int argc, char *argv[]){
             }
     	}
 	}
+	if (cin.eof()){return 1;}
 	theBoard->startGame();
     #ifndef toilet
        cout << theBoard;
@@ -130,7 +132,7 @@ int main(int argc, char *argv[]){
 	Player *currentPlayer;
 	bool hasRolled = false;
     int doublesCount = 0;
-	while(!theBoard->winner()){
+	while(!(cin.eof())&&(!theBoard->winner())){
 		if (beginTurn){
 			currentPlayer = theBoard->getNextPlayer(0);
             #ifdef toilet
@@ -369,8 +371,8 @@ addch('\n');
             }
 		}
 		else if (command == "bankrupt"){
-			if (theBoard->getNextPlayer(0)->canAfford(0)){
-				#ifndef toilet 
+			if (!currentPlayer->hasDebt()){
+	            #ifndef toilet 
                 cout << "You can not declare bankruptcy as you do not have debt you can not pay." << endl;
                 #endif
                 #ifdef toilet
